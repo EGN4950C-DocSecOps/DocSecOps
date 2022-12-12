@@ -66,14 +66,14 @@ pipeline {
                 }
             }
         }
-         stage('Deploy to Artifactory') {
+         stage('Upload to Artifactory') {
             steps {
-                echo "Deploying files...."
+                echo "Uploading files...."
                         rtUpload(
                             serverId: 'artifactory',
                             spec:"""${uploadSpec}"""
                         )
-                echo "File(s) successully deployed to artifact repository"
+                echo "File(s) successully uploaded to artifact repository"
             }
         }
     }
