@@ -26,12 +26,12 @@ pipeline {
       ARTIFACTORY_ACCESS_TOKEN = credentials('artifactory-access-token')
     }
     stages {
-        stage('Build') {
+        stage('Find files') {
             steps {
-                echo "Building.."
+                echo "Finding the files..."
 
                 script {
-                    echo "doing build stuff.."
+                    echo "Getting files from Github repository..."
                     textFiles= sh(returnStdout: true, script: 'find ./documents -iname *.txt')
                     sh "ls -l ./documents"
                     echo "$textFiles"
@@ -40,7 +40,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo "Testing.."
+                echo "Testing..."
                 echo "Test Step - Value of textFiles = $textFiles"
                
                 script {
@@ -66,13 +66,14 @@ pipeline {
                 }
             }
         }
-         stage('Upload to Artifactory') {
+         stage('Deploy to Artifactory') {
             steps {
-                echo 'Uploading....'
+                echo "Deploying files...."
                         rtUpload(
                             serverId: 'artifactory',
                             spec:"""${uploadSpec}"""
                         )
+                echo "File(s) successully deployed to artifact repository"
             }
         }
     }
