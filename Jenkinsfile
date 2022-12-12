@@ -49,7 +49,7 @@ pipeline {
                 def uploadSpecSTART = '{"files": ['
                 def uploadSpecPatStart = '{"pattern": "'   
                 def uploadSpecPatEnd = '",'                          
-                def uploadSpecTarget = '"target": "artifactory-practice/"}'
+                def uploadSpecTarget = '"target": "DocSecOps/"}'
                 def uploadSpecEND = ']}'
                 
                 uploadSpec = uploadSpecSTART
