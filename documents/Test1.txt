@@ -1,1 +1,1 @@
-Checking that the document "Test1.txt" is succesully going through the pipeline and deploying to artifactory.
+Checking that the document "Test1.txt" is successfully going through the pipeline and deploying to artifactory.
