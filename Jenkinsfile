@@ -1,6 +1,6 @@
 def JSONFiles = " "
 def uploadSpecJSON = " "
-//def server = Artifactory.server 'artifactory'
+def server = Artifactory.server 'artifactory'
 pipeline {
     agent {
         kubernetes {
