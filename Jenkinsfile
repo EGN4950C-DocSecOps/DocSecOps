@@ -63,7 +63,7 @@ pipeline {
          stage('Prepare-JSON-files-to-upload') {
             steps {
                 echo "Uploading successfully checked files to JFrog.."
-                echo "Test Step - Value of textFiles = $jsonFiles"
+                echo "Test Step - Value of jsonFiles = $jsonFiles"
                
                 script {
                     
@@ -119,7 +119,7 @@ pipeline {
         stage('Prepare-pdf-files-to-upload') {
             steps {
                 echo "Uploading successfully checked files to JFrog.."
-                echo "Test Step - Value of textFiles = $textFiles"
+                echo "Test Step - Value of pdfFiles = $pdfFiles"
                
                 script {
                     
