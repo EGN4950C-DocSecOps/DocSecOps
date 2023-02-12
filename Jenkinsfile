@@ -1,4 +1,6 @@
 def textFiles = " "
+def pdfFiles = " "
+def jsonFiles = " "
 def uploadSpecJSON = " "
 def uploadSpecTXT = " "
 def uploadSpecPDF = " "
@@ -50,7 +52,9 @@ pipeline {
                 echo "Building.."
                 script {
                     echo "doing build stuff.."
-                    textFiles= sh(returnStdout: true, script: 'find ./documents -iname *.*')
+                    textFiles= sh(returnStdout: true, script: 'find ./documents -iname *.txt')
+                    pdfFiles= sh(returnStdout: true, script: 'find ./documents -iname *.pdf')
+                    jsonFiles= sh(returnStdout: true, script: 'find ./documents -iname *.json')
                     sh "ls -l ./documents"
                     echo "$textFiles"
                  }
@@ -59,7 +63,7 @@ pipeline {
          stage('Prepare-JSON-files-to-upload') {
             steps {
                 echo "Uploading successfully checked files to JFrog.."
-                echo "Test Step - Value of textFiles = $textFiles"
+                echo "Test Step - Value of textFiles = $jsonFiles"
                
                 script {
                     
@@ -72,7 +76,7 @@ pipeline {
                     
                 uploadSpecJSON = uploadSpecSTART
                  sh "echo ${uploadSpecJSON}"
-                     def texts = textFiles.split('\n')
+                     def texts = jsonFiles.split('\n')
                      for (txt in texts) {
                          sh "echo ${txt}"
                          //sh "cat ${txt}"
