@@ -1,4 +1,4 @@
-def JSONFiles = " "
+def textFiles = " "
 def uploadSpecJSON = " "
 def server = Artifactory.server 'artifactory'
 pipeline {
@@ -57,7 +57,7 @@ pipeline {
          stage('Prepare-JSON-files-to-upload') {
             steps {
                 echo "Uploading successfully checked files to JFrog.."
-                echo "Test Step - Value of textFiles = $JSONFiles"
+                echo "Test Step - Value of textFiles = $textFiles"
                
                 script {
                     
@@ -70,7 +70,7 @@ pipeline {
                     
                 uploadSpecJSON = uploadSpecSTART
                  sh "echo ${uploadSpecJSON}"
-                     def texts = JSONFiles.split('\n')
+                     def texts = textFiles.split('\n')
                      for (txt in texts) {
                          sh "echo ${txt}"
                          //sh "cat ${txt}"
