@@ -1,5 +1,7 @@
 def textFiles = " "
 def uploadSpecJSON = " "
+def uploadSpecTXT = " "
+def uploadSpecPDF = " "
 def server = Artifactory.server 'artifactory'
 pipeline {
     agent {
@@ -82,6 +84,80 @@ pipeline {
                 }
             }
         }
+        stage('Prepare-txt-files-to-upload') {
+            steps {
+                echo "Uploading successfully checked files to JFrog.."
+                echo "Test Step - Value of textFiles = $textFiles"
+               
+                script {
+                    
+                    
+                def uploadSpecSTART = '{"files": ['
+                def uploadSpecPatStart = '{"pattern": "'   
+                def uploadSpecPatEnd = '",'                          
+                def uploadSpecTarget = '"target": "DocSecOps-txt/"}'
+                def uploadSpecEND = ']}'
+                    
+                uploadSpecTXT = uploadSpecSTART
+                 sh "echo ${uploadSpecTXT}"
+                     def texts = textFiles.split('\n')
+                     for (txt in texts) {
+                         sh "echo ${txt}"
+                         //sh "cat ${txt}"
+                         uploadSpecTXT = uploadSpecTXT + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
+                    }
+                    uploadSpecTXT = uploadSpecTXT[0..-2]
+                    uploadSpecTXT = uploadSpecTXT + uploadSpecEND
+                    echo "${uploadSpecTXT}"
+                }
+            }
+        }
+        stage('Prepare-pdf-files-to-upload') {
+            steps {
+                echo "Uploading successfully checked files to JFrog.."
+                echo "Test Step - Value of textFiles = $textFiles"
+               
+                script {
+                    
+                    
+                def uploadSpecSTART = '{"files": ['
+                def uploadSpecPatStart = '{"pattern": "'   
+                def uploadSpecPatEnd = '",'                          
+                def uploadSpecTarget = '"target": "DocSecOps-pdf/"}'
+                def uploadSpecEND = ']}'
+                    
+                uploadSpecPDF = uploadSpecSTART
+                 sh "echo ${uploadSpecPDF}"
+                     def texts = pdfFiles.split('\n')
+                     for (txt in texts) {
+                         sh "echo ${txt}"
+                         //sh "cat ${txt}"
+                         uploadSpecPDF = uploadSpecPDF + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
+                    }
+                    uploadSpecPDF = uploadSpecPDF[0..-2]
+                    uploadSpecPDF = uploadSpecPDF + uploadSpecEND
+                    echo "${uploadSpecPDF}"
+                }
+            }
+        }
+        stage('Deploy txt to Artifactory') {
+            steps {
+                echo 'Uploading....'
+                        rtUpload(
+                            serverId: 'artifactory',
+                            spec:"""${uploadSpecTXT}"""
+                        )
+            }
+        }    
+        stage('Deploy pdf to Artifactory') {
+            steps {
+                echo 'Uploading....'
+                        rtUpload(
+                            serverId: 'artifactory',
+                            spec:"""${uploadSpecPDF}"""
+                        )
+            }
+        }  
          stage('Deploy JSON to Artifactory') {
             steps {
                 echo 'Uploading....'
