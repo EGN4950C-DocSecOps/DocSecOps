@@ -34,7 +34,7 @@ pipeline {
                 echo "working on Java script.."
                 script {
                     echo "Compiling File Detection Script..."
-                    sh " javac ./fileProcessing/FileTypeDetection.java"
+                    sh " javac ./fileProcessing/src/FileTypeDetection.java"
                  }
             }
         }
