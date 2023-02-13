@@ -43,7 +43,7 @@ pipeline {
                 echo "Running File Detection Script..."
                 script {
                     echo "Checking Files Uploaded..."
-                    sh " java ./fileProcessing/FileTypeDetection.java"
+                    sh " java ./fileProcessing/src/FileTypeDetection.java"
                  }
             }
         }
