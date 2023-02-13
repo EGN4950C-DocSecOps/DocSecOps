@@ -1,5 +1,3 @@
-import jj2000.j2k.util.ArrayUtil;
-
 import java.io.FileFilter;
 import java.io.IOException;
 import java.io.File;
