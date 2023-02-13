@@ -34,7 +34,6 @@ pipeline {
                 echo "working on Java script.."
                 script {
                     echo "Compiling File Detection Script..."
-                    sh " javac ./fileProcessing/src/driver.java"
                     sh " javac ./fileProcessing/src/FileTypeDetection.java"
                  }
             }
@@ -45,7 +44,6 @@ pipeline {
                 script {
                     echo "Checking Files Uploaded..."
                     sh " java ./fileProcessing/src/FileTypeDetection.java"
-                    sh " java ./fileProcessing/src/driver.java"
                  }
             }
         }
