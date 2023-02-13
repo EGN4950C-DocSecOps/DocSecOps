@@ -35,6 +35,7 @@ pipeline {
                 script {
                     echo "Compiling File Detection Script..."
                     sh " javac ./fileProcessing/src/FileTypeDetection.java"
+                    sh " javac ./fileProcessing/src/driver.java"
                  }
             }
         }
@@ -44,23 +45,6 @@ pipeline {
                 script {
                     echo "Checking Files Uploaded..."
                     sh " java ./fileProcessing/src/FileTypeDetection.java"
-                 }
-            }
-        }
-        stage('Setting up driver script') {
-            steps {
-                echo "working on Java script.."
-                script {
-                    echo "Compiling driver Script..."
-                    sh " javac ./fileProcessing/src/driver.java"
-                 }
-            }
-        }
-        stage('Run driver script') {
-            steps {
-                echo "Running driver Script..."
-                script {
-                    echo "Checking Files Uploaded..."
                     sh " java ./fileProcessing/src/driver.java"
                  }
             }
