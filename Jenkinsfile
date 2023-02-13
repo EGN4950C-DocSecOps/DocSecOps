@@ -47,6 +47,24 @@ pipeline {
                  }
             }
         }
+        stage('Setting up driver script') {
+            steps {
+                echo "working on Java script.."
+                script {
+                    echo "Compiling driver Script..."
+                    sh " javac ./fileProcessing/src/driver.java"
+                 }
+            }
+        }
+        stage('Run driver script') {
+            steps {
+                echo "Running driver Script..."
+                script {
+                    echo "Checking Files Uploaded..."
+                    sh " java ./fileProcessing/src/driver.java"
+                 }
+            }
+        }
         stage('Build') {
             steps {
                 echo "Building.."
