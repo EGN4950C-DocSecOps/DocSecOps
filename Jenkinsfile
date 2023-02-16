@@ -34,7 +34,7 @@ pipeline {
                 echo "working on Java program.."
                 script {
                     echo "Compiling File Detection program..."
-                    sh " javac ./fileProcessing/src/FileTypeDetection.java"
+                    //sh " javac ./fileProcessing/src/FileTypeDetection.java"
                  }
             }
         }
@@ -43,7 +43,7 @@ pipeline {
                 echo "Running File Detection program..."
                 script {
                     echo "Checking Files Uploaded..."
-                    sh " java ./fileProcessing/src/FileTypeDetection.java"
+                    sh " java -jar DocumentTester.jar"
                  }
             }
         }
