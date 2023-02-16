@@ -52,9 +52,9 @@ pipeline {
                 echo "Building.."
                 script {
                     echo "doing build stuff.."
-                    textFiles= sh(returnStdout: true, script: 'find ./ED1_Demo/documents -iname *.txt')
-                    pdfFiles= sh(returnStdout: true, script: 'find ./ED1_Demo/documents -iname *.pdf')
-                    jsonFiles= sh(returnStdout: true, script: 'find ./ED1_Demo/documents -iname *.json')
+                    textFiles= sh(returnStdout: true, script: 'find ./documents -iname *.txt')
+                    pdfFiles= sh(returnStdout: true, script: 'find ./documents -iname *.pdf')
+                    jsonFiles= sh(returnStdout: true, script: 'find ./documents -iname *.json')
                     sh "ls -l ./documents"
                     echo "$textFiles"
                  }
