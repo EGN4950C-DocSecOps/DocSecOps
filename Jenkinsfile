@@ -17,4 +17,10 @@ pipeline {
     options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
     }
+     stages {
+         stage('Compile Java program') {
+            steps {
+                echo "working on Java program.."
+            }
+        }
 }
