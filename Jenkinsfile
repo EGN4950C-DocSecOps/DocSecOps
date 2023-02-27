@@ -46,6 +46,7 @@ pipeline {
                     sh " java -jar DocumentTester.jar ./documents/"
                     echo "Checking if json files were created successfully"
                     sh "pwd"
+                    echo "Listing the json files with extracted metadata"
                     sh "ls ./src/FileOutput/"
                  }
             }
@@ -57,7 +58,7 @@ pipeline {
                     echo "doing build stuff.."
                     textFiles= sh(returnStdout: true, script: 'find ./documents -iname *.txt')
                     pdfFiles= sh(returnStdout: true, script: 'find ./documents -iname *.pdf')
-                    jsonFiles= sh(returnStdout: true, script: 'find ./documents -iname *.json')
+                    jsonFiles= sh(returnStdout: true, script: 'find ./src/FileOutput/ -iname *.json')
                     sh "ls -l ./documents"
                     echo "$textFiles"
                  }
