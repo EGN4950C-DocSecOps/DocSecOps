@@ -46,7 +46,7 @@ pipeline {
                     sh " java -jar DocumentTester.jar ./documents/"
                     echo "Checking if json files were created successfully"
                     sh "pwd"
-                    sh "ls"
+                    sh "ls ./src/FileOutput/"
                  }
             }
         }
