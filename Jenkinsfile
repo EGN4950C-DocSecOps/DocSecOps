@@ -44,6 +44,8 @@ pipeline {
                 script {
                     echo "Checking Files Uploaded..."
                     sh " java -jar DocumentTester.jar ./documents/"
+                    echo "Checking if json files were created successfully"
+                    sh "jar tf DocumentTester.jar/src/FileOuput/"
                  }
             }
         }
