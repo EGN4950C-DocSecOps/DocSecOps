@@ -33,7 +33,7 @@ pipeline {
                steps{
                    sh '''
                    ls -ltr ./documents/
-                   git diff 
+                   git diff ./documents/
                    '''
                }
         }
