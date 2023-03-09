@@ -32,7 +32,7 @@ pipeline {
         stage('Checking if there are differences in GitHub'){
                steps{
                    sh '''
-                   ls -ltr src/FileInput
+                   ls -ltr ./documents/
                    git diff 
                    '''
                }
