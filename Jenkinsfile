@@ -29,7 +29,7 @@ pipeline {
       ARTIFACTORY_ACCESS_TOKEN = credentials('artifactory-access-token')
     }
     stages {
-        stage{('Checking if there are differences in GitHub)
+        stage('Checking if there are differences in GitHub'){
                steps{
                    sh '''
                    ls -ltr src/FileInput
