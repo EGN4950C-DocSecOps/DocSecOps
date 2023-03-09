@@ -29,6 +29,11 @@ pipeline {
       ARTIFACTORY_ACCESS_TOKEN = credentials('artifactory-access-token')
     }
     stages {
+        stage{('Checking if there are differences in GitHub)
+               steps{
+                   sh "git diff -- src/FileInput"
+               }
+        }
          stage('Compile Java program') {
             steps {
                 echo "working on Java program.."
