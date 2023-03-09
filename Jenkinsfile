@@ -31,7 +31,10 @@ pipeline {
     stages {
         stage{('Checking if there are differences in GitHub)
                steps{
-                   sh '''git diff -- src/FileInput'''
+                   sh '''
+                   ls -ltr src/FileInput
+                   git diff 
+                   '''
                }
         }
          stage('Compile Java program') {
