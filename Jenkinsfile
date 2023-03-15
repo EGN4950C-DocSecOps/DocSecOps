@@ -158,6 +158,34 @@ pipeline {
                 }
             }
         }
+        stage('Prepare-pptx-files-to-upload') {
+            steps {
+                echo "Uploading successfully checked files to JFrog.."
+                echo "Test Step - Value of pptxFiles = $pptxFiles"
+               
+                script {
+                    
+                    
+                def uploadSpecSTART = '{"files": ['
+                def uploadSpecPatStart = '{"pattern": "'   
+                def uploadSpecPatEnd = '",'                          
+                def uploadSpecTarget = '"target": "DocSecOps-pptx/"}'
+                def uploadSpecEND = ']}'
+                    
+                uploadSpecPPTX = uploadSpecSTART
+                 sh "echo ${uploadSpecPPTX}"
+                     def texts = pptxFiles.split('\n')
+                     for (txt in texts) {
+                         sh "echo ${txt}"
+                         //sh "cat ${txt}"
+                         uploadSpecPPTX = uploadSpecPPTX + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
+                    }
+                    uploadSpecPPTX = uploadSpecPPTX[0..-2]
+                    uploadSpecPPTX = uploadSpecPPTX + uploadSpecEND
+                    echo "${uploadSpecPPTX}"
+                }
+            }
+        }
         stage('Deploy txt to Artifactory') {
             steps {
                 echo 'Uploading....'
@@ -176,6 +204,15 @@ pipeline {
                         )
             }
         }  
+         stage('Deploy pptx to Artifactory') {
+            steps {
+                echo 'Uploading....'
+                        rtUpload(
+                            serverId: 'artifactory',
+                            spec:"""${uploadSpecPPTX}"""
+                        )
+            }
+        }
          stage('Deploy JSON to Artifactory') {
             steps {
                 echo 'Uploading....'
@@ -194,14 +231,14 @@ pipeline {
              echo 'The build is successful, document uploaded!'
              emailext attachLog: true,
                 subject: "Jenkins Build: ${env.BUILD_NUMBER} Status: SUCCESS!", 
-                body: "Project: ${env.JOB_NAME}\r\nBuild Number: ${env.BUILD_NUMBER} \r\nBuild URL: ${env.BUILD_URL}",
+                body: "Project: ${env.JOB_NAME}\r\nBuild Number: ${env.BUILD_NUMBER} \r\n",
                 to: 'faugroup22@gmail.com'
          }  
          failure {  
              echo 'The build failed'
              emailext attachLog: true,
                 subject: "Jenkins Build: ${env.BUILD_NUMBER} Status: FAILED!",
-                body: "Project: ${env.JOB_NAME}\r\nBuild Number: ${env.BUILD_NUMBER} \r\nBuild URL: ${env.BUILD_URL}",
+                body: "Project: ${env.JOB_NAME}\r\nBuild Number: ${env.BUILD_NUMBER} \r\n",
                 to: 'faugroup22@gmail.com'  
          }  
          unstable {  
