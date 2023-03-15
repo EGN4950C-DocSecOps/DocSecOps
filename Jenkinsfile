@@ -1,6 +1,7 @@
 def textFiles = " "
 def pdfFiles = " "
 def pptxFiles = " "
+def docxFiles = " "
 def jsonFiles = " "
 def uploadSpecJSON = " "
 def uploadSpecTXT = " "
@@ -68,6 +69,7 @@ pipeline {
                     textFiles= sh(returnStdout: true, script: 'find ./documents -iname *.txt')
                     pdfFiles= sh(returnStdout: true, script: 'find ./documents -iname *.pdf')
                     pptxFiles = sh(returnStdout: true, script: 'find ./documents -iname *.pptx')
+                    docxFiles = sh(returnStdout: true, script: 'find ./documents -iname *.docx')
                     jsonFiles= sh(returnStdout: true, script: 'find ./src/FileOutput/ -iname *.json')
                     sh "ls -l ./documents"
                     echo "$textFiles"
@@ -186,6 +188,34 @@ pipeline {
                 }
             }
         }
+        stage('Prepare-docx-files-to-upload') {
+            steps {
+                echo "Uploading successfully checked files to JFrog.."
+                echo "Test Step - Value of docxFiles = $docxFiles"
+               
+                script {
+                    
+                    
+                def uploadSpecSTART = '{"files": ['
+                def uploadSpecPatStart = '{"pattern": "'   
+                def uploadSpecPatEnd = '",'                          
+                def uploadSpecTarget = '"target": "DocSecOps-docx/"}'
+                def uploadSpecEND = ']}'
+                    
+                uploadSpecDOCX = uploadSpecSTART
+                 sh "echo ${uploadSpecDOCX}"
+                     def texts = docxFiles.split('\n')
+                     for (txt in texts) {
+                         sh "echo ${txt}"
+                         //sh "cat ${txt}"
+                         uploadSpecDOCX = uploadSpecDOCX + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
+                    }
+                    uploadSpecDOCX = uploadSpecDOCX[0..-2]
+                    uploadSpecDOCX = uploadSpecDOCX + uploadSpecEND
+                    echo "${uploadSpecDOCX}"
+                }
+            }
+        }
         stage('Deploy txt to Artifactory') {
             steps {
                 echo 'Uploading....'
@@ -210,6 +240,15 @@ pipeline {
                         rtUpload(
                             serverId: 'artifactory',
                             spec:"""${uploadSpecPPTX}"""
+                        )
+            }
+        }
+        stage('Deploy docx to Artifactory') {
+            steps {
+                echo 'Uploading....'
+                        rtUpload(
+                            serverId: 'artifactory',
+                            spec:"""${uploadSpecDOCX}"""
                         )
             }
         }
