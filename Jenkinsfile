@@ -1,5 +1,6 @@
 def textFiles = " "
 def pdfFiles = " "
+def pptxFiles = " "
 def jsonFiles = " "
 def uploadSpecJSON = " "
 def uploadSpecTXT = " "
@@ -66,6 +67,7 @@ pipeline {
                     echo "doing build stuff.."
                     textFiles= sh(returnStdout: true, script: 'find ./documents -iname *.txt')
                     pdfFiles= sh(returnStdout: true, script: 'find ./documents -iname *.pdf')
+                    pptxFiles = sh(returnStdout: true, script: 'find ./documents -iname *.pptx')
                     jsonFiles= sh(returnStdout: true, script: 'find ./src/FileOutput/ -iname *.json')
                     sh "ls -l ./documents"
                     echo "$textFiles"
