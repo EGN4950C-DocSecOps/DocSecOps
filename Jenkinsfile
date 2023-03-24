@@ -227,15 +227,14 @@ pipeline {
             }
         }    
         stage('Deploy pdf to Artifactory') {
-            steps {
-                steps {
+          steps {
                 echo 'Uploading....'
                         rtUpload(
                             serverId: 'artifactory',
                             spec:"""${uploadSpecPDF}"""
                         )
             }
-        }  
+        }   
          stage('Deploy pptx to Artifactory') {
             steps {
                 echo 'Uploading....'
