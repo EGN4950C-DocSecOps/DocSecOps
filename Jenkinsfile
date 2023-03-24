@@ -229,7 +229,7 @@ pipeline {
             steps {
                 if(uploadSpecPDF == " ")
                 {
-                    echo 'There are no PDF files to deploy
+                    echo 'There are no PDF files to deploy'
                 }
                 else
                 {
