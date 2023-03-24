@@ -227,18 +227,20 @@ pipeline {
         }    
         stage('Deploy pdf to Artifactory') {
             steps {
-                if(uploadSpecPDF == " ")
-                {
-                    echo 'There are no PDF files to deploy'
+                script{
+                      if(uploadSpecPDF == " ")
+                     {
+                         echo 'There are no PDF files to deploy'
+                     }
+                      else
+                     {
+                         echo 'Uploading....'
+                             rtUpload(
+                                serverId: 'artifactory',
+                                spec:"""${uploadSpecPDF}"""
+                            )
+                     } 
                 }
-                else
-                {
-                     echo 'Uploading....'
-                        rtUpload(
-                            serverId: 'artifactory',
-                            spec:"""${uploadSpecPDF}"""
-                        )
-                } 
             }
         }  
          stage('Deploy pptx to Artifactory') {
