@@ -73,6 +73,7 @@ pipeline {
                     jsonFiles= sh(returnStdout: true, script: 'find ./src/FileOutput/ -iname *.json')
                     sh "ls -l ./documents"
                     echo "$textFiles"
+                    echo "$pdfFiles"
                  }
             }
         }
@@ -134,35 +135,29 @@ pipeline {
         }
         stage('Prepare-pdf-files-to-upload') {
             steps {
-                script{
-                    if(pdfFiles == " ")
-                    {
-                        echo 'No PDFs were found'
-                    }
-                    else
-                    {
-                        echo "Uploading successfully checked files to JFrog.."
-                        echo "Test Step - Value of pdfFiles = $pdfFiles"
-                 
-                        def uploadSpecSTART = '{"files": ['
-                        def uploadSpecPatStart = '{"pattern": "'   
-                        def uploadSpecPatEnd = '",'                          
-                        def uploadSpecTarget = '"target": "DocSecOps-pdf/"}'
-                        def uploadSpecEND = ']}'
+                echo "Uploading successfully checked files to JFrog.."
+                echo "Test Step - Value of pdfFiles = $pdfFiles"
+               
+                script {
                     
-                        uploadSpecPDF = uploadSpecSTART
-                        sh "echo ${uploadSpecPDF}"
-                        def texts = pdfFiles.split('\n')
-                        for (txt in texts) {
-                            sh "echo ${txt}"
-                            //sh "cat ${txt}"
-                            uploadSpecPDF = uploadSpecPDF + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
-                        }
-                        uploadSpecPDF = uploadSpecPDF[0..-2]
-                        uploadSpecPDF = uploadSpecPDF + uploadSpecEND
-                        echo "${uploadSpecPDF}"
-                    }
                     
+                def uploadSpecSTART = '{"files": ['
+                def uploadSpecPatStart = '{"pattern": "'   
+                def uploadSpecPatEnd = '",'                          
+                def uploadSpecTarget = '"target": "DocSecOps-pdf/"}'
+                def uploadSpecEND = ']}'
+                    
+                uploadSpecPDF = uploadSpecSTART
+                 sh "echo ${uploadSpecPDF}"
+                     def texts = pdfFiles.split('\n')
+                     for (txt in texts) {
+                         sh "echo ${txt}"
+                         //sh "cat ${txt}"
+                         uploadSpecPDF = uploadSpecPDF + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
+                    }
+                    uploadSpecPDF = uploadSpecPDF[0..-2]
+                    uploadSpecPDF = uploadSpecPDF + uploadSpecEND
+                    echo "${uploadSpecPDF}"
                 }
             }
         }
@@ -233,20 +228,12 @@ pipeline {
         }    
         stage('Deploy pdf to Artifactory') {
             steps {
-                script{
-                      if(uploadSpecPDF == " ")
-                     {
-                         echo 'There are no PDF files to deploy'
-                     }
-                      else
-                     {
-                         echo 'Uploading....'
-                             rtUpload(
-                                serverId: 'artifactory',
-                                spec:"""${uploadSpecPDF}"""
-                            )
-                     } 
-                }
+                steps {
+                echo 'Uploading....'
+                        rtUpload(
+                            serverId: 'artifactory',
+                            spec:"""${uploadSpecPDF}"""
+                        )
             }
         }  
          stage('Deploy pptx to Artifactory') {
