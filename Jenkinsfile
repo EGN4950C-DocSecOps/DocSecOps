@@ -227,7 +227,7 @@ pipeline {
         }    
         stage('Deploy pdf to Artifactory') {
             steps {
-                if(uploadSpecPDF = " ")
+                if(uploadSpecPDF == " ")
                 {
                     echo 'There are no PDF files to deploy
                 }
