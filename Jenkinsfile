@@ -134,29 +134,35 @@ pipeline {
         }
         stage('Prepare-pdf-files-to-upload') {
             steps {
-                echo "Uploading successfully checked files to JFrog.."
-                echo "Test Step - Value of pdfFiles = $pdfFiles"
-               
-                script {
-                    
-                    
-                def uploadSpecSTART = '{"files": ['
-                def uploadSpecPatStart = '{"pattern": "'   
-                def uploadSpecPatEnd = '",'                          
-                def uploadSpecTarget = '"target": "DocSecOps-pdf/"}'
-                def uploadSpecEND = ']}'
-                    
-                uploadSpecPDF = uploadSpecSTART
-                 sh "echo ${uploadSpecPDF}"
-                     def texts = pdfFiles.split('\n')
-                     for (txt in texts) {
-                         sh "echo ${txt}"
-                         //sh "cat ${txt}"
-                         uploadSpecPDF = uploadSpecPDF + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
+                script{
+                    if(pdfFiles == " ")
+                    {
+                        echo 'No PDFs were found'
                     }
-                    uploadSpecPDF = uploadSpecPDF[0..-2]
-                    uploadSpecPDF = uploadSpecPDF + uploadSpecEND
-                    echo "${uploadSpecPDF}"
+                    else
+                    {
+                        echo "Uploading successfully checked files to JFrog.."
+                        echo "Test Step - Value of pdfFiles = $pdfFiles"
+                 
+                        def uploadSpecSTART = '{"files": ['
+                        def uploadSpecPatStart = '{"pattern": "'   
+                        def uploadSpecPatEnd = '",'                          
+                        def uploadSpecTarget = '"target": "DocSecOps-pdf/"}'
+                        def uploadSpecEND = ']}'
+                    
+                        uploadSpecPDF = uploadSpecSTART
+                        sh "echo ${uploadSpecPDF}"
+                        def texts = pdfFiles.split('\n')
+                        for (txt in texts) {
+                            sh "echo ${txt}"
+                            //sh "cat ${txt}"
+                            uploadSpecPDF = uploadSpecPDF + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
+                        }
+                        uploadSpecPDF = uploadSpecPDF[0..-2]
+                        uploadSpecPDF = uploadSpecPDF + uploadSpecEND
+                        echo "${uploadSpecPDF}"
+                    }
+                    
                 }
             }
         }
