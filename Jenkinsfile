@@ -61,34 +61,6 @@ pipeline {
                  }
             }
         }
-         stage('Prepare-JSON-files-to-upload') {
-            steps {
-                echo "Uploading successfully checked files to JFrog.."
-                echo "Test Step - Value of jsonFiles = $jsonFiles"
-               
-                script {
-                    
-                    
-                def uploadSpecSTART = '{"files": ['
-                def uploadSpecPatStart = '{"pattern": "'   
-                def uploadSpecPatEnd = '",'                          
-                def uploadSpecTarget = '"target": "DocSecOps/"}'
-                def uploadSpecEND = ']}'
-                    
-                uploadSpecJSON = uploadSpecSTART
-                 sh "echo ${uploadSpecJSON}"
-                     def texts = jsonFiles.split('\n')
-                     for (txt in texts) {
-                         sh "echo ${txt}"
-                         //sh "cat ${txt}"
-                         uploadSpecJSON = uploadSpecJSON + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
-                    }
-                    uploadSpecJSON = uploadSpecJSON[0..-2]
-                    uploadSpecJSON = uploadSpecJSON + uploadSpecEND
-                    echo "${uploadSpecJSON}"
-                }
-            }
-        }
         stage('Prepare-txt-files-to-upload') {
             steps {
                 echo "Uploading successfully checked files to JFrog.."
