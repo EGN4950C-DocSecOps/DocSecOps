@@ -6,6 +6,8 @@ def jsonFiles = " "
 def uploadSpecJSON = " "
 def uploadSpecTXT = " "
 def uploadSpecPDF = " "
+def uploadSpecDOCX = " "
+def uploadSpecPPTX = " "
 def server = Artifactory.server 'artifactory'
 pipeline {
     agent {
@@ -217,7 +219,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy txt to Artifactory') {
+        stage('Deploying Files to Artifactory') {
             steps {
                 script {
                     if(textFiles.length() != 0)
@@ -230,47 +232,50 @@ pipeline {
                     }
                     else
                     {
-                        echo 'There are no files to Deploy'
+                        echo 'There are no text files to Deploy'
+                    }
+                    
+                     if(pdfFiles.length() != 0)
+                    {
+                        echo 'Deploying *.pdf files to JFrog....'
+                            rtUpload(
+                                serverId: 'artifactory',
+                                spec:"""${uploadSpecPDF}"""
+                            )
+                    }
+                    else
+                    {
+                        echo 'There are no PDF files to Deploy'
+                    }
+                    
+                     if(docxFiles.length() != 0)
+                    {
+                        echo 'Deploying *.docx files to JFrog....'
+                            rtUpload(
+                                serverId: 'artifactory',
+                                spec:"""${uploadSpecDOCX}"""
+                            )
+                    }
+                    else
+                    {
+                        echo 'There are no Word Document files to Deploy'
+                    }
+                    
+                     if(pptxFiles.length() != 0)
+                    {
+                        echo 'Deploying *.pptx files to JFrog....'
+                            rtUpload(
+                                serverId: 'artifactory',
+                                spec:"""${uploadSpecPPTX}"""
+                            )
+                    }
+                    else
+                    {
+                        echo 'There are no PowerPoint files to Deploy'
                     }
                 }
             }
-        }    
-        stage('Deploy pdf to Artifactory') {
-          steps {
-                echo 'Uploading....'
-                        rtUpload(
-                            serverId: 'artifactory',
-                            spec:"""${uploadSpecPDF}"""
-                        )
-            }
-        }   
-         stage('Deploy pptx to Artifactory') {
-            steps {
-                echo 'Uploading....'
-                        rtUpload(
-                            serverId: 'artifactory',
-                            spec:"""${uploadSpecPPTX}"""
-                        )
-            }
-        }
-        stage('Deploy docx to Artifactory') {
-            steps {
-                echo 'Uploading....'
-                        rtUpload(
-                            serverId: 'artifactory',
-                            spec:"""${uploadSpecDOCX}"""
-                        )
-            }
-        }
-         stage('Deploy JSON to Artifactory') {
-            steps {
-                echo 'Uploading....'
-                        rtUpload(
-                            serverId: 'artifactory',
-                            spec:"""${uploadSpecJSON}"""
-                        )
-            }
-        }     
+        }         
     }
     post {  
          always {  
