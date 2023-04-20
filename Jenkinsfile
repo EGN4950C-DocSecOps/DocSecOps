@@ -195,6 +195,19 @@ pipeline {
                     {
                         echo 'There are no PowerPoint files to Deploy'
                     }
+                    
+                    if(jsonFiles.length() != 0)
+                    {
+                        echo 'Deploying *.pptx files to JFrog....'
+                            rtUpload(
+                                serverId: 'artifactory',
+                                spec:"""${uploadSpecJSON}"""
+                            )
+                    }
+                    else
+                    {
+                        echo 'There are no Json files to Deploy'
+                    }
                 }
             }
         }         
