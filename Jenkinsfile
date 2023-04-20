@@ -76,20 +76,20 @@ pipeline {
                     
                 echo "Test Step - Value of jsonFiles = $jsonFiles"    
                 uploadSpecJSON = uploadSpecSTART
-                 sh "echo ${uploadSpecJSON}"
+                 //sh "echo ${uploadSpecJSON}"
                      def jsontexts = jsonFiles.split('\n')
                      for (txt in jsontexts) {
-                         sh "echo ${txt}"
+                         //sh "echo ${txt}"
                          //sh "cat ${txt}"
                          uploadSpecJSON = uploadSpecJSON + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
                     }
                     uploadSpecJSON = uploadSpecJSON[0..-2]
                     uploadSpecJSON = uploadSpecJSON + uploadSpecEND
-                    echo "${uploadSpecJSON}"
+                    //echo "${uploadSpecJSON}"
                     
                 echo "Test Step - Value of textFiles = $textFiles"    
                 uploadSpecTXT = uploadSpecSTART
-                 sh "echo ${uploadSpecTXT}"
+                 //sh "echo ${uploadSpecTXT}"
                      def txttexts = textFiles.split('\n')
                      for (txt in txttexts) {
                          sh "echo ${txt}"
@@ -98,11 +98,11 @@ pipeline {
                     }
                     uploadSpecTXT = uploadSpecTXT[0..-2]
                     uploadSpecTXT = uploadSpecTXT + uploadSpecEND
-                    echo "${uploadSpecTXT}"    
+                    //echo "${uploadSpecTXT}"    
                     
                 echo "Test Step - Value of pdfFiles = $pdfFiles"    
                 uploadSpecPDF = uploadSpecSTART
-                 sh "echo ${uploadSpecPDF}"
+                 //sh "echo ${uploadSpecPDF}"
                      def pdftexts = pdfFiles.split('\n')
                      for (txt in pdftexts) {
                          sh "echo ${txt}"
@@ -111,11 +111,11 @@ pipeline {
                     }
                     uploadSpecPDF = uploadSpecPDF[0..-2]
                     uploadSpecPDF = uploadSpecPDF + uploadSpecEND
-                    echo "${uploadSpecPDF}"  
+                    //echo "${uploadSpecPDF}"  
                     
                 echo "Test Step - Value of pptxFiles = $pptxFiles"    
                 uploadSpecPPTX = uploadSpecSTART
-                 sh "echo ${uploadSpecPPTX}"
+                 //sh "echo ${uploadSpecPPTX}"
                      def pptxtexts = pptxFiles.split('\n')
                      for (txt in pptxtexts) {
                          sh "echo ${txt}"
@@ -124,11 +124,11 @@ pipeline {
                     }
                     uploadSpecPPTX = uploadSpecPPTX[0..-2]
                     uploadSpecPPTX = uploadSpecPPTX + uploadSpecEND
-                    echo "${uploadSpecPPTX}"
+                    //echo "${uploadSpecPPTX}"
                     
                 echo "Test Step - Value of docxFiles = $docxFiles"    
                 uploadSpecDOCX = uploadSpecSTART
-                 sh "echo ${uploadSpecDOCX}"
+                 //sh "echo ${uploadSpecDOCX}"
                      def docxtexts = docxFiles.split('\n')
                      for (txt in docxtexts) {
                          sh "echo ${txt}"
@@ -137,8 +137,7 @@ pipeline {
                     }
                     uploadSpecDOCX = uploadSpecDOCX[0..-2]
                     uploadSpecDOCX = uploadSpecDOCX + uploadSpecEND
-                    echo "${uploadSpecDOCX}"    
-            
+                    //echo "${uploadSpecDOCX}"    
                 }
             }
         }
