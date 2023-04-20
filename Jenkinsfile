@@ -91,18 +91,21 @@ pipeline {
         }
         stage('Deploy txt to Artifactory') {
             steps {
-                if(textFiles != " ")
-                {
-                    echo 'Deploying *.txt files to JFrog....'
-                        rtUpload(
-                            serverId: 'artifactory',
-                            spec:"""${uploadSpecTXT}"""
-                        )
+                script {
+                    if(textFiles != " ")
+                    {
+                        echo 'Deploying *.txt files to JFrog....'
+                            rtUpload(
+                                serverId: 'artifactory',
+                                spec:"""${uploadSpecTXT}"""
+                            )
+                    }
+                    else
+                    {
+                        echo 'There are no files to Deploy'
+                    }
                 }
-                else
-                {
-                    echo 'There are no files to Deploy'
-                }
+                
                 
             }
         }     
