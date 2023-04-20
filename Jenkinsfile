@@ -42,7 +42,7 @@ pipeline {
                     echo "Checking if json files were created successfully"
                     sh "pwd"
                     echo "Listing the json files with extracted metadata"
-                    sh "ls ./src/FileOutput/"
+                    sh "ls ./FileProcessing/src/FileOutput/"
                  }
             }
         }
@@ -55,7 +55,7 @@ pipeline {
                     pdfFiles= sh(returnStdout: true, script: 'find ./documents -iname *.pdf')
                     pptxFiles = sh(returnStdout: true, script: 'find ./documents -iname *.pptx')
                     docxFiles = sh(returnStdout: true, script: 'find ./documents -iname *.docx')
-                    jsonFiles= sh(returnStdout: true, script: 'find ./src/FileOutput/ -iname *.json')
+                    jsonFiles= sh(returnStdout: true, script: 'find ./FileProcessing/src/FileOutput/ -iname *.json')
                     sh "ls -l ./documents"
                     echo "$textFiles"
                     echo "$pdfFiles"
