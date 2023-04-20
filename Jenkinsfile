@@ -33,23 +33,6 @@ pipeline {
       ARTIFACTORY_ACCESS_TOKEN = credentials('artifactory-access-token')
     }
     stages {
-        stage('Checking if there are differences in GitHub'){
-               steps{
-                   sh '''
-                   ls -ltr ./documents/
-                   git diff ./documents/
-                   '''
-               }
-        }
-         stage('Compile Java program') {
-            steps {
-                echo "working on Java program.."
-                script {
-                    echo "Compiling File Detection program..."
-                    //sh " javac ./fileProcessing/src/FileTypeDetection.java"
-                 }
-            }
-        }
         stage('Run Java program') {
             steps {
                 echo "Running File Detection program..."
@@ -79,13 +62,11 @@ pipeline {
                  }
             }
         }
-         stage('Prepare-JSON-files-to-upload') {
+         stage('Preparing-file(s)-to-upload') {
             steps {
                 echo "Uploading successfully checked files to JFrog.."
-                echo "Test Step - Value of jsonFiles = $jsonFiles"
                
                 script {
-                    
                     
                 def uploadSpecSTART = '{"files": ['
                 def uploadSpecPatStart = '{"pattern": "'   
@@ -93,6 +74,7 @@ pipeline {
                 def uploadSpecTarget = '"target": "DocSecOps/"}'
                 def uploadSpecEND = ']}'
                     
+                echo "Test Step - Value of jsonFiles = $jsonFiles"    
                 uploadSpecJSON = uploadSpecSTART
                  sh "echo ${uploadSpecJSON}"
                      def texts = jsonFiles.split('\n')
@@ -104,23 +86,8 @@ pipeline {
                     uploadSpecJSON = uploadSpecJSON[0..-2]
                     uploadSpecJSON = uploadSpecJSON + uploadSpecEND
                     echo "${uploadSpecJSON}"
-                }
-            }
-        }
-        stage('Prepare-txt-files-to-upload') {
-            steps {
-                echo "Uploading successfully checked files to JFrog.."
-                echo "Test Step - Value of textFiles = $textFiles"
-               
-                script {
                     
-                    
-                def uploadSpecSTART = '{"files": ['
-                def uploadSpecPatStart = '{"pattern": "'   
-                def uploadSpecPatEnd = '",'                          
-                def uploadSpecTarget = '"target": "DocSecOps-txt/"}'
-                def uploadSpecEND = ']}'
-                    
+                echo "Test Step - Value of textFiles = $textFiles"    
                 uploadSpecTXT = uploadSpecSTART
                  sh "echo ${uploadSpecTXT}"
                      def texts = textFiles.split('\n')
@@ -131,24 +98,9 @@ pipeline {
                     }
                     uploadSpecTXT = uploadSpecTXT[0..-2]
                     uploadSpecTXT = uploadSpecTXT + uploadSpecEND
-                    echo "${uploadSpecTXT}"
-                }
-            }
-        }
-        stage('Prepare-pdf-files-to-upload') {
-            steps {
-                echo "Uploading successfully checked files to JFrog.."
-                echo "Test Step - Value of pdfFiles = $pdfFiles"
-               
-                script {
+                    echo "${uploadSpecTXT}"    
                     
-                    
-                def uploadSpecSTART = '{"files": ['
-                def uploadSpecPatStart = '{"pattern": "'   
-                def uploadSpecPatEnd = '",'                          
-                def uploadSpecTarget = '"target": "DocSecOps-pdf/"}'
-                def uploadSpecEND = ']}'
-                    
+                echo "Test Step - Value of pdfFiles = $pdfFiles"    
                 uploadSpecPDF = uploadSpecSTART
                  sh "echo ${uploadSpecPDF}"
                      def texts = pdfFiles.split('\n')
@@ -159,24 +111,9 @@ pipeline {
                     }
                     uploadSpecPDF = uploadSpecPDF[0..-2]
                     uploadSpecPDF = uploadSpecPDF + uploadSpecEND
-                    echo "${uploadSpecPDF}"
-                }
-            }
-        }
-        stage('Prepare-pptx-files-to-upload') {
-            steps {
-                echo "Uploading successfully checked files to JFrog.."
-                echo "Test Step - Value of pptxFiles = $pptxFiles"
-               
-                script {
+                    echo "${uploadSpecPDF}"  
                     
-                    
-                def uploadSpecSTART = '{"files": ['
-                def uploadSpecPatStart = '{"pattern": "'   
-                def uploadSpecPatEnd = '",'                          
-                def uploadSpecTarget = '"target": "DocSecOps-pptx/"}'
-                def uploadSpecEND = ']}'
-                    
+                echo "Test Step - Value of pptxFiles = $pptxFiles"    
                 uploadSpecPPTX = uploadSpecSTART
                  sh "echo ${uploadSpecPPTX}"
                      def texts = pptxFiles.split('\n')
@@ -188,23 +125,8 @@ pipeline {
                     uploadSpecPPTX = uploadSpecPPTX[0..-2]
                     uploadSpecPPTX = uploadSpecPPTX + uploadSpecEND
                     echo "${uploadSpecPPTX}"
-                }
-            }
-        }
-        stage('Prepare-docx-files-to-upload') {
-            steps {
-                echo "Uploading successfully checked files to JFrog.."
-                echo "Test Step - Value of docxFiles = $docxFiles"
-               
-                script {
                     
-                    
-                def uploadSpecSTART = '{"files": ['
-                def uploadSpecPatStart = '{"pattern": "'   
-                def uploadSpecPatEnd = '",'                          
-                def uploadSpecTarget = '"target": "DocSecOps-docx/"}'
-                def uploadSpecEND = ']}'
-                    
+                echo "Test Step - Value of docxFiles = $docxFiles"    
                 uploadSpecDOCX = uploadSpecSTART
                  sh "echo ${uploadSpecDOCX}"
                      def texts = docxFiles.split('\n')
@@ -215,7 +137,8 @@ pipeline {
                     }
                     uploadSpecDOCX = uploadSpecDOCX[0..-2]
                     uploadSpecDOCX = uploadSpecDOCX + uploadSpecEND
-                    echo "${uploadSpecDOCX}"
+                    echo "${uploadSpecDOCX}"    
+            
                 }
             }
         }
