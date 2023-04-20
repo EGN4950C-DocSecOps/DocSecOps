@@ -219,11 +219,20 @@ pipeline {
         }
         stage('Deploy txt to Artifactory') {
             steps {
-                echo 'Uploading....'
-                        rtUpload(
-                            serverId: 'artifactory',
-                            spec:"""${uploadSpecTXT}"""
-                        )
+                script {
+                    if(textFiles.length() != 0)
+                    {
+                        echo 'Deploying *.txt files to JFrog....'
+                            rtUpload(
+                                serverId: 'artifactory',
+                                spec:"""${uploadSpecTXT}"""
+                            )
+                    }
+                    else
+                    {
+                        echo 'There are no files to Deploy'
+                    }
+                }
             }
         }    
         stage('Deploy pdf to Artifactory') {
