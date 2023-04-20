@@ -55,7 +55,7 @@ pipeline {
                 echo "Running File Detection program..."
                 script {
                     echo "Checking Files Uploaded..."
-                    sh " java -jar FileDetection.jar ./documents/"
+                    //sh " java -jar FileDetection.jar ./documents/"
                     echo "Checking if json files were created successfully"
                     sh "pwd"
                     echo "Listing the json files with extracted metadata"
@@ -282,7 +282,7 @@ pipeline {
              echo 'Post Build Functions'  
          }  
          success {  
-             echo 'The build is successful, document uploaded!'
+             echo 'The build is successful, document(s) uploaded!'
              emailext attachLog: true,
                 subject: "Jenkins Build: ${env.BUILD_NUMBER} Status: SUCCESS!", 
                 body: "Project: ${env.JOB_NAME}\r\nBuild Number: ${env.BUILD_NUMBER} \r\n",
