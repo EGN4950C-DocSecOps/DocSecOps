@@ -77,8 +77,8 @@ pipeline {
                 echo "Test Step - Value of jsonFiles = $jsonFiles"    
                 uploadSpecJSON = uploadSpecSTART
                  sh "echo ${uploadSpecJSON}"
-                     def texts = jsonFiles.split('\n')
-                     for (txt in texts) {
+                     def jsontexts = jsonFiles.split('\n')
+                     for (txt in jsontexts) {
                          sh "echo ${txt}"
                          //sh "cat ${txt}"
                          uploadSpecJSON = uploadSpecJSON + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
@@ -90,8 +90,8 @@ pipeline {
                 echo "Test Step - Value of textFiles = $textFiles"    
                 uploadSpecTXT = uploadSpecSTART
                  sh "echo ${uploadSpecTXT}"
-                     def texts = textFiles.split('\n')
-                     for (txt in texts) {
+                     def txttexts = textFiles.split('\n')
+                     for (txt in txttexts) {
                          sh "echo ${txt}"
                          //sh "cat ${txt}"
                          uploadSpecTXT = uploadSpecTXT + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
@@ -103,8 +103,8 @@ pipeline {
                 echo "Test Step - Value of pdfFiles = $pdfFiles"    
                 uploadSpecPDF = uploadSpecSTART
                  sh "echo ${uploadSpecPDF}"
-                     def texts = pdfFiles.split('\n')
-                     for (txt in texts) {
+                     def pdftexts = pdfFiles.split('\n')
+                     for (txt in pdftexts) {
                          sh "echo ${txt}"
                          //sh "cat ${txt}"
                          uploadSpecPDF = uploadSpecPDF + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
@@ -116,8 +116,8 @@ pipeline {
                 echo "Test Step - Value of pptxFiles = $pptxFiles"    
                 uploadSpecPPTX = uploadSpecSTART
                  sh "echo ${uploadSpecPPTX}"
-                     def texts = pptxFiles.split('\n')
-                     for (txt in texts) {
+                     def pptxtexts = pptxFiles.split('\n')
+                     for (txt in pptxtexts) {
                          sh "echo ${txt}"
                          //sh "cat ${txt}"
                          uploadSpecPPTX = uploadSpecPPTX + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
@@ -129,8 +129,8 @@ pipeline {
                 echo "Test Step - Value of docxFiles = $docxFiles"    
                 uploadSpecDOCX = uploadSpecSTART
                  sh "echo ${uploadSpecDOCX}"
-                     def texts = docxFiles.split('\n')
-                     for (txt in texts) {
+                     def docxtexts = docxFiles.split('\n')
+                     for (txt in docxtexts) {
                          sh "echo ${txt}"
                          //sh "cat ${txt}"
                          uploadSpecDOCX = uploadSpecDOCX + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
