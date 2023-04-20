@@ -92,7 +92,7 @@ pipeline {
         stage('Deploy txt to Artifactory') {
             steps {
                 script {
-                    if(textFiles != " ")
+                    if(textFiles.length() != 0)
                     {
                         echo 'Deploying *.txt files to JFrog....'
                             rtUpload(
