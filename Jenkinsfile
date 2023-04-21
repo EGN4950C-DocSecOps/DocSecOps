@@ -39,7 +39,7 @@ pipeline {
                 script {
                     echo "Checking Files Uploaded..."
                     //sh " java -jar FileDetection.jar "
-                    sh " java -jar DocumentTesterLC.jar ./documents/"
+                    sh " java -jar DocumentTesterLC.jar "
                     echo "Checking if json files were created successfully"
                     sh "pwd"
                     echo "Listing the json files with extracted metadata"
