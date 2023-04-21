@@ -31,4 +31,34 @@ Here you will need to provide the URL of the Artifactory instance as well as a u
 
 <img width="555" alt="Screen Shot 2023-04-20 at 9 17 52 PM" src="https://user-images.githubusercontent.com/89712188/233518272-aa96df61-3ce9-4d1a-8be2-612815724e14.png">
 
+# How to Build the Pipeline
 
+Once you connected to Github and Artifactory, in Jenkins you can trigger the Build manual by clicking "Build" or you can configure a GitHub webhook everytime a push occurs in the repository. 
+
+When the pipeline begeins the first thing it will do is build a Kubernetes agent that will work on all the task in pipeline.
+
+<img width="244" alt="Screen Shot 2023-04-20 at 9 24 32 PM" src="https://user-images.githubusercontent.com/89712188/233518960-190fae20-5575-4bf1-8951-8ad4650fffde.png">
+
+Everything a build is started this agent will be gernated and is completely customizable and a preferred method since it is destoryed when the build is finished and will only take up memeory while it is executing.
+
+<img width="903" alt="Screen Shot 2023-04-20 at 9 27 16 PM" src="https://user-images.githubusercontent.com/89712188/233519255-e3056589-2db5-4506-aa40-34887ec7ea1b.png">
+
+In the pipeline script, you have stages. Here you can define certain task that need to be accomplish and label them accordingly. The first stage that occurs is to run the JAR file that contains all of the code to process the different file types entering the pipeline. Once this is completely, the following stage located what kind of files its locating. This will begin the set-up to deploy the files the artifact repository. 
+
+<img width="942" alt="Screen Shot 2023-04-20 at 9 30 53 PM" src="https://user-images.githubusercontent.com/89712188/233519612-180041e9-81a6-4ab5-9fb6-fe517b85514d.png">
+
+In this stage, it will be building the upload specifications required by artifory inorder to deploy successfuly, which looks like {"files": [{"pattern": "<file directory + file name","target": "Artifact repo name/"}
+
+Once the upload specs for each file is complete the next stage will begin.
+
+<img width="458" alt="Screen Shot 2023-04-20 at 9 36 38 PM" src="https://user-images.githubusercontent.com/89712188/233520176-a6ad4919-fd7b-4637-a21e-fbf97a64a906.png">
+
+To ensure the pipeline does not fail, there are IF conditions in place to verifiy that there are files to deploy, otherwise to do nothing. We can see that earlier when we configure JFrog, we called it "artifactory" you put this as the serverID then pass all the files. 
+
+Lastly, you can add post builds. We are doing this, so that for every build an email gets sent out that provides the build name, build number, the status of the build (Success or Failure), then provides a copy of the console log.
+
+<img width="695" alt="Screen Shot 2023-04-20 at 9 42 02 PM" src="https://user-images.githubusercontent.com/89712188/233520828-ae651b08-2e24-42e4-b081-6c313a0ffe3b.png">
+
+An example of what the email looks like: 
+
+<img width="496" alt="Screen Shot 2023-04-20 at 9 42 41 PM" src="https://user-images.githubusercontent.com/89712188/233520944-b96dce5e-fd54-4db3-9f1f-2ddc1bd675ad.png">
