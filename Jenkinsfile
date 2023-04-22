@@ -49,7 +49,7 @@ pipeline {
         }
         stage('Validation') {
             steps {
-                validateDocuments(directory: "./FileProcessing/src/FileInput/" ,enableUrlCheck:true)
+                validateDocuments(directory: "FileProcessing/src/FileInput/" ,enableUrlCheck:true)
             }
         }
         stage('Build') {
