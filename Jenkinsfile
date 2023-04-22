@@ -50,7 +50,7 @@ pipeline {
         stage('Validation') {
             steps {
                 sh 'ls ./documents'
-                validateDocuments(directory: '/home/jenkins/agent/workspace/DocSecOps/FileProcessing/src/FileInput', enableUrlCheck: true, outputDirectory: '')
+                validateDocuments(directory:'/home/jenkins/agent/workspace/DocSecOps/FileProcessing/src/FileInput', enableUrlCheck: true)
                 sh 'ls ./documents'
             }
         }
