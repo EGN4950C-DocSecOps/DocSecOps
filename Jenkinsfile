@@ -49,7 +49,7 @@ pipeline {
         }
         stage('Validation') {
             steps {
-                validateDocuments(directory: 'documents/' ,enableUrlCheck:true)
+                validateDocuments()
             }
         }
         stage('Build') {
