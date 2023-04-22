@@ -50,7 +50,7 @@ pipeline {
         stage('Validation') {
             steps {
                 sh 'ls ./FileProcessing/src/FileOutput/'
-                validateDocuments(directory: "${env.WORKSPACE}/documents", urlCheck: true)
+                validateDocuments(directory: "${env.WORKSPACE}/documents", enableUrlCheck: true)
                 sh 'ls ./FileProcessing/src/FileOutput/'
             }
         }
