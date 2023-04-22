@@ -52,8 +52,10 @@ pipeline {
                 script {
                     sh "pwd"
                     sh "ls"
+                    sh "ls ./FileProcessing/src/FileInput/"
                     echo "Running Plugin"
                     validateDocuments(directory: "./FileProcessing/src/FileInput/" ,enableUrlCheck:true)
+                    sh "ls ./FileProcessing/src/FileInput/"
                     echo "Plugin Finished running"
                  }
             }
