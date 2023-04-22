@@ -38,7 +38,7 @@ pipeline {
                 echo "Running File Detection program..."
                 script {
                     echo "Checking Files Uploaded..."
-                    //sh " java -jar FileDetection.jar "
+                    sh " java -jar FileDetection.jar "
                     //sh " java -jar DocumentTesterLC4.jar "
                     echo "Checking if json files were created successfully"
                     //sh "pwd"
@@ -50,7 +50,7 @@ pipeline {
         stage('Validation') {
             steps {
                 sh 'ls ./documents'
-                validateDocuments(directory: './documents', enableUrlCheck: true, outputDirectory: '')
+                validateDocuments(directory: './FileProcessing/src/FileOutput/', enableUrlCheck: true, outputDirectory: '')
                 sh 'ls ./documents'
             }
         }
