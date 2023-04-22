@@ -49,7 +49,7 @@ pipeline {
         }
         stage('Validation') {
             steps {
-                validateDocuments()
+                validateDocuments(directory:)
             }
         }
         stage('Build') {
