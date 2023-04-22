@@ -50,6 +50,8 @@ pipeline {
         stage('Validation') {
             steps {
                 script {
+                    sh "pwd"
+                    sh "ls"
                     echo "Running Plugin"
                     validateDocuments(directory:'./documents',enableUrlCheck:true)
                     echo "Plugin Finished running"
