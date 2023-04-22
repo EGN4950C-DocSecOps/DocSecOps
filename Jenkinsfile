@@ -53,7 +53,7 @@ pipeline {
                     sh "pwd"
                     sh "ls"
                     echo "Running Plugin"
-                    validateDocuments(directory:'https://github.com/EGN4950C-DocSecOps/DocSecOps/tree/main/documents',enableUrlCheck:true)
+                    validateDocuments(directory: "./FileProcessing/src/FileInput/" ,enableUrlCheck:true)
                     echo "Plugin Finished running"
                  }
             }
