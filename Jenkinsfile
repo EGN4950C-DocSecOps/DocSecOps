@@ -49,9 +49,9 @@ pipeline {
         }
         stage('Validation') {
             steps {
-                sh 'ls ./FileProcessing/src/FileOutput/'
+                sh 'ls ./documents'
                 validateDocuments(directory: "${env.WORKSPACE}/documents", enableUrlCheck: true)
-                sh 'ls ./FileProcessing/src/FileOutput/'
+                sh 'ls ./documents'
             }
         }
         stage('Build') {
