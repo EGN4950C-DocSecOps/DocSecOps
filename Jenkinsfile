@@ -53,7 +53,7 @@ pipeline {
                     sh "pwd"
                     sh "ls"
                     echo "Running Plugin"
-                    validateDocuments(directory:'./documents',enableUrlCheck:true)
+                    validateDocuments(directory:'/home/jenkins/agent/workspace/DocSecOps/documents',enableUrlCheck:true)
                     echo "Plugin Finished running"
                  }
             }
