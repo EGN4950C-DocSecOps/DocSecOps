@@ -38,12 +38,21 @@ pipeline {
                 echo "Running File Detection program..."
                 script {
                     echo "Checking Files Uploaded..."
-                    sh " java -jar FileDetection.jar "
+                    //sh " java -jar FileDetection.jar "
                     //sh " java -jar DocumentTesterLC4.jar "
                     echo "Checking if json files were created successfully"
-                    sh "pwd"
+                    //sh "pwd"
                     echo "Listing the json files with extracted metadata"
-                    sh "ls ./FileProcessing/src/FileOutput/"
+                    //sh "ls ./FileProcessing/src/FileOutput/"
+                 }
+            }
+        }
+        stage('Validation') {
+            steps {
+                script {
+                    echo "Running Plugin"
+                    validateDocuments(directory:'./FileProcessing/src/FileInput/',enableUrlCheck:true)
+                    echo "Plugin Finished running"
                  }
             }
         }
