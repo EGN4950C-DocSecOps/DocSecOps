@@ -51,7 +51,7 @@ pipeline {
             steps {
                 script {
                     echo "Running Plugin"
-                    validateDocuments(directory:'documents/',enableUrlCheck:true)
+                    validateDocuments(directory:'./documents/',enableUrlCheck:true)
                     echo "Plugin Finished running"
                  }
             }
