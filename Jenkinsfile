@@ -33,6 +33,14 @@ pipeline {
       ARTIFACTORY_ACCESS_TOKEN = credentials('artifactory-access-token')
     }
     stages {
+        stage('Validation') {
+            steps {
+                sh 'ls ./documents'
+                sh "ls -l ${env.WORKSPACE}/documents"
+                validateDocuments(directory: "${env.WORKSPACE}/documents")
+                sh 'ls ./documents'
+            }
+        }
         stage('Run Java program') {
             steps {
                 echo "Running File Detection program..."
@@ -47,14 +55,7 @@ pipeline {
                  }
             }
         }
-        stage('Validation') {
-            steps {
-                sh 'ls ./documents'
-                sh "ls -l ${env.WORKSPACE}/documents"
-                validateDocuments(directory: "${env.WORKSPACE}/documents")
-                sh 'ls ./documents'
-            }
-        }
+
         stage('Build') {
             steps {
                 echo "Building.."
