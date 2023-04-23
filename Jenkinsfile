@@ -43,6 +43,8 @@ pipeline {
             steps {
                 sh 'ls ./documents'
                 validateDocuments(directory: "./documents/")
+                validateDocuments(directory: "./documents")
+                validateDocuments()
                 sh 'ls ./documents'
             }
         }
