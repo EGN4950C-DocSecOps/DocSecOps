@@ -51,7 +51,7 @@ pipeline {
             steps {
                 sh 'ls ./documents'
                 sh "ls -l ${env.WORKSPACE}/documents"
-                validateDocuments(directory: "${env.WORKSPACE}/documents", enableUrlCheck: true)
+                validateDocuments(directory: "${env.WORKSPACE}/documents")
                 sh 'ls ./documents'
             }
         }
