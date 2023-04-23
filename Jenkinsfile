@@ -42,8 +42,7 @@ pipeline {
         stage('Validation') {
             steps {
                 sh 'ls ./documents'
-                sh "ls -l /home/jenkins/agent/workspace/DocSecOps./src/FileInput"
-                validateDocuments(directory: "/home/jenkins/agent/workspace/DocSecOps./src/FileInput/")
+                validateDocuments(directory: "./documents/")
                 sh 'ls ./documents'
             }
         }
