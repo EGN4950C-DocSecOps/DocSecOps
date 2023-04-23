@@ -42,10 +42,10 @@ pipeline {
         stage('Validation') {
             steps {
                 sh 'ls ./documents'
+                sh 'ls /documents'
                 validateDocuments(directory: "./documents/")
                 validateDocuments(directory: "./documents")
-                validateDocuments()
-                sh 'ls ./documents'
+
             }
         }
         stage('Run Java program') {
