@@ -33,6 +33,12 @@ pipeline {
       ARTIFACTORY_ACCESS_TOKEN = credentials('artifactory-access-token')
     }
     stages {
+        stage('Check File Permissions') {
+            steps {
+                sh 'ls -l ${WORKSPACE}/documents'
+                sh 'chmod -R 777 ${WORKSPACE}/documents'
+            }
+        }
         stage('Validation') {
             steps {
                 sh 'ls ./documents'
