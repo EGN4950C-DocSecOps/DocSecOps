@@ -2,12 +2,14 @@ def textFiles = " "
 def pdfFiles = " "
 def pptxFiles = " "
 def docxFiles = " "
+def xlsxFiles = " "
 def jsonFiles = " "
 def uploadSpecJSON = " "
 def uploadSpecTXT = " "
 def uploadSpecPDF = " "
 def uploadSpecDOCX = " "
 def uploadSpecPPTX = " "
+def uploadSpecXLSX = " "
 def server = Artifactory.server 'artifactory'
 pipeline {
     agent {
@@ -57,6 +59,7 @@ pipeline {
                     pdfFiles= sh(returnStdout: true, script: 'find ./src/FileInput -iname *.pdf')
                     pptxFiles = sh(returnStdout: true, script: 'find ./src/FileInput -iname *.pptx')
                     docxFiles = sh(returnStdout: true, script: 'find ./src/FileInput -iname *.docx')
+                    xlsxFiles = sh(returnStdout: true, script: 'find ./src/FileInput -iname *.xlsx')
                     jsonFiles= sh(returnStdout: true, script: 'find ./src/FileOutput/ -iname *.json')
                  }
             }
@@ -87,6 +90,7 @@ pipeline {
                     //echo "${uploadSpecJSON}"
                     
                 echo "Test Step - textFiles"    
+                uploadSpecTarget = '"target": "DocSecOps-txt/"}'
                 uploadSpecTXT = uploadSpecSTART
                  //sh "echo ${uploadSpecTXT}"
                      def txttexts = textFiles.split('\n')
@@ -99,9 +103,9 @@ pipeline {
                     uploadSpecTXT = uploadSpecTXT + uploadSpecEND
                     //echo "${uploadSpecTXT}"    
                     
-                echo "Test Step - pdfFiles "    
+                echo "Test Step - pdfFiles "  
+                uploadSpecTarget = '"target": "DocSecOps-pdf/"}'
                 uploadSpecPDF = uploadSpecSTART
-                 //sh "echo ${uploadSpecPDF}"
                      def pdftexts = pdfFiles.split('\n')
                      for (txt in pdftexts) {
                          sh "echo ${txt}"
@@ -112,7 +116,8 @@ pipeline {
                     uploadSpecPDF = uploadSpecPDF + uploadSpecEND
                     //echo "${uploadSpecPDF}"  
                     
-                echo "Test Step - pptxFiles "    
+                echo "Test Step - pptxFiles "  
+                uploadSpecTarget = '"target": "DocSecOps-pptx/"}'
                 uploadSpecPPTX = uploadSpecSTART
                  //sh "echo ${uploadSpecPPTX}"
                      def pptxtexts = pptxFiles.split('\n')
@@ -125,7 +130,8 @@ pipeline {
                     uploadSpecPPTX = uploadSpecPPTX + uploadSpecEND
                     //echo "${uploadSpecPPTX}"
                     
-                echo "Test Step - docxFiles "    
+                echo "Test Step - docxFiles "  
+                uploadSpecTarget = '"target": "DocSecOps-docx/"}'
                 uploadSpecDOCX = uploadSpecSTART
                  //sh "echo ${uploadSpecDOCX}"
                      def docxtexts = docxFiles.split('\n')
@@ -136,7 +142,19 @@ pipeline {
                     }
                     uploadSpecDOCX = uploadSpecDOCX[0..-2]
                     uploadSpecDOCX = uploadSpecDOCX + uploadSpecEND
-                    //echo "${uploadSpecDOCX}"    
+                    //echo "${uploadSpecDOCX}"  
+                    
+                echo "Test Step - xlsxFiles "  
+                uploadSpecTarget = '"target": "DocSecOps-xlsx/"}'
+                uploadSpecXLSX = uploadSpecSTART
+                     def xlsxtexts = xlsxFiles.split('\n')
+                     for (txt in xlsxtexts) {
+                         sh "echo ${txt}"
+                         //sh "cat ${txt}"
+                         uploadSpecXLSX = uploadSpecDOCX + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
+                    }
+                    uploadSpecXLSX = uploadSpecXLSX[0..-2]
+                    uploadSpecXLSX = uploadSpecXLSX + uploadSpecEND
                 }
             }
         }
@@ -194,10 +212,22 @@ pipeline {
                     {
                         echo 'There are no PowerPoint files to Deploy'
                     }
+                     if(xlsxFiles.length() != 0)
+                    {
+                        echo 'Deploying *.xlsx files to JFrog....'
+                            rtUpload(
+                                serverId: 'artifactory',
+                                spec:"""${uploadSpecXLSX}"""
+                            )
+                    }
+                    else
+                    {
+                        echo 'There are no Excel files to Deploy'
+                    }
                     
                     if(jsonFiles.length() != 0)
                     {
-                        echo 'Deploying *.pptx files to JFrog....'
+                        echo 'Deploying *.json files to JFrog....'
                             rtUpload(
                                 serverId: 'artifactory',
                                 spec:"""${uploadSpecJSON}"""
