@@ -43,7 +43,7 @@ pipeline {
                     sh "cd documents/"
                     sh "ls /home/jenkins/agent/workspace/DocSecOps/documents"
                     echo "Finished listing files."
-                    validateDocuments directory: "/home/jenkins/agent/workspace/DocSecOps", enableUrlCheck: true, outputDirectory: ''
+                    validateDocuments(directory: "/home/jenkins/agent/workspace/DocSecOps./src/FileInput", enableUrlCheck: true, outputDirectory: '')
 
                 }
                 sh 'ls ./documents'
