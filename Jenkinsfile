@@ -47,9 +47,7 @@ pipeline {
                    //sh "ls ${env.WORKSPACE}/output"
                     echo "Trying to change the directory"
                     sh "cd documents/"
-                    sh "ls"
-                    echo "current directory"
-                    sh "pwd"
+                    sh "ls /home/jenkins/agent/workspace/DocSecOps/documents"
                     echo "Finished listing files."
                     validateDocuments directory: "/home/jenkins/agent/workspace/DocSecOps", enableUrlCheck: true, outputDirectory: ''
 
