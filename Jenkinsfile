@@ -45,7 +45,7 @@ pipeline {
                     sh "mv /home/jenkins/agent/workspace/DocSecOps/documents/testdoc.docx /home/jenkins/agent/workspace/DocSecOps/documents/src"
                     sh "ls /home/jenkins/agent/workspace/DocSecOps/src"
                     echo "Finished listing files."
-                    validateDocuments(directory: "/home/jenkins/agent/workspace/DocSecOps/documents", enableUrlCheck: true, outputDirectory: '')
+                    validateDocuments(directory: "/home/jenkins/agent/workspace/DocSecOps/documents/testdoc.docx", enableUrlCheck: true, outputDirectory: '')
 
                 }
                 sh 'ls ./documents'
