@@ -41,14 +41,16 @@ pipeline {
         }
         stage('Validation') {
             steps {
-                echo "Listing files in: ${env.WORKSPACE}/output"
-                sh "mkdir -p ${env.WORKSPACE}/output"
-                sh "ls ${env.WORKSPACE}/output"
-                echo "Finished listing files."
+                script{
+                    echo "Listing files in: ${env.WORKSPACE}/output"
+                    sh "mkdir -p "${env.WORKSPACE}"/output"
+                    sh "ls ${env.WORKSPACE}/output"
+                    echo "Finished listing files."
+                    validateDocuments directory: "'/home/jenkins/agent/workspace/DocSecOps/documents'", enableUrlCheck: true, outputDirectory: '/home/jenkins/agent/workspace/DocSecOps/FileProcessing/src/FileOutput/'
 
+                }
                 sh 'ls ./documents'
                 //validateDocuments(directory: "${WORKSPACE}/documents_copy")
-                validateDocuments directory: '/home/jenkins/agent/workspace/DocSecOps/documents', enableUrlCheck: true, outputDirectory: '/home/jenkins/agent/workspace/DocSecOps/FileProcessing/src/FileOutput/'
             }
         }
         stage('List Output Files') {
