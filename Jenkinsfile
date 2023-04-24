@@ -37,13 +37,11 @@ pipeline {
             steps {
                 echo "Running File Detection program..."
                 script {
-                    echo "Checking Files Uploaded..."
+                    echo "Checking the uploaded files..."
                     sh " java -jar FileDetectionLC2.jar true "
-                    //sh " java -jar DocumentTesterLC4.jar "
                     echo "Checking if json files were created successfully"
-                    //sh "pwd"
                     echo "Listing the json files with extracted metadata"
-                    //sh "ls ./FileProcessing/src/FileOutput/"
+                    sh "ls ./src/FileOutput/"
                  }
             }
             
@@ -54,11 +52,11 @@ pipeline {
                 echo "Building.."
                 script {
                     echo "doing build stuff.."
-                    textFiles= sh(returnStdout: true, script: 'find ./documents -iname *.txt')
-                    pdfFiles= sh(returnStdout: true, script: 'find ./documents -iname *.pdf')
-                    pptxFiles = sh(returnStdout: true, script: 'find ./documents -iname *.pptx')
-                    docxFiles = sh(returnStdout: true, script: 'find ./documents -iname *.docx')
-                    jsonFiles= sh(returnStdout: true, script: 'find ./FileProcessing/src/FileOutput/ -iname *.json')
+                    textFiles= sh(returnStdout: true, script: 'find ./src/FileInput -iname *.txt')
+                    pdfFiles= sh(returnStdout: true, script: 'find ./src/FileInput -iname *.pdf')
+                    pptxFiles = sh(returnStdout: true, script: 'find ./src/FileInput -iname *.pptx')
+                    docxFiles = sh(returnStdout: true, script: 'find ./src/FileInput -iname *.docx')
+                    jsonFiles= sh(returnStdout: true, script: 'find ./src/FileOutput/ -iname *.json')
                     sh "ls -l ./documents"
                     echo "$textFiles"
                     echo "$pdfFiles"
@@ -77,7 +75,7 @@ pipeline {
                 def uploadSpecTarget = '"target": "DocSecOps/"}'
                 def uploadSpecEND = ']}'
                     
-                echo "Test Step - Value of jsonFiles = $jsonFiles"    
+                echo "Test Step - jsonFiles"   
                 uploadSpecJSON = uploadSpecSTART
                  //sh "echo ${uploadSpecJSON}"
                      def jsontexts = jsonFiles.split('\n')
@@ -90,7 +88,7 @@ pipeline {
                     uploadSpecJSON = uploadSpecJSON + uploadSpecEND
                     //echo "${uploadSpecJSON}"
                     
-                echo "Test Step - Value of textFiles = $textFiles"    
+                echo "Test Step - textFiles"    
                 uploadSpecTXT = uploadSpecSTART
                  //sh "echo ${uploadSpecTXT}"
                      def txttexts = textFiles.split('\n')
@@ -103,7 +101,7 @@ pipeline {
                     uploadSpecTXT = uploadSpecTXT + uploadSpecEND
                     //echo "${uploadSpecTXT}"    
                     
-                echo "Test Step - Value of pdfFiles = $pdfFiles"    
+                echo "Test Step - pdfFiles "    
                 uploadSpecPDF = uploadSpecSTART
                  //sh "echo ${uploadSpecPDF}"
                      def pdftexts = pdfFiles.split('\n')
@@ -116,7 +114,7 @@ pipeline {
                     uploadSpecPDF = uploadSpecPDF + uploadSpecEND
                     //echo "${uploadSpecPDF}"  
                     
-                echo "Test Step - Value of pptxFiles = $pptxFiles"    
+                echo "Test Step - pptxFiles "    
                 uploadSpecPPTX = uploadSpecSTART
                  //sh "echo ${uploadSpecPPTX}"
                      def pptxtexts = pptxFiles.split('\n')
@@ -129,7 +127,7 @@ pipeline {
                     uploadSpecPPTX = uploadSpecPPTX + uploadSpecEND
                     //echo "${uploadSpecPPTX}"
                     
-                echo "Test Step - Value of docxFiles = $docxFiles"    
+                echo "Test Step - docxFiles "    
                 uploadSpecDOCX = uploadSpecSTART
                  //sh "echo ${uploadSpecDOCX}"
                      def docxtexts = docxFiles.split('\n')
