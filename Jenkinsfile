@@ -56,7 +56,7 @@ pipeline {
                     pdfFiles= sh(returnStdout: true, script: 'find ./src/FileInput -iname *.pdf')
                     pptxFiles = sh(returnStdout: true, script: 'find ./src/FileInput -iname *.pptx')
                     docxFiles = sh(returnStdout: true, script: 'find ./src/FileInput -iname *.docx')
-                    jsonFiles= sh(returnStdout: true, script: 'find ./FileProcessing/src/FileOutput/ -iname *.json')
+                    jsonFiles= sh(returnStdout: true, script: 'find ./src/FileOutput/ -iname *.json')
                     sh "ls -l ./documents"
                     echo "$textFiles"
                     echo "$pdfFiles"
