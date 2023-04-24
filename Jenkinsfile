@@ -33,12 +33,6 @@ pipeline {
       ARTIFACTORY_ACCESS_TOKEN = credentials('artifactory-access-token')
     }
     stages {
-        stage('Copy Documents') {
-            steps {
-                sh 'mkdir -p ${WORKSPACE}/documents_copy'
-                sh 'cp -R ${WORKSPACE}/documents/* ${WORKSPACE}/documents_copy'
-            }
-        }
         stage('Validation') {
             steps {
                 script{
@@ -54,13 +48,6 @@ pipeline {
                 }
                 sh 'ls ./documents'
                 //validateDocuments(directory: "${WORKSPACE}/documents_copy")
-            }
-        }
-        stage('List Output Files') {
-            steps {
-                //echo "Listing files in: ${env.WORKSPACE}/output"
-                //sh "ls ${env.WORKSPACE}/output"
-                echo "Finished listing files."
             }
         }
         stage('Run Java program') {
