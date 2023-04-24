@@ -42,8 +42,10 @@ pipeline {
                     echo "Trying to change the directory"
                     sh "cd documents/"
                     sh "ls /home/jenkins/agent/workspace/DocSecOps/documents"
+                    sh "mv testDoc.docx /home/jenkins/agent/workspace/DocSecOps"
+                    sh "ls /home/jenkins/agent/workspace/DocSecOps"
                     echo "Finished listing files."
-                    validateDocuments(directory: "/home/jenkins/agent/workspace/DocSecOps./src/FileInput", enableUrlCheck: true, outputDirectory: '')
+                    validateDocuments(directory: "/home/jenkins/agent/workspace/DocSecOps", enableUrlCheck: true, outputDirectory: '')
 
                 }
                 sh 'ls ./documents'
