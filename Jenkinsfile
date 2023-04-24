@@ -151,7 +151,7 @@ pipeline {
                      for (txt in xlsxtexts) {
                          sh "echo ${txt}"
                          //sh "cat ${txt}"
-                         uploadSpecXLSX = uploadSpecDOCX + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
+                         uploadSpecXLSX = uploadSpecXLSX + uploadSpecPatStart + "${txt}" + uploadSpecPatEnd + uploadSpecTarget + ','
                     }
                     uploadSpecXLSX = uploadSpecXLSX[0..-2]
                     uploadSpecXLSX = uploadSpecXLSX + uploadSpecEND
@@ -212,6 +212,7 @@ pipeline {
                     {
                         echo 'There are no PowerPoint files to Deploy'
                     }
+                    
                      if(xlsxFiles.length() != 0)
                     {
                         echo 'Deploying *.xlsx files to JFrog....'
