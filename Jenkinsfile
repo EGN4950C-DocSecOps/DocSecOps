@@ -51,7 +51,7 @@ pipeline {
                     echo "current directory"
                     sh "pwd"
                     echo "Finished listing files."
-                    validateDocuments directory: "/", enableUrlCheck: true, outputDirectory: ''
+                    validateDocuments directory: "/home/jenkins/agent/workspace/DocSecOps", enableUrlCheck: true, outputDirectory: ''
 
                 }
                 sh 'ls ./documents'
