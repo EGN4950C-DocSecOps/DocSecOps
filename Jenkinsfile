@@ -43,7 +43,7 @@ pipeline {
             steps {
                 script{
                     echo "Listing files in: ${env.WORKSPACE}/output"
-                    sh "mkdir -p "${env.WORKSPACE}"/output"
+                    sh "mkdir -p ${env.WORKSPACE}/output"
                     sh "ls ${env.WORKSPACE}/output"
                     echo "Finished listing files."
                     validateDocuments directory: "'/home/jenkins/agent/workspace/DocSecOps/documents'", enableUrlCheck: true, outputDirectory: '/home/jenkins/agent/workspace/DocSecOps/FileProcessing/src/FileOutput/'
