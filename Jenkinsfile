@@ -33,13 +33,19 @@ pipeline {
       ARTIFACTORY_ACCESS_TOKEN = credentials('artifactory-access-token')
     }
     stages {
-
+        stage('Copy Documents') {
+            steps {
+                sh 'mkdir -p ${WORKSPACE}/documents_copy'
+                sh 'cp -R ${WORKSPACE}/documents/* ${WORKSPACE}/documents_copy'
+            }
+        }
         stage('Validation') {
             steps {
                 sh 'ls ./documents'
-                validateDocuments(directory: "./documents")
+                validateDocuments(directory: "${WORKSPACE}/documents_copy")
+                //validateDocuments(directory: "./documents")
                 //echo "default output directory files: "
-                //sh 'ls ${env.WORKSPACE}/output'
+                sh 'ls ${env.WORKSPACE}/output'
 
             }
         }
