@@ -33,31 +33,12 @@ pipeline {
       ARTIFACTORY_ACCESS_TOKEN = credentials('artifactory-access-token')
     }
     stages {
-        stage('Validation') {
-            steps {
-                script{
-                    //echo "Listing files in: ${env.WORKSPACE}/output"
-                    //sh "mkdir -p ${env.WORKSPACE}/output"
-                   //sh "ls ${env.WORKSPACE}/output"
-                    echo "Trying to change the directory"
-                    sh "cd documents/"
-                    sh "ls /home/jenkins/agent/workspace/DocSecOps/documents"
-                    sh "mv /home/jenkins/agent/workspace/DocSecOps/documents/testdoc.docx /home/jenkins/agent/workspace/DocSecOps/documents/src"
-                    sh "ls /home/jenkins/agent/workspace/DocSecOps/src"
-                    echo "Finished listing files."
-                    validateDocuments(directory: "/home/jenkins/agent/workspace/DocSecOps/documents/testdoc.docx", enableUrlCheck: true, outputDirectory: '')
-
-                }
-                sh 'ls ./documents'
-                //validateDocuments(directory: "${WORKSPACE}/documents_copy")
-            }
-        }
         stage('Run Java program') {
             steps {
                 echo "Running File Detection program..."
                 script {
                     echo "Checking Files Uploaded..."
-                    sh " java -jar FileDetectionLC.jar "
+                    sh " java -jar FileDetectionLC2.jar false "
                     //sh " java -jar DocumentTesterLC4.jar "
                     echo "Checking if json files were created successfully"
                     //sh "pwd"
