@@ -48,7 +48,7 @@ pipeline {
 
                 sh 'ls ./documents'
                 //validateDocuments(directory: "${WORKSPACE}/documents_copy")
-                validateDocuments directory: '${WORKSPACE}/documents', enableUrlCheck: true, outputDirectory: '${WORKSPACE}/FileProcessing/src/FileOutput/'
+                validateDocuments directory: '/home/jenkins/agent/workspace/DocSecOps/documents', enableUrlCheck: true, outputDirectory: '/home/jenkins/agent/workspace/DocSecOps/FileProcessing/src/FileOutput/'
             }
         }
         stage('List Output Files') {
