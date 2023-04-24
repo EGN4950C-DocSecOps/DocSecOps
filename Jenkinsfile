@@ -47,7 +47,8 @@ pipeline {
                 echo "Finished listing files."
 
                 sh 'ls ./documents'
-                validateDocuments(directory: "${WORKSPACE}/documents_copy")
+                //validateDocuments(directory: "${WORKSPACE}/documents_copy")
+                validateDocuments directory: '${WORKSPACE}/documents', enableUrlCheck: true, outputDirectory: '${WORKSPACE}/FileProcessing/src/FileOutput/'
             }
         }
         stage('List Output Files') {
