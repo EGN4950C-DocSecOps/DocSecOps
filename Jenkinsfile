@@ -58,8 +58,8 @@ pipeline {
         }
         stage('List Output Files') {
             steps {
-                echo "Listing files in: ${env.WORKSPACE}/output"
-                sh "ls ${env.WORKSPACE}/output"
+                //echo "Listing files in: ${env.WORKSPACE}/output"
+                //sh "ls ${env.WORKSPACE}/output"
                 echo "Finished listing files."
             }
         }
