@@ -48,8 +48,10 @@ pipeline {
                     echo "Trying to change the directory"
                     sh "cd documents/"
                     sh "ls"
+                    echo "current directory"
+                    sh "pwd"
                     echo "Finished listing files."
-                    validateDocuments directory: "./", enableUrlCheck: true, outputDirectory: ''
+                    validateDocuments directory: "/", enableUrlCheck: true, outputDirectory: ''
 
                 }
                 sh 'ls ./documents'
