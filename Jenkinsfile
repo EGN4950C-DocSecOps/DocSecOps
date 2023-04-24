@@ -41,6 +41,13 @@ pipeline {
         }
         stage('Validation') {
             steps {
+                echo "Listing files in: ${env.WORKSPACE}/output"
+                sh "mkdir -p ${env.WORKSPACE}/output"
+                sh "ls ${env.WORKSPACE}/output"
+                echo "Finished listing files."
+            }
+            steps {
+                
                 sh 'ls ./documents'
                 validateDocuments(directory: "${WORKSPACE}/documents_copy")
                 //validateDocuments(directory: "./documents")
