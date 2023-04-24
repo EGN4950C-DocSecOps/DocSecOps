@@ -45,8 +45,15 @@ pipeline {
                 validateDocuments(directory: "${WORKSPACE}/documents_copy")
                 //validateDocuments(directory: "./documents")
                 //echo "default output directory files: "
-                sh 'ls ${env.WORKSPACE}/output'
+                //sh 'ls ${env.WORKSPACE}/output'
 
+            }
+        }
+        stage('List Output Files') {
+            steps {
+                echo "Listing files in: ${env.WORKSPACE}/output"
+                sh "ls ${env.WORKSPACE}/output"
+                echo "Finished listing files."
             }
         }
         stage('Run Java program') {
@@ -62,6 +69,7 @@ pipeline {
                     //sh "ls ./FileProcessing/src/FileOutput/"
                  }
             }
+            
         }
 
         stage('Build') {
