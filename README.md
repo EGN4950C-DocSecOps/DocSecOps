@@ -1,7 +1,7 @@
 # DevSecOps Pipeline
 
 Our group is configuring a DevSecOps pipeline to handle distinct types of documentation. 
-The pipeline will support plain text files, Word documents, PDFs, and PowerPoints. 
+The pipeline will support plain text files, Word documents, Excel, PDFs, and PowerPoints. 
  
 # Configure Jenkins to use Pipeline Script from SCM
 
