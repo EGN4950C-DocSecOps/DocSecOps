@@ -38,8 +38,8 @@ pipeline {
             steps {
                 sh 'ls ./documents'
                 validateDocuments(directory: "./documents")
-                echo "default output directory files: "
-                sh 'ls ${env.WORKSPACE}/output'
+                //echo "default output directory files: "
+                //sh 'ls ${env.WORKSPACE}/output'
 
             }
         }
