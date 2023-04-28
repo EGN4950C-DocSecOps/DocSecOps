@@ -1,0 +1,26 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="FileDetection:jar5">
+    <output-path>$PROJECT_DIR$/out/artifacts/FileDetection_jar5</output-path>
+    <root id="archive" name="FileDetection.jar">
+      <element id="module-output" name="FileDetection" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/fontbox-2.0.28.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/openxml4j-1.0-beta.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/fontbox-2.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/commons-logging-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/pdfbox-2.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/gson-2.10.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/poi-scratchpad-3.2-FINAL.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/poi-ooxml-5.2.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/poi-ooxml-lite-5.2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/SparseBitSet-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/curvesapi-1.07.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/commons-io-2.11.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/commons-compress-1.22.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/commons-collections4-4.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/log4j-api-2.20.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/poi-5.2.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/xmlbeans-5.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/log4j-core-2.20.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
