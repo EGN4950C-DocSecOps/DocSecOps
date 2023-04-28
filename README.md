@@ -3,6 +3,11 @@
 Our group is configuring a DevSecOps pipeline to handle distinct types of documentation. 
 The pipeline will support plain text files, Word documents, Excel, PDFs, and PowerPoints. 
 
+* FileProcessing Folder contains the source code 
+  * it can be found in main as well as the "DevSecOps-Java-Source-Code" branch
+* docDataValidator Folder contains the source code for the plugin
+  * it can be found in main as well as the "Jenkins-Plugin" branch
+
  
 # Configure Jenkins to use Pipeline Script from SCM
 
@@ -15,10 +20,6 @@ In the definition, select the "Pipeline script from SCM" and for the SCM pick "G
 <img width="1405" alt="Screen Shot 2023-04-20 at 8 41 47 PM" src="https://user-images.githubusercontent.com/89712188/233516519-7afe8e01-70aa-4996-8ed3-54dd60fb3099.png">
 
 Then you want to specify the desired branch and the name of the file. In standard practice for Jenkins, it is preferred to use the name "Jenkinsfile" as the name of the document where the pipeline script will resided. To ensure it is working, you can build the pipeline with a simple pipeline script to ensure that it is connecting appropriately.
-
-Example of pipeline script:
-
-<img width="820" alt="Screen Shot 2023-04-20 at 9 06 31 PM" src="https://user-images.githubusercontent.com/89712188/233517142-40e4c35a-ee30-44ff-b198-e1dc2e44169e.png">
 
 Quick Tip: If you need help writing pipeline script, you can click on "pipeline syntax" and it will show you various types on common questions and how to write them in the script.
 
