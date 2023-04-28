@@ -1531,7 +1531,7 @@ spec:
         rkeWindowsPathPrefix: ""
         systemDefaultRegistry: ""
         systemProjectId: p-4978h
-        url: https://rancher.k8s.trapnet.xyz
+        url: https://rancher.danr.dev
       systemDefaultRegistry: ""
     persistence:
       size: 25Gi
