@@ -41,35 +41,109 @@ If the parameter is not included it will not check for URls.
 
 Lastly, for the Jar file to work appropriately there needs to exist a src/FileInput and src/FileOutput directory in the GitHub Repository. Due to the nature of GitHub this requires to upload a "dummy" file to maintain the,. If a file doesnt exists here, the folder will be deleted and the Jar file will fail.
 
-# How to Build the Pipeline
+# Jenkins-Document-Data-Validator
 
-Once you connected to Github and Artifactory, in Jenkins you can trigger the Build manual by clicking "Build" or you can configure a GitHub webhook everytime a push occurs in the repository. 
+Original Repository: https://github.com/lcasals/Jenkins-File-Processor-Plugin
+
+Document Data Validator is a Jenkins plugin that extracts metadata from PDF, Word, and PPTX files, validates the content, and saves metadata into JSON files. It detects and lists files in a directory, prints out file information, and report errors such as broken links to the console. 
+## Features:  
+- Detects and lists files in a directory (optional parameter)
+- Extracts metadata from PDF, Word, and PPTX files
+- Validates content for broken links (optional parameter)
+- Saves metadata and errors into json files in an output directory (optional parameter)
 
 
-When the pipeline begeins the first thing it will do is build a Kubernetes agent that will work on all the task in pipeline.
+## Usage: 
+### Importing the plugin into Jenkins: 
+Use jenkins dashboard web UI: 
+    Go to Jenkins dashboard
+    After logging in, click on Manage Jenkins, then Manage Plugins
+    Click on Advanced Settings
+    In the Deploy Plugin section, click browse to choose a file and select the .hpi file
+    Click Upload
+May need to restart the Jenkins instance to complete installation
 
-<img width="244" alt="Screen Shot 2023-04-20 at 9 24 32 PM" src="https://user-images.githubusercontent.com/89712188/233518960-190fae20-5575-4bf1-8951-8ad4650fffde.png">
+### To use the Document Data Validator plugin in a declarative Jenkins pipeline, add the following step to your `Jenkinsfile`:
+### Windows Systems
+```
+pipeline {
+    agent any
 
-Everything a build is started this agent will be gernated and is completely customizable and a preferred method since it is destoryed when the build is finished and will only take up memeory while it is executing.
+    stages {
+        stage('Validation') {
+            steps {
+                script {
+                    validateDocuments(directory: 'C:\\path\\to\\inputFolder\\', enableUrlCheck: true)
+                }
+            }
+        }
+    }
+}
 
-<img width="903" alt="Screen Shot 2023-04-20 at 9 27 16 PM" src="https://user-images.githubusercontent.com/89712188/233519255-e3056589-2db5-4506-aa40-34887ec7ea1b.png">
+```
+Replace "C:\\path\\to\\inputFolder\\" with the path to the directory containing the documents you want to validate.
 
-In the pipeline script, you have stages. Here you can define certain task that need to be accomplish and label them accordingly. The first stage that occurs is to run the JAR file that contains all of the code to process the different file types entering the pipeline. Once this is completely, the following stage located what kind of files its locating. This will begin the set-up to deploy the files the artifact repository. 
+### Unix Systems
+```
+pipeline {
+    agent any
 
-<img width="942" alt="Screen Shot 2023-04-20 at 9 30 53 PM" src="https://user-images.githubusercontent.com/89712188/233519612-180041e9-81a6-4ab5-9fb6-fe517b85514d.png">
+    stages {
+        stage('Validation') {
+            steps {
+                script {
+                    validateDocuments(directory: '/path/to/inputFolder/', enableUrlCheck: true)
+                }
+            }
+        }
+    }
+}
 
-In this stage, it will be building the upload specifications required by artifory inorder to deploy successfuly, which looks like {"files": [{"pattern": "<file directory + file name","target": "Artifact repo name/"}
+```
+Replace "/path/to/inputFolder/" with the path to the directory containing the documents you want to validate. 
+Make sure to include the forward slash at the end.
 
-Once the upload specs for each file is complete the next stage will begin.
+## Default Directories: 
+### Default Input Directory: 
+The plugin scans for documents in the root of the Jenkins workspace. If you want to specify a different directory, you can provide the `directory` parameter in the `validateDocuments` step as shown above under "Usage"
+- Note: when you use a pipeline script and check out files from a GitHub repository, Jenkins creates a workspace folder for the job run. The workspace folder will contain the files and directories from the checked-out repository. The files should be available in the workspace folder when the plugin is called.
 
-<img width="458" alt="Screen Shot 2023-04-20 at 9 36 38 PM" src="https://user-images.githubusercontent.com/89712188/233520176-a6ad4919-fd7b-4637-a21e-fbf97a64a906.png">
+### Default JSON Output Directory: 
+The plugin saves metadata and error information in JSON files, which are stored in a directory named jsonOutput inside the Jenkins workspace. If you want to specify a different output directory, you can provide the outputDirectory parameter in the validateDocuments step as shown above under "Usage"
+## Using the Default Input and Output Directories: 
+By not providing the directory and outputDirectory parameters, the plugin will use the default input directory (the root of the Jenkins workspace) to scan for documents and the default output directory (jsonOutput inside the Jenkins workspace) to save the JSON files with metadata.
 
-To ensure the pipeline does not fail, there are IF conditions in place to verifiy that there are files to deploy, otherwise to do nothing. We can see that earlier when we configure JFrog, we called it "artifactory" you put this as the serverID then pass all the files. 
+### Using Default Directories in a Jenkins Pipeline
+To use the default input and output directories in your Jenkins pipeline, you don't need to provide the `directory` and `outputDirectory` parameters in the `validateDocuments` step. Here's an example of how to use the default directories in a Jenkinsfile. note that the enableUrlCheck parameter is also optional:
 
-Lastly, you can add post builds. We are doing this, so that for every build an email gets sent out that provides the build name, build number, the status of the build (Success or Failure), then provides a copy of the console log.
+```groovy
+pipeline {
+    agent any
 
-<img width="695" alt="Screen Shot 2023-04-20 at 9 42 02 PM" src="https://user-images.githubusercontent.com/89712188/233520828-ae651b08-2e24-42e4-b081-6c313a0ffe3b.png">
+    stages {
+        stage('Validation') {
+            steps {
+                script {
+                    validateDocuments()
+                }
+            }
+        }
+    }
+}
+```
+## how to test Locally:
+1. install maven
+2. Open project folder in command line
+3. run the following command:   mvn hpi:run
+4. jenkins dashboard should be available at http://localhost:8080/jenkins/ , 
+5. if port is being used, you can specify the port like this:    mvn hpi:run -Dport=8081  
 
-An example of what the email looks like: 
+# DevSecOps Data Processing Source Code
 
-<img width="496" alt="Screen Shot 2023-04-20 at 9 42 41 PM" src="https://user-images.githubusercontent.com/89712188/233520944-b96dce5e-fd54-4db3-9f1f-2ddc1bd675ad.png">
+Original Repository: https://github.com/jaroldsabillon/FIleProcessing
+
+A file processing project to be converted to a jenkins plug. Metadata extraction will be done using apache libraries, and will start will docx, pdf, and pptx files. Unrecognized files will undergo generic data extraction, if unsuccesfull it will set it aside and add it to a list of unprocessed files.
+
+Information extracted is written to JSON files
+
+Implemented URLChecker that requires "-validateURL" arugument parameter
