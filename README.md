@@ -37,6 +37,8 @@ Here you will need to provide the URL of the Artifactory instance as well as a u
 In the "Run Java program" stage, if you want to run the URL validator you have to add the argumant parameter "-validateURL"
 If the parameter is not included it will not check for URls.
 
+<img width="575" alt="Screen Shot 2023-04-27 at 9 37 04 PM" src="https://user-images.githubusercontent.com/89712188/235034427-0a8aa768-f09a-4b27-951c-cceb1792ebb2.png">
+
 Lastly, for the Jar file to work appropriately there needs to exist a src/FileInput and src/FileOutput directory in the GitHub Repository. Due to the nature of GitHub this requires to upload a "dummy" file to maintain the,. If a file doesnt exists here, the folder will be deleted and the Jar file will fail.
 
 # How to Build the Pipeline
