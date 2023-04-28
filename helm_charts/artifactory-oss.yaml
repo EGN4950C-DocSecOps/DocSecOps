@@ -1,79 +1,2501 @@
-artifactory:
-  artifactory:
-    image:
-      registry: releases-docker.jfrog.io
-      repository: jfrog/artifactory-oss
-    javaOpts: {}
-    resources: {}
-  databaseUpgradeReady: 'yes'
-  ingress:
-    enabled: false
-    tls: null
-  installer:
-    platform: art-oss-helm
-  installerInfo: >-
-    {"productId": "Helm_artifactory-oss/{{ .Chart.Version }}", "features": [ {
-    "featureId": "Platform/{{ default "kubernetes" .Values.installer.platform
-    }}"}]}
-  jfconnect:
-    enabled: false
-  nginx:
-    enabled: false
-    service:
-      type: LoadBalancer
-    tlsSecretName: ''
-  postgresql:
-    enabled: true
-  javaOpts:
-    xms: 1g
-    xmx: 2g
-  persistence:
-    accessMode: ReadWriteOnce
-    cacheProviderDir: cache
-    enabled: true
-    mountPath: /var/opt/jfrog/artifactory
-    size: 200Gi
-    storageClass: longhorn
+apiVersion: catalog.cattle.io/v1
+kind: App
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: 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
+    objectset.rio.cattle.io/id: helm-app
+    objectset.rio.cattle.io/owner-gvk: /v1, Kind=Secret
+    objectset.rio.cattle.io/owner-name: sh.helm.release.v1.artifactory.v1
+    objectset.rio.cattle.io/owner-namespace: devops-tools
+  creationTimestamp: "2022-11-23T02:03:23Z"
+  generation: 2
+  labels:
+    objectset.rio.cattle.io/hash: 532def92e9e61b2902c723eb7181185e5ab5da9f
+  managedFields:
+  - apiVersion: catalog.cattle.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:objectset.rio.cattle.io/applied: {}
+          f:objectset.rio.cattle.io/id: {}
+          f:objectset.rio.cattle.io/owner-gvk: {}
+          f:objectset.rio.cattle.io/owner-name: {}
+          f:objectset.rio.cattle.io/owner-namespace: {}
+        f:labels:
+          .: {}
+          f:objectset.rio.cattle.io/hash: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"712b6261-587f-4fee-b51f-e2d86c4ab9a5"}: {}
+      f:spec:
+        .: {}
+        f:chart:
+          .: {}
+          f:metadata:
+            .: {}
+            f:annotations:
+              .: {}
+              f:catalog.cattle.io/ui-source-repo: {}
+              f:catalog.cattle.io/ui-source-repo-type: {}
+            f:apiVersion: {}
+            f:appVersion: {}
+            f:description: {}
+            f:home: {}
+            f:icon: {}
+            f:keywords: {}
+            f:maintainers: {}
+            f:name: {}
+            f:sources: {}
+            f:type: {}
+            f:version: {}
+          f:values:
+            .: {}
+            f:artifactory:
+              .: {}
+              f:access:
+                .: {}
+                f:accessConfig:
+                  .: {}
+                  f:security:
+                    .: {}
+                    f:tls: {}
+                f:database:
+                  .: {}
+                  f:maxOpenConnections: {}
+                f:tomcat:
+                  .: {}
+                  f:connector:
+                    .: {}
+                    f:extraConfig: {}
+                    f:maxThreads: {}
+                    f:sendReasonPhrase: {}
+              f:additionalResources: {}
+              f:artifactory:
+                .: {}
+                f:admin:
+                  .: {}
+                  f:ip: {}
+                  f:username: {}
+                f:affinity: {}
+                f:annotations: {}
+                f:catalinaLoggers: {}
+                f:catalinaLoggersResources: {}
+                f:circleOfTrustCertificatesSecret: {}
+                f:configMapName: {}
+                f:configMaps: {}
+                f:consoleLog: {}
+                f:copyOnEveryStartup: {}
+                f:customCertificates:
+                  .: {}
+                  f:enabled: {}
+                f:customInitContainers: {}
+                f:customInitContainersBegin: {}
+                f:customPersistentVolumeClaim: {}
+                f:customSecrets: {}
+                f:customSidecarContainers: {}
+                f:customVolumeMounts: {}
+                f:customVolumes: {}
+                f:database:
+                  .: {}
+                  f:maxOpenConnections: {}
+                f:deleteDBPropertiesOnStartup: {}
+                f:externalArtifactoryPort: {}
+                f:externalPort: {}
+                f:extraEnvironmentVariables: {}
+                f:gid: {}
+                f:haBackupDir:
+                  .: {}
+                  f:enabled: {}
+                f:haDataDir:
+                  .: {}
+                  f:enabled: {}
+                f:image:
+                  .: {}
+                  f:pullPolicy: {}
+                  f:registry: {}
+                  f:repository: {}
+                f:internalArtifactoryPort: {}
+                f:internalPort: {}
+                f:javaOpts:
+                  .: {}
+                  f:jmx:
+                    .: {}
+                    f:authenticate: {}
+                    f:enabled: {}
+                    f:port: {}
+                    f:ssl: {}
+                f:labels: {}
+                f:license: {}
+                f:lifecycle: {}
+                f:livenessProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+                f:loggers: {}
+                f:loggersResources: {}
+                f:migration:
+                  .: {}
+                  f:enabled: {}
+                  f:timeoutSeconds: {}
+                f:name: {}
+                f:nodeSelector: {}
+                f:openMetrics:
+                  .: {}
+                  f:enabled: {}
+                  f:filebeat:
+                    .: {}
+                    f:elasticsearch:
+                      .: {}
+                      f:password: {}
+                      f:url: {}
+                      f:username: {}
+                    f:enabled: {}
+                    f:log:
+                      .: {}
+                      f:enabled: {}
+                      f:level: {}
+                f:persistence:
+                  .: {}
+                  f:accessMode: {}
+                  f:annotations: {}
+                  f:awsS3V3:
+                    .: {}
+                    f:bucketName: {}
+                    f:enablePathStyleAccess: {}
+                    f:enableSignedUrlRedirect: {}
+                    f:maxConnections: {}
+                    f:path: {}
+                    f:signatureExpirySeconds: {}
+                    f:signedUrlExpirySeconds: {}
+                    f:testConnection: {}
+                    f:useInstanceCredentials: {}
+                    f:usePresigning: {}
+                  f:azureBlob:
+                    .: {}
+                    f:multiPartLimit: {}
+                    f:multipartElementSize: {}
+                    f:testConnection: {}
+                  f:cacheProviderDir: {}
+                  f:enabled: {}
+                  f:fileSystem:
+                    .: {}
+                    f:cache:
+                      .: {}
+                      f:enabled: {}
+                  f:googleStorage:
+                    .: {}
+                    f:bucketExists: {}
+                    f:bucketName: {}
+                    f:endpoint: {}
+                    f:gcpServiceAccount:
+                      .: {}
+                      f:enabled: {}
+                    f:httpsOnly: {}
+                    f:path: {}
+                    f:useInstanceCredentials: {}
+                  f:lenientLimit: {}
+                  f:maxCacheSize: {}
+                  f:mountPath: {}
+                  f:nfs:
+                    .: {}
+                    f:backupDir: {}
+                    f:capacity: {}
+                    f:dataDir: {}
+                    f:haBackupMount: {}
+                    f:haDataMount: {}
+                  f:redundancy: {}
+                  f:size: {}
+                  f:type: {}
+                f:podAntiAffinity:
+                  .: {}
+                  f:topologyKey: {}
+                  f:type: {}
+                f:priorityClass:
+                  .: {}
+                  f:create: {}
+                  f:value: {}
+                f:readinessProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+                f:replicaCount: {}
+                f:replicator:
+                  .: {}
+                  f:enabled: {}
+                  f:ingress:
+                    .: {}
+                    f:annotations: {}
+                    f:className: {}
+                    f:enabled: {}
+                    f:hosts: {}
+                    f:tls: {}
+                  f:lifecycle: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:trackerIngress:
+                    .: {}
+                    f:annotations: {}
+                    f:className: {}
+                    f:enabled: {}
+                    f:hosts: {}
+                    f:tls: {}
+                f:resources: {}
+                f:schedulerName: {}
+                f:service:
+                  .: {}
+                  f:annotations: {}
+                  f:loadBalancerSourceRanges: {}
+                  f:name: {}
+                  f:type: {}
+                f:setSecurityContext: {}
+                f:ssh:
+                  .: {}
+                  f:enabled: {}
+                  f:externalPort: {}
+                  f:internalPort: {}
+                f:startupProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+                f:systemYaml: {}
+                f:terminationGracePeriodSeconds: {}
+                f:tolerations: {}
+                f:tomcat:
+                  .: {}
+                  f:connector:
+                    .: {}
+                    f:extraConfig: {}
+                    f:maxThreads: {}
+                    f:sendReasonPhrase: {}
+                  f:maintenanceConnector:
+                    .: {}
+                    f:port: {}
+                f:topologySpreadConstraints: {}
+                f:uid: {}
+                f:unifiedSecretInstallation: {}
+                f:updateStrategy:
+                  .: {}
+                  f:type: {}
+                f:userPluginSecrets: {}
+              f:autoscaling:
+                .: {}
+                f:enabled: {}
+                f:maxReplicas: {}
+                f:minReplicas: {}
+                f:targetCPUUtilizationPercentage: {}
+              f:aws:
+                .: {}
+                f:license:
+                  .: {}
+                  f:enabled: {}
+                f:region: {}
+              f:customIngress: {}
+              f:database:
+                .: {}
+                f:secrets: {}
+              f:databaseUpgradeReady: {}
+              f:event:
+                .: {}
+                f:enabled: {}
+                f:internalPort: {}
+                f:lifecycle: {}
+                f:livenessProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+                f:name: {}
+                f:resources: {}
+                f:startupProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+              f:filebeat:
+                .: {}
+                f:enabled: {}
+                f:filebeatYml: {}
+                f:image:
+                  .: {}
+                  f:repository: {}
+                  f:version: {}
+                f:livenessProbe:
+                  .: {}
+                  f:exec:
+                    .: {}
+                    f:command: {}
+                  f:failureThreshold: {}
+                  f:initialDelaySeconds: {}
+                  f:periodSeconds: {}
+                  f:timeoutSeconds: {}
+                f:logstashUrl: {}
+                f:name: {}
+                f:readinessProbe:
+                  .: {}
+                  f:exec:
+                    .: {}
+                    f:command: {}
+                  f:failureThreshold: {}
+                  f:initialDelaySeconds: {}
+                  f:periodSeconds: {}
+                  f:timeoutSeconds: {}
+                f:resources: {}
+              f:frontend:
+                .: {}
+                f:enabled: {}
+                f:internalPort: {}
+                f:lifecycle: {}
+                f:livenessProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+                f:name: {}
+                f:resources: {}
+                f:session:
+                  .: {}
+                  f:timeoutMinutes: {}
+                f:startupProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+              f:global:
+                .: {}
+                f:cattle:
+                  .: {}
+                  f:clusterId: {}
+                  f:clusterName: {}
+                  f:rkePathPrefix: {}
+                  f:rkeWindowsPathPrefix: {}
+                  f:systemDefaultRegistry: {}
+                  f:systemProjectId: {}
+                  f:url: {}
+                f:customCertificates:
+                  .: {}
+                  f:enabled: {}
+                f:nodeSelector: {}
+                f:systemDefaultRegistry: {}
+                f:versions: {}
+              f:hostAliases: {}
+              f:ingress:
+                .: {}
+                f:additionalRules: {}
+                f:annotations: {}
+                f:artifactoryPath: {}
+                f:className: {}
+                f:defaultBackend:
+                  .: {}
+                  f:enabled: {}
+                f:enabled: {}
+                f:hosts: {}
+                f:labels: {}
+                f:routerPath: {}
+                f:tls: {}
+              f:initContainerImage: {}
+              f:initContainers:
+                .: {}
+                f:resources:
+                  .: {}
+                  f:limits:
+                    .: {}
+                    f:cpu: {}
+                    f:memory: {}
+                  f:requests:
+                    .: {}
+                    f:cpu: {}
+                    f:memory: {}
+              f:installer:
+                .: {}
+                f:platform: {}
+                f:type: {}
+              f:installerInfo: {}
+              f:integration:
+                .: {}
+                f:enabled: {}
+                f:internalPort: {}
+                f:lifecycle: {}
+                f:livenessProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+                f:name: {}
+                f:resources: {}
+                f:startupProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+              f:jfconnect:
+                .: {}
+                f:enabled: {}
+                f:extraEnvironmentVariables: {}
+                f:internalPort: {}
+                f:lifecycle: {}
+                f:livenessProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+                f:name: {}
+                f:resources: {}
+                f:startupProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+              f:logger:
+                .: {}
+                f:image:
+                  .: {}
+                  f:registry: {}
+                  f:repository: {}
+                  f:tag: {}
+              f:mc:
+                .: {}
+                f:database:
+                  .: {}
+                  f:maxOpenConnections: {}
+                f:enabled: {}
+                f:idgenerator:
+                  .: {}
+                  f:maxOpenConnections: {}
+                f:tomcat:
+                  .: {}
+                  f:connector:
+                    .: {}
+                    f:extraConfig: {}
+                    f:maxThreads: {}
+                    f:sendReasonPhrase: {}
+              f:metadata:
+                .: {}
+                f:database:
+                  .: {}
+                  f:maxOpenConnections: {}
+                f:enabled: {}
+                f:internalPort: {}
+                f:lifecycle: {}
+                f:livenessProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+                f:name: {}
+                f:resources: {}
+                f:startupProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+              f:networkpolicy: {}
+              f:nginx:
+                .: {}
+                f:affinity: {}
+                f:annotations: {}
+                f:artifactoryConf: {}
+                f:customArtifactoryConfigMap: {}
+                f:customCommand: {}
+                f:customConfigMap: {}
+                f:customInitContainers: {}
+                f:customPorts: {}
+                f:customSidecarContainers: {}
+                f:customVolumeMounts: {}
+                f:customVolumes: {}
+                f:enabled: {}
+                f:gid: {}
+                f:http:
+                  .: {}
+                  f:enabled: {}
+                  f:externalPort: {}
+                  f:internalPort: {}
+                f:https:
+                  .: {}
+                  f:enabled: {}
+                  f:externalPort: {}
+                  f:internalPort: {}
+                f:image:
+                  .: {}
+                  f:pullPolicy: {}
+                  f:registry: {}
+                  f:repository: {}
+                f:kind: {}
+                f:labels: {}
+                f:lifecycle: {}
+                f:livenessProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+                f:loggers: {}
+                f:loggersResources: {}
+                f:logs:
+                  .: {}
+                  f:level: {}
+                  f:stderr: {}
+                f:mainConf: {}
+                f:minAvailable: {}
+                f:name: {}
+                f:nodeSelector: {}
+                f:persistence:
+                  .: {}
+                  f:accessMode: {}
+                  f:enabled: {}
+                  f:mountPath: {}
+                  f:size: {}
+                f:priorityClassName: {}
+                f:readinessProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+                f:replicaCount: {}
+                f:resources: {}
+                f:securityContext: {}
+                f:service:
+                  .: {}
+                  f:annotations: {}
+                  f:customPorts: {}
+                  f:externalTrafficPolicy: {}
+                  f:loadBalancerIP: {}
+                  f:loadBalancerSourceRanges: {}
+                  f:ssloffload: {}
+                  f:type: {}
+                f:ssh:
+                  .: {}
+                  f:externalPort: {}
+                  f:internalPort: {}
+                f:startupProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+                f:terminationGracePeriodSeconds: {}
+                f:tlsSecretName: {}
+                f:tolerations: {}
+                f:topologySpreadConstraints: {}
+                f:uid: {}
+              f:observability:
+                .: {}
+                f:enabled: {}
+                f:internalPort: {}
+                f:lifecycle: {}
+                f:livenessProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+                f:name: {}
+                f:resources: {}
+                f:startupProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+              f:postgresql:
+                .: {}
+                f:audit:
+                  .: {}
+                  f:clientMinMessages: {}
+                  f:logConnections: {}
+                  f:logDisconnections: {}
+                  f:logHostname: {}
+                  f:logLinePrefix: {}
+                  f:logTimezone: {}
+                  f:pgAuditLog: {}
+                  f:pgAuditLogCatalog: {}
+                f:common:
+                  .: {}
+                  f:exampleValue: {}
+                  f:global:
+                    .: {}
+                    f:cattle:
+                      .: {}
+                      f:clusterId: {}
+                      f:clusterName: {}
+                      f:rkePathPrefix: {}
+                      f:rkeWindowsPathPrefix: {}
+                      f:systemDefaultRegistry: {}
+                      f:systemProjectId: {}
+                      f:url: {}
+                    f:customCertificates:
+                      .: {}
+                      f:enabled: {}
+                    f:nodeSelector: {}
+                    f:postgresql: {}
+                    f:systemDefaultRegistry: {}
+                    f:versions: {}
+                f:commonAnnotations: {}
+                f:containerSecurityContext:
+                  .: {}
+                  f:enabled: {}
+                  f:runAsUser: {}
+                f:customLivenessProbe: {}
+                f:customReadinessProbe: {}
+                f:customStartupProbe: {}
+                f:enabled: {}
+                f:extraDeploy: {}
+                f:extraEnv: {}
+                f:global:
+                  .: {}
+                  f:cattle:
+                    .: {}
+                    f:clusterId: {}
+                    f:clusterName: {}
+                    f:rkePathPrefix: {}
+                    f:rkeWindowsPathPrefix: {}
+                    f:systemDefaultRegistry: {}
+                    f:systemProjectId: {}
+                    f:url: {}
+                  f:customCertificates:
+                    .: {}
+                    f:enabled: {}
+                  f:nodeSelector: {}
+                  f:postgresql: {}
+                  f:systemDefaultRegistry: {}
+                  f:versions: {}
+                f:image:
+                  .: {}
+                  f:debug: {}
+                  f:pullPolicy: {}
+                  f:registry: {}
+                  f:repository: {}
+                  f:tag: {}
+                f:ldap:
+                  .: {}
+                  f:baseDN: {}
+                  f:bindDN: {}
+                  f:enabled: {}
+                  f:port: {}
+                  f:prefix: {}
+                  f:scheme: {}
+                  f:search_attr: {}
+                  f:search_filter: {}
+                  f:server: {}
+                  f:suffix: {}
+                  f:tls: {}
+                  f:url: {}
+                f:livenessProbe:
+                  .: {}
+                  f:enabled: {}
+                  f:failureThreshold: {}
+                  f:initialDelaySeconds: {}
+                  f:periodSeconds: {}
+                  f:successThreshold: {}
+                  f:timeoutSeconds: {}
+                f:metrics:
+                  .: {}
+                  f:enabled: {}
+                  f:extraEnvVars: {}
+                  f:image:
+                    .: {}
+                    f:pullPolicy: {}
+                    f:registry: {}
+                    f:repository: {}
+                    f:tag: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:enabled: {}
+                    f:failureThreshold: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:prometheusRule:
+                    .: {}
+                    f:additionalLabels: {}
+                    f:enabled: {}
+                    f:namespace: {}
+                    f:rules: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:enabled: {}
+                    f:failureThreshold: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:securityContext:
+                    .: {}
+                    f:enabled: {}
+                    f:runAsUser: {}
+                  f:service:
+                    .: {}
+                    f:annotations:
+                      .: {}
+                      f:prometheus.io/port: {}
+                      f:prometheus.io/scrape: {}
+                    f:type: {}
+                  f:serviceMonitor:
+                    .: {}
+                    f:additionalLabels: {}
+                    f:enabled: {}
+                f:networkPolicy:
+                  .: {}
+                  f:allowExternal: {}
+                  f:enabled: {}
+                  f:explicitNamespacesSelector: {}
+                f:persistence:
+                  .: {}
+                  f:accessModes: {}
+                  f:annotations: {}
+                  f:enabled: {}
+                  f:mountPath: {}
+                  f:selector: {}
+                  f:size: {}
+                  f:subPath: {}
+                f:postgresqlDataDir: {}
+                f:postgresqlDatabase: {}
+                f:postgresqlDbUserConnectionLimit: {}
+                f:postgresqlExtendedConf:
+                  .: {}
+                  f:listenAddresses: {}
+                  f:maxConnections: {}
+                f:postgresqlMaxConnections: {}
+                f:postgresqlPassword: {}
+                f:postgresqlPghbaRemoveFilters: {}
+                f:postgresqlPostgresConnectionLimit: {}
+                f:postgresqlSharedPreloadLibraries: {}
+                f:postgresqlStatementTimeout: {}
+                f:postgresqlTcpKeepalivesCount: {}
+                f:postgresqlTcpKeepalivesIdle: {}
+                f:postgresqlTcpKeepalivesInterval: {}
+                f:postgresqlUsername: {}
+                f:primary:
+                  .: {}
+                  f:affinity: {}
+                  f:annotations: {}
+                  f:extraInitContainers: {}
+                  f:extraVolumeMounts: {}
+                  f:extraVolumes: {}
+                  f:labels: {}
+                  f:nodeAffinityPreset:
+                    .: {}
+                    f:key: {}
+                    f:type: {}
+                    f:values: {}
+                  f:nodeSelector: {}
+                  f:podAffinityPreset: {}
+                  f:podAnnotations: {}
+                  f:podAntiAffinityPreset: {}
+                  f:podLabels: {}
+                  f:priorityClassName: {}
+                  f:service: {}
+                  f:sidecars: {}
+                  f:tolerations: {}
+                f:primaryAsStandBy:
+                  .: {}
+                  f:enabled: {}
+                f:psp:
+                  .: {}
+                  f:create: {}
+                f:rbac:
+                  .: {}
+                  f:create: {}
+                f:readReplicas:
+                  .: {}
+                  f:affinity: {}
+                  f:annotations: {}
+                  f:extraInitContainers: {}
+                  f:extraVolumeMounts: {}
+                  f:extraVolumes: {}
+                  f:labels: {}
+                  f:nodeAffinityPreset:
+                    .: {}
+                    f:key: {}
+                    f:type: {}
+                    f:values: {}
+                  f:nodeSelector: {}
+                  f:persistence:
+                    .: {}
+                    f:enabled: {}
+                  f:podAffinityPreset: {}
+                  f:podAnnotations: {}
+                  f:podAntiAffinityPreset: {}
+                  f:podLabels: {}
+                  f:priorityClassName: {}
+                  f:resources: {}
+                  f:service: {}
+                  f:sidecars: {}
+                  f:tolerations: {}
+                f:readinessProbe:
+                  .: {}
+                  f:enabled: {}
+                  f:failureThreshold: {}
+                  f:initialDelaySeconds: {}
+                  f:periodSeconds: {}
+                  f:successThreshold: {}
+                  f:timeoutSeconds: {}
+                f:replication:
+                  .: {}
+                  f:applicationName: {}
+                  f:enabled: {}
+                  f:numSynchronousReplicas: {}
+                  f:password: {}
+                  f:readReplicas: {}
+                  f:synchronousCommit: {}
+                  f:user: {}
+                f:resources:
+                  .: {}
+                  f:requests:
+                    .: {}
+                    f:cpu: {}
+                    f:memory: {}
+                f:securityContext:
+                  .: {}
+                  f:enabled: {}
+                  f:fsGroup: {}
+                f:service:
+                  .: {}
+                  f:annotations: {}
+                  f:port: {}
+                  f:type: {}
+                f:serviceAccount:
+                  .: {}
+                  f:enabled: {}
+                f:shmVolume:
+                  .: {}
+                  f:chmod:
+                    .: {}
+                    f:enabled: {}
+                  f:enabled: {}
+                f:startupProbe:
+                  .: {}
+                  f:enabled: {}
+                  f:failureThreshold: {}
+                  f:initialDelaySeconds: {}
+                  f:periodSeconds: {}
+                  f:successThreshold: {}
+                  f:timeoutSeconds: {}
+                f:tls:
+                  .: {}
+                  f:certFilename: {}
+                  f:certKeyFilename: {}
+                  f:certificatesSecret: {}
+                  f:enabled: {}
+                  f:preferServerCiphers: {}
+                f:updateStrategy:
+                  .: {}
+                  f:type: {}
+                f:volumePermissions:
+                  .: {}
+                  f:enabled: {}
+                  f:image:
+                    .: {}
+                    f:pullPolicy: {}
+                    f:registry: {}
+                    f:repository: {}
+                    f:tag: {}
+                  f:securityContext:
+                    .: {}
+                    f:runAsUser: {}
+              f:probes:
+                .: {}
+                f:timeoutSeconds: {}
+              f:rbac:
+                .: {}
+                f:create: {}
+                f:role:
+                  .: {}
+                  f:rules: {}
+              f:router:
+                .: {}
+                f:customVolumeMounts: {}
+                f:externalPort: {}
+                f:image:
+                  .: {}
+                  f:imagePullPolicy: {}
+                  f:registry: {}
+                  f:repository: {}
+                  f:tag: {}
+                f:internalPort: {}
+                f:lifecycle: {}
+                f:livenessProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+                f:name: {}
+                f:persistence:
+                  .: {}
+                  f:mountPath: {}
+                f:readinessProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+                f:resources: {}
+                f:serviceRegistry:
+                  .: {}
+                  f:insecure: {}
+                f:startupProbe:
+                  .: {}
+                  f:config: {}
+                  f:enabled: {}
+                f:tlsEnabled: {}
+              f:serviceAccount:
+                .: {}
+                f:annotations: {}
+                f:automountServiceAccountToken: {}
+                f:create: {}
+              f:splitServicesToContainers: {}
+              f:systemYamlOverride: {}
+              f:waitForDatabase: {}
+            f:postgresql:
+              .: {}
+              f:enabled: {}
+        f:helmVersion: {}
+        f:info:
+          .: {}
+          f:description: {}
+          f:firstDeployed: {}
+          f:lastDeployed: {}
+          f:notes: {}
+          f:readme: {}
+          f:status: {}
+        f:name: {}
+        f:namespace: {}
+        f:resources: {}
+        f:values:
+          .: {}
+          f:artifactory:
+            .: {}
+            f:javaOpts:
+              .: {}
+              f:xms: {}
+              f:xmx: {}
+            f:nginx:
+              .: {}
+              f:enabled: {}
+            f:persistence:
+              .: {}
+              f:accessMode: {}
+              f:cacheProviderDir: {}
+              f:enabled: {}
+              f:mountPath: {}
+              f:size: {}
+              f:storageClass: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+          f:global:
+            .: {}
+            f:cattle:
+              .: {}
+              f:clusterId: {}
+              f:clusterName: {}
+              f:rkePathPrefix: {}
+              f:rkeWindowsPathPrefix: {}
+              f:systemDefaultRegistry: {}
+              f:systemProjectId: {}
+              f:url: {}
+            f:systemDefaultRegistry: {}
+          f:postgresql:
+            .: {}
+            f:image:
+              .: {}
+              f:registry: {}
+              f:repository: {}
+              f:tag: {}
+            f:persistence:
+              .: {}
+              f:enabled: {}
+              f:size: {}
+              f:storageClass: {}
+            f:postgresqlDatabase: {}
+            f:postgresqlExtendedConf:
+              .: {}
+              f:listenAddresses: {}
+              f:maxConnections: {}
+            f:postgresqlPassword: {}
+            f:postgresqlUsername: {}
+            f:primary:
+              .: {}
+              f:affinity: {}
+              f:nodeSelector: {}
+              f:tolerations: {}
+            f:readReplicas:
+              .: {}
+              f:affinity: {}
+              f:nodeSelector: {}
+              f:tolerations: {}
+            f:resources:
+              .: {}
+              f:limits:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+              f:requests:
+                .: {}
+                f:cpu: {}
+                f:memory: {}
+            f:service:
+              .: {}
+              f:port: {}
+        f:version: {}
+    manager: rancher
+    operation: Update
+    time: "2022-11-23T02:03:23Z"
+  - apiVersion: catalog.cattle.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        .: {}
+        f:observedGeneration: {}
+        f:summary:
+          .: {}
+          f:state: {}
+    manager: rancher
+    operation: Update
+    subresource: status
+    time: "2022-11-23T02:09:39Z"
+  name: artifactory
+  namespace: devops-tools
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: false
+    controller: true
+    kind: Secret
+    name: sh.helm.release.v1.artifactory.v1
+    uid: 712b6261-587f-4fee-b51f-e2d86c4ab9a5
+  resourceVersion: "8921896"
+  uid: cbdc00dc-81f3-41d8-bd85-34b9cf01b65b
+spec:
+  chart:
+    metadata:
+      annotations:
+        catalog.cattle.io/ui-source-repo: jfrog
+        catalog.cattle.io/ui-source-repo-type: cluster
+      apiVersion: v2
+      appVersion: 7.46.11
+      description: JFrog Artifactory OSS
+      home: https://www.jfrog.com/artifactory/
+      icon: https://raw.githubusercontent.com/jfrog/charts/master/stable/artifactory/logo/artifactory-logo.png
+      keywords:
+      - artifactory
+      - jfrog
+      - container
+      - registry
+      - devops
+      maintainers:
+      - email: helm@jfrog.com
+        name: Chart Maintainers at JFrog
+      name: artifactory-oss
+      sources:
+      - https://github.com/jfrog/charts
+      type: application
+      version: 107.46.11
+    values:
+      artifactory:
+        access:
+          accessConfig:
+            security:
+              tls: false
+          database:
+            maxOpenConnections: 80
+          tomcat:
+            connector:
+              extraConfig: acceptCount="100"
+              maxThreads: 50
+              sendReasonPhrase: false
+        additionalResources: ""
+        artifactory:
+          admin:
+            ip: 127.0.0.1
+            username: admin
+          affinity: {}
+          annotations: {}
+          catalinaLoggers: null
+          catalinaLoggersResources: {}
+          circleOfTrustCertificatesSecret: null
+          configMapName: null
+          configMaps: ""
+          consoleLog: false
+          copyOnEveryStartup: null
+          customCertificates:
+            enabled: false
+          customInitContainers: ""
+          customInitContainersBegin: ""
+          customPersistentVolumeClaim: {}
+          customSecrets: null
+          customSidecarContainers: ""
+          customVolumeMounts: ""
+          customVolumes: ""
+          database:
+            maxOpenConnections: 80
+          deleteDBPropertiesOnStartup: true
+          externalArtifactoryPort: 8081
+          externalPort: 8082
+          extraEnvironmentVariables: null
+          gid: 1030
+          haBackupDir:
+            enabled: false
+          haDataDir:
+            enabled: false
+          image:
+            pullPolicy: IfNotPresent
+            registry: releases-docker.jfrog.io
+            repository: jfrog/artifactory-oss
+          internalArtifactoryPort: 8081
+          internalPort: 8082
+          javaOpts:
+            jmx:
+              authenticate: false
+              enabled: false
+              port: 9010
+              ssl: false
+          labels: {}
+          license: {}
+          lifecycle: {}
+          livenessProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl -s -k --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.artifactory.tomcat.maintenanceConnector.port }}/artifactory/api/v1/system/liveness
+              initialDelaySeconds: {{ if semverCompare "<v1.20.0-0" .Capabilities.KubeVersion.Version }}180{{ else }}0{{ end }}
+              periodSeconds: 10
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+              failureThreshold: 5
+              successThreshold: 1
+            enabled: true
+          loggers: null
+          loggersResources: {}
+          migration:
+            enabled: true
+            timeoutSeconds: 3600
+          name: artifactory
+          nodeSelector: {}
+          openMetrics:
+            enabled: false
+            filebeat:
+              elasticsearch:
+                password: ""
+                url: Elasticsearch url where JFrog Insight is installed For example,
+                  http://<ip_address>:8082
+                username: ""
+              enabled: false
+              log:
+                enabled: false
+                level: info
+          persistence:
+            accessMode: ReadWriteOnce
+            annotations: {}
+            awsS3V3:
+              bucketName: artifactory-aws
+              enablePathStyleAccess: false
+              enableSignedUrlRedirect: false
+              maxConnections: 50
+              path: artifactory/filestore
+              signatureExpirySeconds: 300
+              signedUrlExpirySeconds: 30
+              testConnection: false
+              useInstanceCredentials: true
+              usePresigning: false
+            azureBlob:
+              multiPartLimit: 100000000
+              multipartElementSize: 50000000
+              testConnection: false
+            cacheProviderDir: cache
+            enabled: true
+            fileSystem:
+              cache:
+                enabled: false
+            googleStorage:
+              bucketExists: false
+              bucketName: artifactory-gcp
+              endpoint: commondatastorage.googleapis.com
+              gcpServiceAccount:
+                enabled: false
+              httpsOnly: false
+              path: artifactory/filestore
+              useInstanceCredentials: false
+            lenientLimit: 1
+            maxCacheSize: 5000000000
+            mountPath: /var/opt/jfrog/artifactory
+            nfs:
+              backupDir: /var/opt/jfrog/artifactory-backup
+              capacity: 200Gi
+              dataDir: /var/opt/jfrog/artifactory
+              haBackupMount: /backup
+              haDataMount: /data
+            redundancy: 3
+            size: 20Gi
+            type: file-system
+          podAntiAffinity:
+            topologyKey: kubernetes.io/hostname
+            type: soft
+          priorityClass:
+            create: false
+            value: 1000000000
+          readinessProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl -s -k --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.artifactory.tomcat.maintenanceConnector.port }}/artifactory/api/v1/system/readiness
+              initialDelaySeconds: {{ if semverCompare "<v1.20.0-0" .Capabilities.KubeVersion.Version }}90{{ else }}0{{ end }}
+              periodSeconds: 10
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+              failureThreshold: 5
+              successThreshold: 1
+            enabled: true
+          replicaCount: 1
+          replicator:
+            enabled: false
+            ingress:
+              annotations: {}
+              className: ""
+              enabled: true
+              hosts: null
+              tls: null
+            lifecycle: {}
+            name: replicator
+            resources: {}
+            trackerIngress:
+              annotations: {}
+              className: ""
+              enabled: false
+              hosts: null
+              tls: null
+          resources: {}
+          schedulerName: null
+          service:
+            annotations: {}
+            loadBalancerSourceRanges: null
+            name: artifactory
+            type: ClusterIP
+          setSecurityContext: true
+          ssh:
+            enabled: false
+            externalPort: 1339
+            internalPort: 1339
+          startupProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl -s -k --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.artifactory.tomcat.maintenanceConnector.port }}/artifactory/api/v1/system/readiness
+              initialDelaySeconds: 10
+              failureThreshold: 90
+              periodSeconds: 5
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+            enabled: true
+          systemYaml: |
+            router:
+              serviceRegistry:
+                insecure: {{ .Values.router.serviceRegistry.insecure }}
+            shared:
+            {{- if  .Values.artifactory.openMetrics.enabled }}
+              metrics:
+                enabled: true
+              {{- if .Values.artifactory.openMetrics.filebeat.enabled }}
+                filebeat: {{ toYaml .Values.artifactory.openMetrics.filebeat | nindent 6 }}
+              {{- end }}
+            {{- end }}
+              logging:
+                consoleLog:
+                  enabled: {{ .Values.artifactory.consoleLog }}
+              extraJavaOpts: >
+                -Dartifactory.access.client.max.connections={{ .Values.access.tomcat.connector.maxThreads }}
+              {{- with .Values.artifactory.javaOpts }}
+                {{- if .corePoolSize }}
+                -Dartifactory.async.corePoolSize={{ .corePoolSize }}
+                {{- end }}
+              {{- if .xms }}
+                -Xms{{ .xms }}
+              {{- end }}
+              {{- if .xmx }}
+                -Xmx{{ .xmx }}
+              {{- end }}
+              {{- if .jmx.enabled }}
+                -Dcom.sun.management.jmxremote
+                -Dcom.sun.management.jmxremote.port={{ .jmx.port }}
+                -Dcom.sun.management.jmxremote.rmi.port={{ .jmx.port }}
+                -Dcom.sun.management.jmxremote.ssl={{ .jmx.ssl }}
+              {{- if .jmx.host }}
+                -Djava.rmi.server.hostname={{ tpl .jmx.host $ }}
+              {{- else }}
+                -Djava.rmi.server.hostname={{ template "artifactory.fullname" $ }}
+              {{- end }}
+              {{- if .jmx.authenticate }}
+                -Dcom.sun.management.jmxremote.authenticate=true
+                -Dcom.sun.management.jmxremote.access.file={{ .jmx.accessFile }}
+                -Dcom.sun.management.jmxremote.password.file={{ .jmx.passwordFile }}
+              {{- else }}
+                -Dcom.sun.management.jmxremote.authenticate=false
+              {{- end }}
+              {{- end }}
+              {{- if .other }}
+                {{ .other }}
+              {{- end }}
+              {{- end }}
+              {{- if or .Values.database.type .Values.postgresql.enabled }}
+              database:
+                {{- if .Values.postgresql.enabled }}
+                type: postgresql
+                url: "jdbc:postgresql://{{ .Release.Name }}-postgresql:{{ .Values.postgresql.service.port }}/{{ .Values.postgresql.postgresqlDatabase }}"
+                driver: org.postgresql.Driver
+                username: "{{ .Values.postgresql.postgresqlUsername }}"
+                {{- else }}
+                type: "{{ .Values.database.type }}"
+                driver: "{{ .Values.database.driver }}"
+                {{- end }}
+              {{- end }}
+            artifactory:
+            {{- if or .Values.artifactory.haDataDir.enabled .Values.artifactory.haBackupDir.enabled }}
+              node:
+              {{- if .Values.artifactory.haDataDir.path }}
+                haDataDir: {{ .Values.artifactory.haDataDir.path }}
+              {{- end }}
+              {{- if .Values.artifactory.haBackupDir.path }}
+                haBackupDir: {{ .Values.artifactory.haBackupDir.path }}
+              {{- end }}
+            {{- end }}
+              database:
+                maxOpenConnections: {{ .Values.artifactory.database.maxOpenConnections }}
+              tomcat:
+                maintenanceConnector:
+                  port: {{ .Values.artifactory.tomcat.maintenanceConnector.port }}
+                connector:
+                  maxThreads: {{ .Values.artifactory.tomcat.connector.maxThreads }}
+                  sendReasonPhrase: {{ .Values.artifactory.tomcat.connector.sendReasonPhrase }}
+                  extraConfig: {{ .Values.artifactory.tomcat.connector.extraConfig }}
+            frontend:
+              session:
+                timeMinutes: {{ .Values.frontend.session.timeoutMinutes | quote }}
+            access:
+              database:
+                maxOpenConnections: {{ .Values.access.database.maxOpenConnections }}
+              tomcat:
+                connector:
+                  maxThreads: {{ .Values.access.tomcat.connector.maxThreads }}
+                  sendReasonPhrase: {{ .Values.access.tomcat.connector.sendReasonPhrase }}
+                  extraConfig: {{ .Values.access.tomcat.connector.extraConfig }}
+            {{- if .Values.mc.enabled }}
+            mc:
+              enabled: true
+              database:
+                maxOpenConnections: {{ .Values.mc.database.maxOpenConnections }}
+              idgenerator:
+                maxOpenConnections: {{ .Values.mc.idgenerator.maxOpenConnections }}
+              tomcat:
+                connector:
+                  maxThreads: {{ .Values.mc.tomcat.connector.maxThreads }}
+                  sendReasonPhrase: {{ .Values.mc.tomcat.connector.sendReasonPhrase }}
+                  extraConfig: {{ .Values.mc.tomcat.connector.extraConfig }}
+            {{- end }}
+            metadata:
+              database:
+                maxOpenConnections: {{ .Values.metadata.database.maxOpenConnections }}
+            {{- if .Values.artifactory.replicator.enabled }}
+            replicator:
+              enabled: true
+            {{- end }}
+            {{- if and .Values.jfconnect.enabled  (not (regexMatch "^.*(oss|cpp-ce|jcr).*$" .Values.artifactory.image.repository)) }}
+            jfconnect:
+              enabled: true
+            {{- else }}
+            jfconnect:
+              enabled: false
+            {{- end }}
+          terminationGracePeriodSeconds: 30
+          tolerations: null
+          tomcat:
+            connector:
+              extraConfig: acceptCount="100"
+              maxThreads: 200
+              sendReasonPhrase: false
+            maintenanceConnector:
+              port: 8091
+          topologySpreadConstraints: null
+          uid: 1030
+          unifiedSecretInstallation: false
+          updateStrategy:
+            type: RollingUpdate
+          userPluginSecrets: null
+        autoscaling:
+          enabled: false
+          maxReplicas: 3
+          minReplicas: 1
+          targetCPUUtilizationPercentage: 70
+        aws:
+          license:
+            enabled: false
+          region: us-east-1
+        customIngress: ""
+        database:
+          secrets: {}
+        databaseUpgradeReady: "yes"
+        event:
+          enabled: true
+          internalPort: 8061
+          lifecycle: {}
+          livenessProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.event.internalPort }}/api/v1/system/liveness
+              initialDelaySeconds: {{ if semverCompare "<v1.20.0-0" .Capabilities.KubeVersion.Version }}180{{ else }}0{{ end }}
+              failureThreshold: 5
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+              periodSeconds: 10
+              successThreshold: 1
+            enabled: true
+          name: event
+          resources: {}
+          startupProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.event.internalPort }}/api/v1/system/readiness
+              initialDelaySeconds: 30
+              failureThreshold: 90
+              periodSeconds: 5
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+            enabled: true
+        filebeat:
+          enabled: false
+          filebeatYml: |
+            logging.level: info
+            path.data: {{ .Values.artifactory.persistence.mountPath }}/log/filebeat
+            name: artifactory-filebeat
+            queue.spool:
+              file:
+                permissions: 0760
+            filebeat.inputs:
+            - type: log
+              enabled: true
+              close_eof: ${CLOSE:false}
+              paths:
+                 - {{ .Values.artifactory.persistence.mountPath }}/log/*.log
+              fields:
+                service: "jfrt"
+                log_type: "artifactory"
+            output:
+              logstash:
+                 hosts: ["{{ .Values.filebeat.logstashUrl }}"]
+          image:
+            repository: docker.elastic.co/beats/filebeat
+            version: 7.16.2
+          livenessProbe:
+            exec:
+              command:
+              - sh
+              - -c
+              - |
+                #!/usr/bin/env bash -e
+                curl --fail 127.0.0.1:5066
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+          logstashUrl: logstash:5044
+          name: artifactory-filebeat
+          readinessProbe:
+            exec:
+              command:
+              - sh
+              - -c
+              - |
+                #!/usr/bin/env bash -e
+                filebeat test output
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+          resources: {}
+        frontend:
+          enabled: true
+          internalPort: 8070
+          lifecycle: {}
+          livenessProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.frontend.internalPort }}/api/v1/system/liveness
+              initialDelaySeconds: {{ if semverCompare "<v1.20.0-0" .Capabilities.KubeVersion.Version }}180{{ else }}0{{ end }}
+              failureThreshold: 5
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+              periodSeconds: 10
+              successThreshold: 1
+            enabled: true
+          name: frontend
+          resources: {}
+          session:
+            timeoutMinutes: "30"
+          startupProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.frontend.internalPort }}/api/v1/system/readiness
+              initialDelaySeconds: 30
+              failureThreshold: 90
+              periodSeconds: 5
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+            enabled: true
+        global:
+          cattle:
+            clusterId: local
+            clusterName: local
+            rkePathPrefix: ""
+            rkeWindowsPathPrefix: ""
+            systemDefaultRegistry: ""
+            systemProjectId: p-4978h
+            url: https://rancher.danr.dev
+          customCertificates:
+            enabled: false
+          nodeSelector: {}
+          systemDefaultRegistry: ""
+          versions: {}
+        hostAliases: null
+        ingress:
+          additionalRules: null
+          annotations: {}
+          artifactoryPath: /artifactory/
+          className: ""
+          defaultBackend:
+            enabled: true
+          enabled: false
+          hosts: null
+          labels: {}
+          routerPath: /
+          tls: null
+        initContainerImage: releases-docker.jfrog.io/ubi8/ubi-minimal:8.6-902
+        initContainers:
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1Gi
+            requests:
+              cpu: 10m
+              memory: 50Mi
+        installer:
+          platform: art-oss-helm
+          type: null
+        installerInfo: '{"productId": "Helm_artifactory-oss/{{ .Chart.Version }}",
+          "features": [ { "featureId": "Platform/{{ default "kubernetes" .Values.installer.platform
+          }}"}]}'
+        integration:
+          enabled: true
+          internalPort: 8071
+          lifecycle: {}
+          livenessProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.integration.internalPort }}/api/v1/system/liveness
+              initialDelaySeconds: {{ if semverCompare "<v1.20.0-0" .Capabilities.KubeVersion.Version }}180{{ else }}0{{ end }}
+              failureThreshold: 5
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+              periodSeconds: 10
+              successThreshold: 1
+            enabled: true
+          name: integration
+          resources: {}
+          startupProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.integration.internalPort }}/api/v1/system/readiness
+              initialDelaySeconds: 30
+              failureThreshold: 90
+              periodSeconds: 5
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+            enabled: true
+        jfconnect:
+          enabled: false
+          extraEnvironmentVariables: null
+          internalPort: 8030
+          lifecycle: {}
+          livenessProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.jfconnect.internalPort }}/api/v1/system/liveness
+              initialDelaySeconds: {{ if semverCompare "<v1.20.0-0" .Capabilities.KubeVersion.Version }}180{{ else }}0{{ end }}
+              failureThreshold: 5
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+              periodSeconds: 10
+              successThreshold: 1
+            enabled: true
+          name: jfconnect
+          resources: {}
+          startupProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.jfconnect.internalPort }}/api/v1/system/readiness
+              initialDelaySeconds: 30
+              failureThreshold: 90
+              periodSeconds: 5
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+            enabled: true
+        logger:
+          image:
+            registry: releases-docker.jfrog.io
+            repository: ubi8/ubi-minimal
+            tag: 8.6-902
+        mc:
+          database:
+            maxOpenConnections: 10
+          enabled: false
+          idgenerator:
+            maxOpenConnections: 2
+          tomcat:
+            connector:
+              extraConfig: acceptCount="100"
+              maxThreads: 50
+              sendReasonPhrase: false
+        metadata:
+          database:
+            maxOpenConnections: 80
+          enabled: true
+          internalPort: 8086
+          lifecycle: {}
+          livenessProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.metadata.internalPort }}/api/v1/system/liveness
+              initialDelaySeconds: {{ if semverCompare "<v1.20.0-0" .Capabilities.KubeVersion.Version }}180{{ else }}0{{ end }}
+              failureThreshold: 5
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+              periodSeconds: 10
+              successThreshold: 1
+            enabled: true
+          name: metadata
+          resources: {}
+          startupProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.metadata.internalPort }}/api/v1/system/readiness
+              initialDelaySeconds: 30
+              failureThreshold: 90
+              periodSeconds: 5
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+            enabled: true
+        networkpolicy: null
+        nginx:
+          affinity: {}
+          annotations: {}
+          artifactoryConf: |
+            {{- if .Values.nginx.https.enabled }}
+            ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
+            ssl_certificate  {{ .Values.nginx.persistence.mountPath }}/ssl/tls.crt;
+            ssl_certificate_key  {{ .Values.nginx.persistence.mountPath }}/ssl/tls.key;
+            ssl_session_cache shared:SSL:1m;
+            ssl_prefer_server_ciphers   on;
+            {{- end }}
+            ## server configuration
+            server {
+            {{- if .Values.nginx.internalPortHttps }}
+              listen {{ .Values.nginx.internalPortHttps }} ssl;
+            {{- else -}}
+              {{- if .Values.nginx.https.enabled }}
+              listen {{ .Values.nginx.https.internalPort }} ssl;
+              {{- end }}
+            {{- end }}
+            {{- if .Values.nginx.internalPortHttp }}
+              listen {{ .Values.nginx.internalPortHttp }};
+            {{- else -}}
+              {{- if .Values.nginx.http.enabled }}
+              listen {{ .Values.nginx.http.internalPort }};
+              {{- end }}
+            {{- end }}
+              server_name ~(?<repo>.+)\.{{ include "artifactory.fullname" . }} {{ include "artifactory.fullname" . }}
+              {{- range .Values.ingress.hosts -}}
+                {{- if contains "." . -}}
+                  {{ "" | indent 0 }} ~(?<repo>.+)\.{{ . }}
+                {{- end -}}
+              {{- end -}};
+
+              if ($http_x_forwarded_proto = '') {
+                set $http_x_forwarded_proto  $scheme;
+              }
+              ## Application specific logs
+              ## access_log /var/log/nginx/artifactory-access.log timing;
+              ## error_log /var/log/nginx/artifactory-error.log;
+              rewrite ^/artifactory/?$ / redirect;
+              if ( $repo != "" ) {
+                rewrite ^/(v1|v2)/(.*) /artifactory/api/docker/$repo/$1/$2 break;
+              }
+              chunked_transfer_encoding on;
+              client_max_body_size 0;
+
+              location / {
+                proxy_read_timeout  900;
+                proxy_pass_header   Server;
+                proxy_cookie_path   ~*^/.* /;
+                proxy_pass          {{ include "artifactory.scheme" . }}://{{ include "artifactory.fullname" . }}:{{ .Values.artifactory.externalPort }}/;
+                {{- if .Values.nginx.service.ssloffload}}
+                proxy_set_header    X-JFrog-Override-Base-Url $http_x_forwarded_proto://$host;
+                {{- else }}
+                proxy_set_header    X-JFrog-Override-Base-Url $http_x_forwarded_proto://$host:$server_port;
+                proxy_set_header    X-Forwarded-Port  $server_port;
+                {{- end }}
+                proxy_set_header    X-Forwarded-Proto $http_x_forwarded_proto;
+                proxy_set_header    Host              $http_host;
+                proxy_set_header    X-Forwarded-For   $proxy_add_x_forwarded_for;
+                add_header Strict-Transport-Security always;
+
+                location /artifactory/ {
+                  if ( $request_uri ~ ^/artifactory/(.*)$ ) {
+                    proxy_pass       http://{{ include "artifactory.fullname" . }}:{{ .Values.artifactory.externalArtifactoryPort }}/artifactory/$1;
+                  }
+                  proxy_pass         http://{{ include "artifactory.fullname" . }}:{{ .Values.artifactory.externalArtifactoryPort }}/artifactory/;
+                }
+                location /pipelines/ {
+                  proxy_http_version 1.1;
+                  proxy_set_header Upgrade $http_upgrade;
+                  proxy_set_header Connection "upgrade";
+                  proxy_set_header Host $http_host;
+                  {{- if .Values.router.tlsEnabled }}
+                  proxy_pass  https://{{ include "artifactory.fullname" . }}:{{ .Values.router.internalPort }};
+                  {{- else }}
+                  proxy_pass  http://{{ include "artifactory.fullname" . }}:{{ .Values.router.internalPort }};
+                  {{- end }}
+                }
+              }
+            }
+          customArtifactoryConfigMap: null
+          customCommand: null
+          customConfigMap: null
+          customInitContainers: ""
+          customPorts: null
+          customSidecarContainers: ""
+          customVolumeMounts: ""
+          customVolumes: ""
+          enabled: true
+          gid: 107
+          http:
+            enabled: true
+            externalPort: 80
+            internalPort: 80
+          https:
+            enabled: true
+            externalPort: 443
+            internalPort: 443
+          image:
+            pullPolicy: IfNotPresent
+            registry: releases-docker.jfrog.io
+            repository: jfrog/nginx-artifactory-pro
+          kind: Deployment
+          labels: {}
+          lifecycle: {}
+          livenessProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl -s -k --fail --max-time {{ .Values.probes.timeoutSeconds }} {{ include "nginx.scheme" . }}://localhost:{{ include "nginx.port" . }}/
+              initialDelaySeconds: {{ if semverCompare "<v1.20.0-0" .Capabilities.KubeVersion.Version }}180{{ else }}0{{ end }}
+              periodSeconds: 10
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+              failureThreshold: 5
+              successThreshold: 1
+            enabled: true
+          loggers: null
+          loggersResources: {}
+          logs:
+            level: warn
+            stderr: false
+          mainConf: |
+            # Main Nginx configuration file
+            worker_processes  4;
+
+            {{ if .Values.nginx.logs.stderr }}
+            error_log  stderr {{ .Values.nginx.logs.level }};
+            {{- else -}}
+            error_log  {{ .Values.nginx.persistence.mountPath }}/logs/error.log {{ .Values.nginx.logs.level }};
+            {{- end }}
+            pid        /tmp/nginx.pid;
+
+            {{- if .Values.artifactory.ssh.enabled }}
+            ## SSH Server Configuration
+            stream {
+              server {
+                listen {{ .Values.nginx.ssh.internalPort }};
+                proxy_pass {{ include "artifactory.fullname" . }}:{{ .Values.artifactory.ssh.externalPort }};
+              }
+            }
+            {{- end }}
+
+            events {
+              worker_connections  1024;
+            }
+
+
+            http {
+              include       /etc/nginx/mime.types;
+              default_type  application/octet-stream;
+
+              variables_hash_max_size 1024;
+              variables_hash_bucket_size 64;
+              server_names_hash_max_size 4096;
+              server_names_hash_bucket_size 128;
+              types_hash_max_size 2048;
+              types_hash_bucket_size 64;
+              proxy_read_timeout 2400s;
+              client_header_timeout 2400s;
+              client_body_timeout 2400s;
+              proxy_connect_timeout 75s;
+              proxy_send_timeout 2400s;
+              proxy_buffer_size 128k;
+              proxy_buffers 40 128k;
+              proxy_busy_buffers_size 128k;
+              proxy_temp_file_write_size 250m;
+              proxy_http_version 1.1;
+              client_body_buffer_size 128k;
+
+              log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+              '$status $body_bytes_sent "$http_referer" '
+              '"$http_user_agent" "$http_x_forwarded_for"';
+
+              log_format timing 'ip = $remote_addr '
+              'user = \"$remote_user\" '
+              'local_time = \"$time_local\" '
+              'host = $host '
+              'request = \"$request\" '
+              'status = $status '
+              'bytes = $body_bytes_sent '
+              'upstream = \"$upstream_addr\" '
+              'upstream_time = $upstream_response_time '
+              'request_time = $request_time '
+              'referer = \"$http_referer\" '
+              'UA = \"$http_user_agent\"';
+
+              access_log  {{ .Values.nginx.persistence.mountPath }}/logs/access.log  timing;
+
+              sendfile        on;
+              #tcp_nopush     on;
+
+              keepalive_timeout  65;
+
+              #gzip  on;
+
+              include /etc/nginx/conf.d/*.conf;
+
+            }
+          minAvailable: 0
+          name: nginx
+          nodeSelector: {}
+          persistence:
+            accessMode: ReadWriteOnce
+            enabled: false
+            mountPath: /var/opt/jfrog/nginx
+            size: 5Gi
+          priorityClassName: null
+          readinessProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl -s -k --fail --max-time {{ .Values.probes.timeoutSeconds }} {{ include "nginx.scheme" . }}://localhost:{{ include "nginx.port" . }}/router/api/v1/system/readiness
+              initialDelaySeconds: {{ if semverCompare "<v1.20.0-0" .Capabilities.KubeVersion.Version }}90{{ else }}0{{ end }}
+              periodSeconds: 10
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+              failureThreshold: 5
+              successThreshold: 1
+            enabled: true
+          replicaCount: 1
+          resources: {}
+          securityContext: {}
+          service:
+            annotations: {}
+            customPorts: null
+            externalTrafficPolicy: Cluster
+            loadBalancerIP: null
+            loadBalancerSourceRanges: null
+            ssloffload: false
+            type: LoadBalancer
+          ssh:
+            externalPort: 1339
+            internalPort: 1339
+          startupProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl -s -k --fail --max-time {{ .Values.probes.timeoutSeconds }} {{ include "nginx.scheme" . }}://localhost:{{ include "nginx.port" . }}/router/api/v1/system/readiness
+              initialDelaySeconds: 30
+              failureThreshold: 90
+              periodSeconds: 5
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+            enabled: true
+          terminationGracePeriodSeconds: 30
+          tlsSecretName: ""
+          tolerations: null
+          topologySpreadConstraints: null
+          uid: 104
+        observability:
+          enabled: true
+          internalPort: 8036
+          lifecycle: {}
+          livenessProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.observability.internalPort }}/api/v1/system/liveness
+              initialDelaySeconds: {{ if semverCompare "<v1.20.0-0" .Capabilities.KubeVersion.Version }}180{{ else }}0{{ end }}
+              failureThreshold: 5
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+              periodSeconds: 10
+              successThreshold: 1
+            enabled: true
+          name: observability
+          resources: {}
+          startupProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl --fail --max-time {{ .Values.probes.timeoutSeconds }} http://localhost:{{ .Values.observability.internalPort }}/api/v1/system/readiness
+              initialDelaySeconds: 30
+              failureThreshold: 90
+              periodSeconds: 5
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+            enabled: true
+        postgresql:
+          audit:
+            clientMinMessages: error
+            logConnections: false
+            logDisconnections: false
+            logHostname: false
+            logLinePrefix: ""
+            logTimezone: ""
+            pgAuditLog: ""
+            pgAuditLogCatalog: "off"
+          common:
+            exampleValue: common-chart
+            global:
+              cattle:
+                clusterId: local
+                clusterName: local
+                rkePathPrefix: ""
+                rkeWindowsPathPrefix: ""
+                systemDefaultRegistry: ""
+                systemProjectId: p-4978h
+                url: https://rancher.danr.dev
+              customCertificates:
+                enabled: false
+              nodeSelector: {}
+              postgresql: {}
+              systemDefaultRegistry: ""
+              versions: {}
+          commonAnnotations: {}
+          containerSecurityContext:
+            enabled: true
+            runAsUser: 1001
+          customLivenessProbe: {}
+          customReadinessProbe: {}
+          customStartupProbe: {}
+          enabled: true
+          extraDeploy: null
+          extraEnv: null
+          global:
+            cattle:
+              clusterId: local
+              clusterName: local
+              rkePathPrefix: ""
+              rkeWindowsPathPrefix: ""
+              systemDefaultRegistry: ""
+              systemProjectId: p-4978h
+              url: https://rancher.danr.dev
+            customCertificates:
+              enabled: false
+            nodeSelector: {}
+            postgresql: {}
+            systemDefaultRegistry: ""
+            versions: {}
+          image:
+            debug: false
+            pullPolicy: IfNotPresent
+            registry: releases-docker.jfrog.io
+            repository: bitnami/postgresql
+            tag: 13.4.0-debian-10-r39
+          ldap:
+            baseDN: ""
+            bindDN: ""
+            enabled: false
+            port: ""
+            prefix: ""
+            scheme: ""
+            search_attr: ""
+            search_filter: ""
+            server: ""
+            suffix: ""
+            tls: {}
+            url: ""
+          livenessProbe:
+            enabled: true
+            failureThreshold: 6
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          metrics:
+            enabled: false
+            extraEnvVars: {}
+            image:
+              pullPolicy: IfNotPresent
+              registry: docker.io
+              repository: bitnami/postgres-exporter
+              tag: 0.9.0-debian-10-r43
+            livenessProbe:
+              enabled: true
+              failureThreshold: 6
+              initialDelaySeconds: 5
+              periodSeconds: 10
+              successThreshold: 1
+              timeoutSeconds: 5
+            prometheusRule:
+              additionalLabels: {}
+              enabled: false
+              namespace: ""
+              rules: null
+            readinessProbe:
+              enabled: true
+              failureThreshold: 6
+              initialDelaySeconds: 5
+              periodSeconds: 10
+              successThreshold: 1
+              timeoutSeconds: 5
+            securityContext:
+              enabled: false
+              runAsUser: 1001
+            service:
+              annotations:
+                prometheus.io/port: "9187"
+                prometheus.io/scrape: "true"
+              type: ClusterIP
+            serviceMonitor:
+              additionalLabels: {}
+              enabled: false
+          networkPolicy:
+            allowExternal: true
+            enabled: false
+            explicitNamespacesSelector: {}
+          persistence:
+            accessModes:
+            - ReadWriteOnce
+            annotations: {}
+            enabled: true
+            mountPath: /bitnami/postgresql
+            selector: {}
+            size: 200Gi
+            subPath: ""
+          postgresqlDataDir: /bitnami/postgresql/data
+          postgresqlDatabase: artifactory
+          postgresqlDbUserConnectionLimit: null
+          postgresqlExtendedConf:
+            listenAddresses: '*'
+            maxConnections: "1500"
+          postgresqlMaxConnections: null
+          postgresqlPassword: ""
+          postgresqlPghbaRemoveFilters: null
+          postgresqlPostgresConnectionLimit: null
+          postgresqlSharedPreloadLibraries: pgaudit
+          postgresqlStatementTimeout: null
+          postgresqlTcpKeepalivesCount: null
+          postgresqlTcpKeepalivesIdle: null
+          postgresqlTcpKeepalivesInterval: null
+          postgresqlUsername: artifactory
+          primary:
+            affinity: {}
+            annotations: {}
+            extraInitContainers: null
+            extraVolumeMounts: null
+            extraVolumes: null
+            labels: {}
+            nodeAffinityPreset:
+              key: ""
+              type: ""
+              values: null
+            nodeSelector: {}
+            podAffinityPreset: ""
+            podAnnotations: {}
+            podAntiAffinityPreset: soft
+            podLabels: {}
+            priorityClassName: ""
+            service: {}
+            sidecars: null
+            tolerations: null
+          primaryAsStandBy:
+            enabled: false
+          psp:
+            create: false
+          rbac:
+            create: false
+          readReplicas:
+            affinity: {}
+            annotations: {}
+            extraInitContainers: null
+            extraVolumeMounts: null
+            extraVolumes: null
+            labels: {}
+            nodeAffinityPreset:
+              key: ""
+              type: ""
+              values: null
+            nodeSelector: {}
+            persistence:
+              enabled: true
+            podAffinityPreset: ""
+            podAnnotations: {}
+            podAntiAffinityPreset: soft
+            podLabels: {}
+            priorityClassName: ""
+            resources: {}
+            service: {}
+            sidecars: null
+            tolerations: null
+          readinessProbe:
+            enabled: true
+            failureThreshold: 6
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          replication:
+            applicationName: my_application
+            enabled: false
+            numSynchronousReplicas: 0
+            password: repl_password
+            readReplicas: 1
+            synchronousCommit: "off"
+            user: repl_user
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+          securityContext:
+            enabled: true
+            fsGroup: 1001
+          service:
+            annotations: {}
+            port: 5432
+            type: ClusterIP
+          serviceAccount:
+            enabled: false
+          shmVolume:
+            chmod:
+              enabled: true
+            enabled: true
+          startupProbe:
+            enabled: false
+            failureThreshold: 10
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            successThreshold: 1
+            timeoutSeconds: 5
+          tls:
+            certFilename: ""
+            certKeyFilename: ""
+            certificatesSecret: ""
+            enabled: false
+            preferServerCiphers: true
+          updateStrategy:
+            type: RollingUpdate
+          volumePermissions:
+            enabled: false
+            image:
+              pullPolicy: Always
+              registry: docker.io
+              repository: bitnami/bitnami-shell
+              tag: "10"
+            securityContext:
+              runAsUser: 0
+        probes:
+          timeoutSeconds: 5
+        rbac:
+          create: false
+          role:
+            rules:
+            - apiGroups:
+              - ""
+              resources:
+              - services
+              - endpoints
+              - pods
+              verbs:
+              - get
+              - watch
+              - list
+        router:
+          customVolumeMounts: ""
+          externalPort: 8082
+          image:
+            imagePullPolicy: IfNotPresent
+            registry: releases-docker.jfrog.io
+            repository: jfrog/router
+            tag: 7.45.0
+          internalPort: 8082
+          lifecycle: {}
+          livenessProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl -s -k --fail --max-time {{ .Values.probes.timeoutSeconds }} {{ include "artifactory.scheme" . }}://localhost:{{ .Values.router.internalPort }}/router/api/v1/system/liveness
+              initialDelaySeconds: {{ if semverCompare "<v1.20.0-0" .Capabilities.KubeVersion.Version }}90{{ else }}0{{ end }}
+              periodSeconds: 10
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+              failureThreshold: 5
+              successThreshold: 1
+            enabled: true
+          name: router
+          persistence:
+            mountPath: /var/opt/jfrog/router
+          readinessProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl -s -k --fail --max-time {{ .Values.probes.timeoutSeconds }} {{ include "artifactory.scheme" . }}://localhost:{{ .Values.router.internalPort }}/router/api/v1/system/readiness
+              initialDelaySeconds: {{ if semverCompare "<v1.20.0-0" .Capabilities.KubeVersion.Version }}60{{ else }}0{{ end }}
+              periodSeconds: 10
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+              failureThreshold: 5
+              successThreshold: 1
+            enabled: true
+          resources: {}
+          serviceRegistry:
+            insecure: false
+          startupProbe:
+            config: |
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - curl -s -k --fail --max-time {{ .Values.probes.timeoutSeconds }} {{ include "artifactory.scheme" . }}://localhost:{{ .Values.router.internalPort }}/router/api/v1/system/readiness
+              initialDelaySeconds: 10
+              failureThreshold: 30
+              periodSeconds: 5
+              timeoutSeconds: {{ .Values.probes.timeoutSeconds }}
+            enabled: true
+          tlsEnabled: false
+        serviceAccount:
+          annotations: {}
+          automountServiceAccountToken: false
+          create: false
+        splitServicesToContainers: false
+        systemYamlOverride: {}
+        waitForDatabase: true
+      postgresql:
+        enabled: true
+  helmVersion: 3
+  info:
+    description: Install complete
+    firstDeployed: "2022-11-23T02:03:21Z"
+    lastDeployed: "2022-11-23T02:03:21Z"
+    notes: |
+      Congratulations. You have just deployed JFrog Artifactory OSS!
+    readme: "# JFrog Artifactory OSS Helm Chart\n\nJFrog Artifactory OSS is a free
+      Artifactory edition to host Generic repositories.\n\n**Heads up: Our Helm Chart
+      docs are moving to our main documentation site. For Artifactory installers,
+      see [Installing Artifactory](https://www.jfrog.com/confluence/display/JFROG/Installing+Artifactory).**\n\n##
+      Prerequisites Details\n\n* Kubernetes 1.14+\n\n## Chart Details\nThis chart
+      will do the following:\n\n* Deploy JFrog Artifactory OSS\n* Deploy an optional
+      Nginx server\n* Deploy an optional PostgreSQL Database\n* Optionally expose
+      Artifactory with Ingress [Ingress documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/)\n\n##
+      Installing the Chart\n\n### Add JFrog Helm repository\n\nBefore installing JFrog
+      helm charts, you need to add the [JFrog helm repository](https://charts.jfrog.io)
+      to your helm client.\n\n```bash\nhelm repo add jfrog https://charts.jfrog.io\nhelm
+      repo update\n```\n\n### Install Chart\nTo install the chart with the release
+      name `artifactory-oss`:\n```bash\nhelm upgrade --install artifactory-oss --set
+      artifactory.postgresql.postgresqlPassword=<postgres_password> --namespace artifactory-oss
+      jfrog/artifactory-oss\n```\n\n### Accessing Artifactory OSS\n**NOTE:** If using
+      artifactory or nginx service type `LoadBalancer`, it might take a few minutes
+      for Artifactory OSS's public IP to become available.\n\n### Updating Artifactory
+      OSS\nOnce you have a new chart version, you can upgrade your deployment with\n```bash\nhelm
+      upgrade artifactory-oss jfrog/artifactory-oss\n```\n\n### Special Upgrade Notes\n####
+      Artifactory upgrade from 6.x to 7.x (App Version)\nArifactory 6.x to 7.x upgrade
+      requires a one time migration process. This is done automatically on pod startup
+      if needed.\nIt's possible to configure the migration timeout with the following
+      configuration in extreme cases. The provided default should be more than enough
+      for completion of the migration.\n```yaml\nartifactory:\n  artifactory:\n    #
+      Migration support from 6.x to 7.x\n    migration:\n      enabled: true\n      timeoutSeconds:
+      3600\n```\n* Note: If you are upgrading from 1.x to 3.x and above chart versions,
+      please delete the existing statefulset of postgresql before upgrading the chart
+      due to breaking changes in postgresql subchart.\n```bash\nkubectl delete statefulsets
+      <OLD_RELEASE_NAME>-postgresql\n```\n* For more details about artifactory chart
+      upgrades refer [here](https://github.com/jfrog/charts/blob/master/stable/artifactory/UPGRADE_NOTES.md)\n\n###
+      Deleting Artifactory OSS\n\n```bash                                                                                                                                                                 \nhelm
+      delete artifactory-oss --namespace artifactory-oss                                                                                                                                     \n```
+      \nThis will delete your Artifactory OSS deployment.<br>\n**NOTE:** You might
+      have left behind persistent volumes. You should explicitly delete them with\n```bash\nkubectl
+      delete pvc ...\nkubectl delete pv ...\n```\n\n## Database\nThe Artifactory OSS
+      chart comes with PostgreSQL deployed by default.<br>\nFor details on the PostgreSQL
+      configuration or customising the database, Look at the options described in
+      the [Artifactory helm chart](https://github.com/jfrog/charts/tree/master/stable/artifactory).\n\n###
+      Ingress and TLS\nTo get Helm to create an ingress object with a hostname, add
+      these two lines to your Helm command:\n```bash\nhelm upgrade --install artifactory-oss
+      \\\n  --set artifactory.nginx.enabled=false \\\n  --set artifactory.ingress.enabled=true
+      \\\n  --set artifactory.ingress.hosts[0]=\"artifactory.company.com\" \\\n  --set
+      artifactory.artifactory.service.type=NodePort \\\n  --namespace artifactory-oss
+      jfrog/artifactory-oss\n```\n\nTo manually configure TLS, first create/retrieve
+      a key & certificate pair for the address(es) you wish to protect. Then create
+      a TLS secret in the namespace:\n\n```bash\nkubectl create secret tls artifactory-tls
+      --cert=path/to/tls.cert --key=path/to/tls.key\n```\n\nInclude the secret's name,
+      along with the desired hostnames, in the Artifactory Ingress TLS section of
+      your custom `values.yaml` file:\n\n```yaml\nartifactory:\n  artifactory:\n    ingress:\n
+      \     ## If true, Artifactory Ingress will be created\n      ##\n      enabled:
+      true\n\n      ## Artifactory Ingress hostnames\n      ## Must be provided if
+      Ingress is enabled\n      ##\n      hosts:\n        - artifactory-oss.domain.com\n
+      \     annotations:\n        kubernetes.io/tls-acme: \"true\"\n      ## Artifactory
+      Ingress TLS configuration\n      ## Secrets must be manually created in the
+      namespace\n      ##\n      tls:\n        - secretName: artifactory-tls\n          hosts:\n
+      \           - artifactory-oss.domain.com\n```\n\n## Useful links\nhttps://www.jfrog.com\nhttps://www.jfrog.com/confluence/\n"
+    status: deployed
+  name: artifactory
+  namespace: devops-tools
   resources:
-    limits:
-      cpu: '2'
-      memory: 2Gi
-    requests:
-      cpu: 500m
-      memory: 1Gi
-postgresql:
-  enabled: true
-  image:
-    registry: releases-docker.jfrog.io
-    repository: bitnami/postgresql
-    tag: 13.4.0-debian-10-r39
-  persistence:
-    enabled: true
-    size: 200Gi
-    storageClass: longhorn
-  postgresqlDatabase: artifactory
-  postgresqlExtendedConf:
-    listenAddresses: '*'
-    maxConnections: '1500'
-  postgresqlPassword: ''
-  postgresqlUsername: artifactory
-  primary:
-    affinity: {}
-    nodeSelector: {}
-    tolerations: null
-  readReplicas:
-    affinity: {}
-    nodeSelector: {}
-    tolerations: null
-  resources:
-    limits:
-      cpu: 500m
-      memory: 1Gi
-    requests:
-      cpu: 100m
-      memory: 512Mi
-  service:
-    port: 5432
-global:
-  cattle:
-    systemProjectId: p-4978h
+  - apiVersion: v1
+    kind: Secret
+    name: artifactory-postgresql
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: Secret
+    name: artifactory-access-config
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: Secret
+    name: artifactory-binarystore
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: Secret
+    name: artifactory
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: Secret
+    name: artifactory-systemyaml
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: ConfigMap
+    name: artifactory-postgresql-extended-configuration
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: ConfigMap
+    name: artifactory-installer-info
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: ConfigMap
+    name: artifactory-migration-scripts
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: ConfigMap
+    name: artifactory-nginx-scripts
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: Service
+    name: artifactory-postgresql-headless
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: Service
+    name: artifactory-postgresql
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: Service
+    name: artifactory
+    namespace: devops-tools
+  - apiVersion: apps/v1
+    kind: StatefulSet
+    name: artifactory-postgresql
+    namespace: devops-tools
+  - apiVersion: apps/v1
+    kind: StatefulSet
+    name: artifactory
+    namespace: devops-tools
+  values:
+    artifactory:
+      javaOpts:
+        xms: 1g
+        xmx: 2g
+      nginx:
+        enabled: false
+      persistence:
+        accessMode: ReadWriteOnce
+        cacheProviderDir: cache
+        enabled: true
+        mountPath: /var/opt/jfrog/artifactory
+        size: 200Gi
+        storageClass: longhorn
+      resources:
+        limits:
+          cpu: "2"
+          memory: 2Gi
+        requests:
+          cpu: 500m
+          memory: 1Gi
+    global:
+      cattle:
+        clusterId: local
+        clusterName: local
+        rkePathPrefix: ""
+        rkeWindowsPathPrefix: ""
+        systemDefaultRegistry: ""
+        systemProjectId: p-4978h
+        url: https://rancher.danr.dev
+      systemDefaultRegistry: ""
+    postgresql:
+      image:
+        registry: releases-docker.jfrog.io
+        repository: bitnami/postgresql
+        tag: 13.4.0-debian-10-r39
+      persistence:
+        enabled: true
+        size: 200Gi
+        storageClass: longhorn
+      postgresqlDatabase: artifactory
+      postgresqlExtendedConf:
+        listenAddresses: '*'
+        maxConnections: "1500"
+      postgresqlPassword: ""
+      postgresqlUsername: artifactory
+      primary:
+        affinity: {}
+        nodeSelector: {}
+        tolerations: null
+      readReplicas:
+        affinity: {}
+        nodeSelector: {}
+        tolerations: null
+      resources:
+        limits:
+          cpu: 500m
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 512Mi
+      service:
+        port: 5432
+  version: 1
+status:
+  observedGeneration: 2
+  summary:
+    state: deployed
