@@ -1,0 +1,1543 @@
+apiVersion: catalog.cattle.io/v1
+kind: App
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: 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
+    objectset.rio.cattle.io/id: helm-app
+    objectset.rio.cattle.io/owner-gvk: /v1, Kind=Secret
+    objectset.rio.cattle.io/owner-name: sh.helm.release.v1.jenkins.v2
+    objectset.rio.cattle.io/owner-namespace: devops-tools
+  creationTimestamp: "2023-02-12T19:11:52Z"
+  generation: 4
+  labels:
+    objectset.rio.cattle.io/hash: 40cbcb997796bd07604c1b69e739b648b9b1e3d7
+  managedFields:
+  - apiVersion: catalog.cattle.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:objectset.rio.cattle.io/applied: {}
+          f:objectset.rio.cattle.io/id: {}
+          f:objectset.rio.cattle.io/owner-gvk: {}
+          f:objectset.rio.cattle.io/owner-name: {}
+          f:objectset.rio.cattle.io/owner-namespace: {}
+        f:labels:
+          .: {}
+          f:objectset.rio.cattle.io/hash: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"90194dea-6bc1-4cc2-88bb-22d457319bb7"}: {}
+      f:spec:
+        .: {}
+        f:chart:
+          .: {}
+          f:metadata:
+            .: {}
+            f:annotations:
+              .: {}
+              f:artifacthub.io/images: {}
+              f:artifacthub.io/links: {}
+              f:catalog.cattle.io/certified: {}
+              f:catalog.cattle.io/display-name: {}
+              f:catalog.cattle.io/kube-version: {}
+              f:catalog.cattle.io/release-name: {}
+              f:catalog.cattle.io/ui-source-repo: {}
+              f:catalog.cattle.io/ui-source-repo-type: {}
+            f:apiVersion: {}
+            f:appVersion: {}
+            f:description: {}
+            f:home: {}
+            f:icon: {}
+            f:maintainers: {}
+            f:name: {}
+            f:sources: {}
+            f:version: {}
+          f:values:
+            .: {}
+            f:additionalAgents: {}
+            f:agent:
+              .: {}
+              f:TTYEnabled: {}
+              f:additionalContainers: {}
+              f:alwaysPullImage: {}
+              f:annotations: {}
+              f:args: {}
+              f:command: {}
+              f:componentName: {}
+              f:connectTimeout: {}
+              f:containerCap: {}
+              f:customJenkinsLabels: {}
+              f:defaultsProviderTemplate: {}
+              f:disableDefaultAgent: {}
+              f:enabled: {}
+              f:envVars: {}
+              f:hostNetworking: {}
+              f:idleMinutes: {}
+              f:image: {}
+              f:imagePullSecretName: {}
+              f:jenkinsTunnel: {}
+              f:jenkinsUrl: {}
+              f:kubernetesConnectTimeout: {}
+              f:kubernetesReadTimeout: {}
+              f:maxRequestsPerHostStr: {}
+              f:namespace: {}
+              f:nodeSelector: {}
+              f:nodeUsageMode: {}
+              f:podName: {}
+              f:podRetention: {}
+              f:podTemplates: {}
+              f:privileged: {}
+              f:resources:
+                .: {}
+                f:limits:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+                f:requests:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+              f:runAsGroup: {}
+              f:runAsUser: {}
+              f:secretEnvVars: {}
+              f:showRawYaml: {}
+              f:sideContainerName: {}
+              f:tag: {}
+              f:volumes: {}
+              f:websocket: {}
+              f:workingDir: {}
+              f:workspaceVolume: {}
+              f:yamlMergeStrategy: {}
+              f:yamlTemplate: {}
+            f:awsSecurityGroupPolicies:
+              .: {}
+              f:enabled: {}
+              f:policies: {}
+            f:backup:
+              .: {}
+              f:activeDeadlineSeconds: {}
+              f:componentName: {}
+              f:destination: {}
+              f:enabled: {}
+              f:env: {}
+              f:existingSecret: {}
+              f:extraArgs: {}
+              f:fsGroup: {}
+              f:image:
+                .: {}
+                f:repository: {}
+                f:tag: {}
+              f:imagePullSecretName: {}
+              f:labels: {}
+              f:onlyJobs: {}
+              f:resources:
+                .: {}
+                f:limits:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+                f:requests:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+              f:runAsUser: {}
+              f:schedule: {}
+              f:securityContextCapabilities: {}
+              f:serviceAccount:
+                .: {}
+                f:annotations: {}
+                f:create: {}
+                f:name: {}
+              f:usePodSecurityContext: {}
+            f:checkDeprecation: {}
+            f:clusterZone: {}
+            f:controller:
+              .: {}
+              f:JCasC:
+                .: {}
+                f:authorizationStrategy: {}
+                f:configScripts: {}
+                f:configUrls: {}
+                f:defaultConfig: {}
+                f:security:
+                  .: {}
+                  f:apiToken:
+                    .: {}
+                    f:creationOfLegacyTokenEnabled: {}
+                    f:tokenGenerationOnCreationEnabled: {}
+                    f:usageStatisticsEnabled: {}
+                f:securityRealm: {}
+              f:additionalExistingSecrets: {}
+              f:additionalPlugins: {}
+              f:additionalSecrets: {}
+              f:admin:
+                .: {}
+                f:existingSecret: {}
+                f:passwordKey: {}
+                f:userKey: {}
+              f:adminSecret: {}
+              f:adminUser: {}
+              f:affinity: {}
+              f:agentListenerEnabled: {}
+              f:agentListenerExternalTrafficPolicy: {}
+              f:agentListenerHostPort: {}
+              f:agentListenerLoadBalancerIP: {}
+              f:agentListenerLoadBalancerSourceRanges: {}
+              f:agentListenerNodePort: {}
+              f:agentListenerPort: {}
+              f:agentListenerServiceAnnotations: {}
+              f:agentListenerServiceType: {}
+              f:backendconfig:
+                .: {}
+                f:annotations: {}
+                f:apiVersion: {}
+                f:enabled: {}
+                f:labels: {}
+                f:name: {}
+                f:spec: {}
+              f:cloudName: {}
+              f:componentName: {}
+              f:containerSecurityContext:
+                .: {}
+                f:allowPrivilegeEscalation: {}
+                f:readOnlyRootFilesystem: {}
+                f:runAsGroup: {}
+                f:runAsUser: {}
+              f:csrf:
+                .: {}
+                f:defaultCrumbIssuer:
+                  .: {}
+                  f:enabled: {}
+                  f:proxyCompatability: {}
+              f:customInitContainers: {}
+              f:customJenkinsLabels: {}
+              f:disableRememberMe: {}
+              f:disabledAgentProtocols: {}
+              f:enableRawHtmlMarkupFormatter: {}
+              f:executorMode: {}
+              f:existingSecret: {}
+              f:extraPorts: {}
+              f:fsGroup: {}
+              f:googlePodMonitor:
+                .: {}
+                f:enabled: {}
+                f:scrapeEndpoint: {}
+                f:scrapeInterval: {}
+              f:healthProbes: {}
+              f:hostAliases: {}
+              f:hostNetworking: {}
+              f:httpsKeyStore:
+                .: {}
+                f:enable: {}
+                f:fileName: {}
+                f:httpPort: {}
+                f:jenkinsHttpsJksSecretName: {}
+                f:jenkinsKeyStoreBase64Encoded: {}
+                f:password: {}
+                f:path: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:imagePullSecretName: {}
+              f:ingress:
+                .: {}
+                f:annotations: {}
+                f:apiVersion: {}
+                f:enabled: {}
+                f:hostName: {}
+                f:labels: {}
+                f:paths: {}
+                f:tls: {}
+              f:initScripts: {}
+              f:initializeOnce: {}
+              f:installLatestPlugins: {}
+              f:installLatestSpecifiedPlugins: {}
+              f:installPlugins: {}
+              f:jenkinsHome: {}
+              f:jenkinsRef: {}
+              f:jenkinsWar: {}
+              f:lifecycle: {}
+              f:loadBalancerSourceRanges: {}
+              f:markupFormatter: {}
+              f:nodeSelector: {}
+              f:numExecutors: {}
+              f:overwritePluginsFromImage: {}
+              f:podAnnotations: {}
+              f:podDisruptionBudget:
+                .: {}
+                f:annotations: {}
+                f:apiVersion: {}
+                f:enabled: {}
+                f:labels: {}
+              f:podLabels: {}
+              f:priorityClassName: {}
+              f:probes:
+                .: {}
+                f:livenessProbe:
+                  .: {}
+                  f:failureThreshold: {}
+                  f:httpGet:
+                    .: {}
+                    f:path: {}
+                    f:port: {}
+                  f:periodSeconds: {}
+                  f:timeoutSeconds: {}
+                f:readinessProbe:
+                  .: {}
+                  f:failureThreshold: {}
+                  f:httpGet:
+                    .: {}
+                    f:path: {}
+                    f:port: {}
+                  f:periodSeconds: {}
+                  f:timeoutSeconds: {}
+                f:startupProbe:
+                  .: {}
+                  f:failureThreshold: {}
+                  f:httpGet:
+                    .: {}
+                    f:path: {}
+                    f:port: {}
+                  f:periodSeconds: {}
+                  f:timeoutSeconds: {}
+              f:projectNamingStrategy: {}
+              f:prometheus:
+                .: {}
+                f:alertingRulesAdditionalLabels: {}
+                f:alertingrules: {}
+                f:enabled: {}
+                f:metricRelabelings: {}
+                f:prometheusRuleNamespace: {}
+                f:relabelings: {}
+                f:scrapeEndpoint: {}
+                f:scrapeInterval: {}
+                f:serviceMonitorAdditionalLabels: {}
+              f:resources:
+                .: {}
+                f:limits:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+                f:requests:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+              f:route:
+                .: {}
+                f:annotations: {}
+                f:enabled: {}
+                f:labels: {}
+              f:runAsUser: {}
+              f:schedulerName: {}
+              f:scriptApproval: {}
+              f:secondaryingress:
+                .: {}
+                f:annotations: {}
+                f:apiVersion: {}
+                f:enabled: {}
+                f:hostName: {}
+                f:labels: {}
+                f:paths: {}
+                f:tls: {}
+              f:secretClaims: {}
+              f:securityContextCapabilities: {}
+              f:serviceAnnotations: {}
+              f:serviceExternalTrafficPolicy: {}
+              f:serviceLabels: {}
+              f:servicePort: {}
+              f:serviceType: {}
+              f:sidecars:
+                .: {}
+                f:configAutoReload:
+                  .: {}
+                  f:containerSecurityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:readOnlyRootFilesystem: {}
+                  f:enabled: {}
+                  f:folder: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:reqRetryConnect: {}
+                  f:resources: {}
+                  f:sshTcpPort: {}
+                f:other: {}
+              f:statefulSetAnnotations: {}
+              f:statefulSetLabels: {}
+              f:tagLabel: {}
+              f:targetPort: {}
+              f:terminationGracePeriodSeconds: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+              f:testEnabled: {}
+              f:tolerations: {}
+              f:updateStrategy: {}
+              f:usePodSecurityContext: {}
+            f:cronJob:
+              .: {}
+              f:apiVersion: {}
+            f:networkPolicy:
+              .: {}
+              f:apiVersion: {}
+              f:enabled: {}
+              f:externalAgents: {}
+              f:internalAgents:
+                .: {}
+                f:allowed: {}
+                f:namespaceLabels: {}
+                f:podLabels: {}
+            f:persistence:
+              .: {}
+              f:accessMode: {}
+              f:annotations: {}
+              f:enabled: {}
+              f:existingClaim: {}
+              f:labels: {}
+              f:mounts: {}
+              f:size: {}
+              f:storageClass: {}
+              f:volumes: {}
+            f:rbac:
+              .: {}
+              f:create: {}
+              f:readSecrets: {}
+            f:renderHelmLabels: {}
+            f:serviceAccount:
+              .: {}
+              f:annotations: {}
+              f:create: {}
+              f:imagePullSecretName: {}
+              f:name: {}
+            f:serviceAccountAgent:
+              .: {}
+              f:annotations: {}
+              f:create: {}
+              f:imagePullSecretName: {}
+              f:name: {}
+        f:helmVersion: {}
+        f:info:
+          .: {}
+          f:description: {}
+          f:firstDeployed: {}
+          f:lastDeployed: {}
+          f:notes: {}
+          f:readme: {}
+          f:status: {}
+        f:name: {}
+        f:namespace: {}
+        f:resources: {}
+        f:values:
+          .: {}
+          f:agent:
+            .: {}
+            f:jenkinsUrl: {}
+          f:global:
+            .: {}
+            f:cattle:
+              .: {}
+              f:clusterId: {}
+              f:clusterName: {}
+              f:rkePathPrefix: {}
+              f:rkeWindowsPathPrefix: {}
+              f:systemDefaultRegistry: {}
+              f:systemProjectId: {}
+              f:url: {}
+            f:systemDefaultRegistry: {}
+          f:persistence:
+            .: {}
+            f:size: {}
+            f:storageClass: {}
+        f:version: {}
+    manager: rancher
+    operation: Update
+    time: "2023-02-12T20:22:11Z"
+  - apiVersion: catalog.cattle.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        .: {}
+        f:observedGeneration: {}
+        f:summary:
+          .: {}
+          f:state: {}
+    manager: rancher
+    operation: Update
+    subresource: status
+    time: "2023-02-12T20:22:12Z"
+  name: jenkins
+  namespace: devops-tools
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: false
+    controller: true
+    kind: Secret
+    name: sh.helm.release.v1.jenkins.v2
+    uid: 90194dea-6bc1-4cc2-88bb-22d457319bb7
+  resourceVersion: "53368803"
+  uid: 1e9e4ddd-578d-4eeb-b34b-f4a63defed3b
+spec:
+  chart:
+    metadata:
+      annotations:
+        artifacthub.io/images: |
+          - name: jenkins
+            image: jenkins/jenkins:2.375.2-jdk11
+          - name: k8s-sidecar
+            image: kiwigrid/k8s-sidecar:1.15.0
+          - name: inbound-agent
+            image: jenkins/inbound-agent:4.11.2-4
+          - name: backup
+            image: maorfr/kube-tasks:0.2.0
+        artifacthub.io/links: |
+          - name: Chart Source
+            url: https://github.com/jenkinsci/helm-charts/tree/main/charts/jenkins
+          - name: Jenkins
+            url: https://www.jenkins.io/
+        catalog.cattle.io/certified: partner
+        catalog.cattle.io/display-name: Jenkins
+        catalog.cattle.io/kube-version: '>=1.14-0'
+        catalog.cattle.io/release-name: jenkins
+        catalog.cattle.io/ui-source-repo: rancher-partner-charts
+        catalog.cattle.io/ui-source-repo-type: cluster
+      apiVersion: v2
+      appVersion: 2.375.2
+      description: Jenkins - Build great things at any scale! The leading open source
+        automation server, Jenkins provides hundreds of plugins to support building,
+        deploying and automating any project.
+      home: https://jenkins.io/
+      icon: https://get.jenkins.io/art/jenkins-logo/logo.svg
+      maintainers:
+      - email: maor.friedman@redhat.com
+        name: maorfr
+      - email: mail@torstenwalter.de
+        name: torstenwalter
+      - email: garridomota@gmail.com
+        name: mogaal
+      - email: wmcdona89@gmail.com
+        name: wmcdona89
+      - email: timjacomb1@gmail.com
+        name: timja
+      name: jenkins
+      sources:
+      - https://github.com/jenkinsci/jenkins
+      - https://github.com/jenkinsci/docker-inbound-agent
+      - https://github.com/maorfr/kube-tasks
+      - https://github.com/jenkinsci/configuration-as-code-plugin
+      version: 4.3.1
+    values:
+      additionalAgents: {}
+      agent:
+        TTYEnabled: false
+        additionalContainers: null
+        alwaysPullImage: false
+        annotations: {}
+        args: ${computer.jnlpmac} ${computer.name}
+        command: null
+        componentName: jenkins-agent
+        connectTimeout: 100
+        containerCap: 10
+        customJenkinsLabels: null
+        defaultsProviderTemplate: ""
+        disableDefaultAgent: false
+        enabled: true
+        envVars: null
+        hostNetworking: false
+        idleMinutes: 0
+        image: jenkins/inbound-agent
+        imagePullSecretName: null
+        jenkinsTunnel: null
+        jenkinsUrl: null
+        kubernetesConnectTimeout: 5
+        kubernetesReadTimeout: 15
+        maxRequestsPerHostStr: "32"
+        namespace: null
+        nodeSelector: {}
+        nodeUsageMode: NORMAL
+        podName: default
+        podRetention: Never
+        podTemplates: {}
+        privileged: false
+        resources:
+          limits:
+            cpu: 512m
+            memory: 512Mi
+          requests:
+            cpu: 512m
+            memory: 512Mi
+        runAsGroup: null
+        runAsUser: null
+        secretEnvVars: null
+        showRawYaml: true
+        sideContainerName: jnlp
+        tag: 4.11.2-4
+        volumes: null
+        websocket: false
+        workingDir: /home/jenkins/agent
+        workspaceVolume: {}
+        yamlMergeStrategy: override
+        yamlTemplate: ""
+      awsSecurityGroupPolicies:
+        enabled: false
+        policies:
+        - name: ""
+          podSelector: {}
+          securityGroupIds: null
+      backup:
+        activeDeadlineSeconds: ""
+        componentName: backup
+        destination: s3://jenkins-data/backup
+        enabled: false
+        env: null
+        existingSecret: {}
+        extraArgs: null
+        fsGroup: 1000
+        image:
+          repository: maorfr/kube-tasks
+          tag: 0.2.0
+        imagePullSecretName: null
+        labels: {}
+        onlyJobs: false
+        resources:
+          limits:
+            cpu: 1
+            memory: 1Gi
+          requests:
+            cpu: 1
+            memory: 1Gi
+        runAsUser: 1000
+        schedule: 0 2 * * *
+        securityContextCapabilities: {}
+        serviceAccount:
+          annotations: {}
+          create: true
+          name: null
+        usePodSecurityContext: true
+      checkDeprecation: true
+      clusterZone: cluster.local
+      controller:
+        JCasC:
+          authorizationStrategy: |-
+            loggedInUsersCanDoAnything:
+              allowAnonymousRead: false
+          configScripts: {}
+          configUrls: null
+          defaultConfig: true
+          security:
+            apiToken:
+              creationOfLegacyTokenEnabled: false
+              tokenGenerationOnCreationEnabled: false
+              usageStatisticsEnabled: true
+          securityRealm: |-
+            local:
+              allowsSignup: false
+              enableCaptcha: false
+              users:
+              - id: "${chart-admin-username}"
+                name: "Jenkins Admin"
+                password: "${chart-admin-password}"
+        additionalExistingSecrets: null
+        additionalPlugins: null
+        additionalSecrets: null
+        admin:
+          existingSecret: ""
+          passwordKey: jenkins-admin-password
+          userKey: jenkins-admin-user
+        adminSecret: true
+        adminUser: admin
+        affinity: {}
+        agentListenerEnabled: true
+        agentListenerExternalTrafficPolicy: null
+        agentListenerHostPort: null
+        agentListenerLoadBalancerIP: null
+        agentListenerLoadBalancerSourceRanges:
+        - 0.0.0.0/0
+        agentListenerNodePort: null
+        agentListenerPort: 50000
+        agentListenerServiceAnnotations: {}
+        agentListenerServiceType: ClusterIP
+        backendconfig:
+          annotations: {}
+          apiVersion: extensions/v1beta1
+          enabled: false
+          labels: {}
+          name: null
+          spec: {}
+        cloudName: kubernetes
+        componentName: jenkins-controller
+        containerSecurityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsGroup: 1000
+          runAsUser: 1000
+        csrf:
+          defaultCrumbIssuer:
+            enabled: true
+            proxyCompatability: true
+        customInitContainers: null
+        customJenkinsLabels: null
+        disableRememberMe: false
+        disabledAgentProtocols:
+        - JNLP-connect
+        - JNLP2-connect
+        enableRawHtmlMarkupFormatter: false
+        executorMode: NORMAL
+        existingSecret: null
+        extraPorts: null
+        fsGroup: 1000
+        googlePodMonitor:
+          enabled: false
+          scrapeEndpoint: /prometheus
+          scrapeInterval: 60s
+        healthProbes: true
+        hostAliases: null
+        hostNetworking: false
+        httpsKeyStore:
+          enable: false
+          fileName: keystore.jks
+          httpPort: 8081
+          jenkinsHttpsJksSecretName: ""
+          jenkinsKeyStoreBase64Encoded: |
+            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
+          password: password
+          path: /var/jenkins_keystore
+        image: jenkins/jenkins
+        imagePullPolicy: Always
+        imagePullSecretName: null
+        ingress:
+          annotations: {}
+          apiVersion: extensions/v1beta1
+          enabled: false
+          hostName: null
+          labels: {}
+          paths: null
+          tls: null
+        initScripts: null
+        initializeOnce: false
+        installLatestPlugins: true
+        installLatestSpecifiedPlugins: false
+        installPlugins:
+        - kubernetes:3734.v562b_b_a_627ea_c
+        - workflow-aggregator:590.v6a_d052e5a_a_b_5
+        - git:4.13.0
+        - configuration-as-code:1569.vb_72405b_80249
+        jenkinsHome: /var/jenkins_home
+        jenkinsRef: /usr/share/jenkins/ref
+        jenkinsWar: /usr/share/jenkins/jenkins.war
+        lifecycle: null
+        loadBalancerSourceRanges:
+        - 0.0.0.0/0
+        markupFormatter: plainText
+        nodeSelector: {}
+        numExecutors: 0
+        overwritePluginsFromImage: true
+        podAnnotations: {}
+        podDisruptionBudget:
+          annotations: {}
+          apiVersion: policy/v1beta1
+          enabled: false
+          labels: {}
+        podLabels: {}
+        priorityClassName: null
+        probes:
+          livenessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: '{{ default "" .Values.controller.jenkinsUriPrefix }}/login'
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: '{{ default "" .Values.controller.jenkinsUriPrefix }}/login'
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 5
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: '{{ default "" .Values.controller.jenkinsUriPrefix }}/login'
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 5
+        projectNamingStrategy: standard
+        prometheus:
+          alertingRulesAdditionalLabels: {}
+          alertingrules: null
+          enabled: false
+          metricRelabelings: null
+          prometheusRuleNamespace: ""
+          relabelings: null
+          scrapeEndpoint: /prometheus
+          scrapeInterval: 60s
+          serviceMonitorAdditionalLabels: {}
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 4096Mi
+          requests:
+            cpu: 50m
+            memory: 256Mi
+        route:
+          annotations: {}
+          enabled: false
+          labels: {}
+        runAsUser: 1000
+        schedulerName: ""
+        scriptApproval: null
+        secondaryingress:
+          annotations: {}
+          apiVersion: extensions/v1beta1
+          enabled: false
+          hostName: null
+          labels: {}
+          paths: null
+          tls: null
+        secretClaims: null
+        securityContextCapabilities: {}
+        serviceAnnotations: {}
+        serviceExternalTrafficPolicy: null
+        serviceLabels: {}
+        servicePort: 8080
+        serviceType: ClusterIP
+        sidecars:
+          configAutoReload:
+            containerSecurityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+            enabled: true
+            folder: /var/jenkins_home/casc_configs
+            image: kiwigrid/k8s-sidecar:1.15.0
+            imagePullPolicy: IfNotPresent
+            reqRetryConnect: 10
+            resources: {}
+            sshTcpPort: 1044
+          other: null
+        statefulSetAnnotations: {}
+        statefulSetLabels: {}
+        tagLabel: jdk11
+        targetPort: 8080
+        terminationGracePeriodSeconds: null
+        terminationMessagePath: null
+        terminationMessagePolicy: null
+        testEnabled: true
+        tolerations: null
+        updateStrategy: {}
+        usePodSecurityContext: true
+      cronJob:
+        apiVersion: batch/v1
+      networkPolicy:
+        apiVersion: networking.k8s.io/v1
+        enabled: false
+        externalAgents: {}
+        internalAgents:
+          allowed: true
+          namespaceLabels: {}
+          podLabels: {}
+      persistence:
+        accessMode: ReadWriteOnce
+        annotations: {}
+        enabled: true
+        existingClaim: null
+        labels: {}
+        mounts: null
+        size: 8Gi
+        storageClass: null
+        volumes: null
+      rbac:
+        create: true
+        readSecrets: false
+      renderHelmLabels: true
+      serviceAccount:
+        annotations: {}
+        create: true
+        imagePullSecretName: null
+        name: null
+      serviceAccountAgent:
+        annotations: {}
+        create: false
+        imagePullSecretName: null
+        name: null
+  helmVersion: 3
+  info:
+    description: Upgrade complete
+    firstDeployed: "2023-02-12T19:11:50Z"
+    lastDeployed: "2023-02-12T20:22:09Z"
+    notes: |
+      1. Get your 'admin' user password by running:
+        kubectl exec --namespace devops-tools -it svc/jenkins -c jenkins -- /bin/cat /run/secrets/additional/chart-admin-password && echo
+      2. Get the Jenkins URL to visit by running these commands in the same shell:
+        echo http://127.0.0.1:8080
+        kubectl --namespace devops-tools port-forward svc/jenkins 8080:8080
+
+      3. Login with the password from step 1 and the username: admin
+      4. Configure security realm and authorization strategy
+      5. Use Jenkins Configuration as Code by specifying configScripts in your values.yaml file, see documentation: http://127.0.0.1:8080/configuration-as-code and examples: https://github.com/jenkinsci/configuration-as-code-plugin/tree/master/demos
+
+      For more information on running Jenkins on Kubernetes, visit:
+      https://cloud.google.com/solutions/jenkins-on-container-engine
+
+      For more information about Jenkins Configuration as Code, visit:
+      https://jenkins.io/projects/jcasc/
+
+
+      NOTE: Consider using a custom image with pre-installed plugins
+    readme: "# Jenkins\n\n[Jenkins](https://www.jenkins.io/) is the leading open source
+      automation server, Jenkins provides hundreds of plugins to support building,
+      deploying and automating any project.\n\nThis chart installs a Jenkins server
+      which spawns agents on [Kubernetes](http://kubernetes.io) utilizing the [Jenkins
+      Kubernetes plugin](https://plugins.jenkins.io/kubernetes/).\n\nInspired by the
+      awesome work of [Carlos Sanchez](https://github.com/carlossg).\n\n## Get Repo
+      Info\n\n```console\nhelm repo add jenkins https://charts.jenkins.io\nhelm repo
+      update\n```\n\n_See [helm repo](https://helm.sh/docs/helm/helm_repo/) for command
+      documentation._\n\n## Install Chart\n\n```console\n# Helm 3\n$ helm install
+      [RELEASE_NAME] jenkins/jenkins [flags]\n```\n\n_See [configuration](#configuration)
+      below._\n\n_See [helm install](https://helm.sh/docs/helm/helm_install/) for
+      command documentation._\n\n## Uninstall Chart\n\n```console\n# Helm 3\n$ helm
+      uninstall [RELEASE_NAME]\n```\n\nThis removes all the Kubernetes components
+      associated with the chart and deletes the release.\n\n_See [helm uninstall](https://helm.sh/docs/helm/helm_uninstall/)
+      for command documentation._\n\n## Upgrade Chart\n\n```console\n# Helm 3\n$ helm
+      upgrade [RELEASE_NAME] jenkins/jenkins [flags]\n```\n\n_See [helm upgrade](https://helm.sh/docs/helm/helm_upgrade/)
+      for command documentation._\n\nVisit the chart's [CHANGELOG](./CHANGELOG.md)
+      to view the chart's release history.\nFor migration between major version check
+      [migration guide](#migration-guide).\n\n## Configuration\n\nSee [Customizing
+      the Chart Before Installing](https://helm.sh/docs/intro/using_helm/#customizing-the-chart-before-installing).\nTo
+      see all configurable options with detailed comments, visit the chart's [values.yaml](./values.yaml),
+      or run these configuration commands:\n\n```console\n# Helm 3\n$ helm show values
+      jenkins/jenkins\n```\n\nFor a summary of all configurable options, see [VALUES_SUMMARY.md](./VALUES_SUMMARY.md)\n\n###
+      Configure Security Realm and Authorization Strategy\n\nThis chart configured
+      a `securityRealm` and `authorizationStrategy` as shown below:\n\n```yaml\ncontroller:\n
+      \ JCasC:\n    securityRealm: |-\n      local:\n        allowsSignup: false\n
+      \       enableCaptcha: false\n        users:\n        - id: \"${chart-admin-username}\"\n
+      \         name: \"Jenkins Admin\"\n          password: \"${chart-admin-password}\"\n
+      \   authorizationStrategy: |-\n      loggedInUsersCanDoAnything:\n        allowAnonymousRead:
+      false\n```\n\nWith the configuration above there is only a single user.\nThis
+      is ok for getting started quickly, but it needs to be adjusted for any serious
+      environment.\n\nSo you should adjust this to suite your needs.\nThat could be
+      using LDAP / OIDC / .. as authorization strategy and use globalMatrix as authorization
+      strategy to configure more fine-grained permissions.\n\n### Consider using a
+      custom image\n\nThis chart allows the user to specify plugins which should be
+      installed. However, for production use cases one should consider to build a
+      custom Jenkins image which has all required plugins pre-installed.\nThis way
+      you can be sure which plugins Jenkins is using when starting up and you avoid
+      trouble in case of connectivity issues to the Jenkins update site.\n\nThe [docker
+      repository](https://github.com/jenkinsci/docker) for the Jenkins image contains
+      [documentation](https://github.com/jenkinsci/docker#preinstalling-plugins) how
+      to do it.\n\nHere is an example how that can be done:\n\n```Dockerfile\nFROM
+      jenkins/jenkins:lts\nRUN jenkins-plugin-cli --plugins kubernetes workflow-aggregator
+      git configuration-as-code\n```\n\nNOTE: If you want a reproducible build then
+      you should specify a non-floating tag for the image `jenkins/jenkins:2.249.3`
+      and specify plugin versions.\n\nOnce you built the image and pushed it to your
+      registry you can specify it in your values file like this:\n\n```yaml\ncontroller:\n
+      \ image: \"registry/my-jenkins\"\n  tag: \"v1.2.3\"\n  installPlugins: false\n```\n\nNotice:
+      `installPlugins` is set to false to disable plugin download. In this case, the
+      image `registry/my-jenkins:v1.2.3` must have the plugins specified as default
+      value for [the `controller.installPlugins` directive](https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/VALUES_SUMMARY.md#jenkins-plugins)
+      to ensure that the configuration side-car system works as expected.\n\nIn case
+      you are using a private registry you can use 'imagePullSecretName' to specify
+      the name of the secret to use when pulling the image:\n\n```yaml\ncontroller:\n
+      \ image: \"registry/my-jenkins\"\n  tag: \"v1.2.3\"\n  imagePullSecretName:
+      registry-secret\n  installPlugins: false\n```\n\n### External URL Configuration\n\nIf
+      you are using the ingress definitions provided by this chart via the `controller.ingress`
+      block the configured hostname will be the ingress hostname starting with `https://`
+      or `http://` depending on the `tls` configuration.\nThe Protocol can be overwritten
+      by specifying `controller.jenkinsUrlProtocol`.\n\nIf you are not using the provided
+      ingress you can specify `controller.jenkinsUrl` to change the url definition.\n\n###
+      Configuration as Code\n\nJenkins Configuration as Code (JCasC) is now a standard
+      component in the Jenkins project.\nTo allow JCasC's configuration from the helm
+      values, the plugin [`configuration-as-code`](https://plugins.jenkins.io/configuration-as-code/)
+      must be installed in the Jenkins Controller's Docker image (which is the case
+      by default as specified by the [default value of the directive `controller.installPlugins`](https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/VALUES_SUMMARY.md#jenkins-plugins)).\n\nJCasc
+      configuration is passed through Helm values under the key `controller.JCasC`.\nThe
+      section [\"Jenkins Configuration as Code (JCasC)\" of the page \"VALUES_SUMMARY.md\"](https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/VALUES_SUMMARY.md#jenkins-configuration-as-code-jcasc)
+      lists all the possible directives.\n\nIn particular, you may specify custom
+      JCasC scripts by adding sub-key under the `controller.JCasC.configScripts` for
+      each configuration area where each corresponds to a plugin or section of the
+      UI.\n\nThe sub-keys (prior to `|` character) are only labels used to give the
+      section a meaningful name.\nThe only restriction is they must conform to RFC
+      1123 definition of a DNS label, so they may only contain lowercase letters,
+      numbers, and hyphens.\n\nEach key will become the name of a configuration yaml
+      file on the controller in `/var/jenkins_home/casc_configs` (by default) and
+      will be processed by the Configuration as Code Plugin during Jenkins startup.\n\nThe
+      lines after each `|` become the content of the configuration yaml file.\n\nThe
+      first line after this is a JCasC root element, e.g. jenkins, credentials, etc.\n\nBest
+      reference is the Documentation link here: `https://<jenkins_url>/configuration-as-code`.\n\nThe
+      example below sets custom systemMessage:\n\n```yaml\ncontroller:\n  JCasC:\n
+      \   configScripts:\n      welcome-message: |\n        jenkins:\n          systemMessage:
+      Welcome to our CI\\CD server.\n```\n\nMore complex example that creates ldap
+      settings:\n\n```yaml\ncontroller:\n  JCasC:\n    configScripts:\n      ldap-settings:
+      |\n        jenkins:\n          securityRealm:\n            ldap:\n              configurations:\n
+      \               - server: ldap.acme.com\n                  rootDN: dc=acme,dc=uk\n
+      \                 managerPasswordSecret: ${LDAP_PASSWORD}\n                  groupMembershipStrategy:\n
+      \                   fromUserRecord:\n                      attributeName: \"memberOf\"\n```\n\nKeep
+      in mind that default configuration file already contains some values that you
+      won't be able to override under configScripts section.\n\nFor example, you can
+      not configure Jenkins URL and System Admin e-mail address like this because
+      of conflicting configuration error.\n\nIncorrect:\n\n```yaml\ncontroller:\n
+      \ JCasC:\n    configScripts:\n      jenkins-url: |\n        unclassified:\n
+      \         location:\n            url: https://example.com/jenkins\n            adminAddress:
+      example@mail.com\n```\n\nCorrect:\n\n```yaml\ncontroller:\n  jenkinsUrl: https://example.com/jenkins\n
+      \ jenkinsAdminEmail: example@mail.com\n```\n\nFurther JCasC examples can be
+      found [here](https://github.com/jenkinsci/configuration-as-code-plugin/tree/master/demos).\n\n####
+      Breaking out large Config as Code scripts\n\nJenkins Config as Code scripts
+      can become quite large, and maintaining all of your scripts within one yaml
+      file can be difficult.  The Config as Code plugin itself suggests updating the
+      `CASC_JENKINS_CONFIG` environment variable to be a comma seperated list of paths
+      for the plugin to traverse, picking up the yaml files as needed.  \nHowever,
+      under the Jenkins helm chart, this `CASC_JENKINS_CONFIG` value is maintained
+      through the templates.  A better solution is to split your `controller.JCasC.configScripts`
+      into seperate values files, and provide each file during the helm install.\n\nFor
+      example, you can have a values file (e.g values_main.yaml) that defines the
+      values described in the `VALUES_SUMMARY.md` for your Jenkins configuration:\n\n```yaml\njenkins:\n
+      \ controller:\n    jenkinsUrlProtocol: https\n    installPlugins: false\n    ...\n```\n\nIn
+      a second file (e.g values_jenkins_casc.yaml), you can define a section of your
+      config scripts:\n\n```yaml\njenkins:\n  controller:\n    JCasC:\n      configScripts:\n
+      \       jenkinsCasc:  |\n          jenkins:\n            disableRememberMe:
+      false\n            mode: NORMAL\n            ...\n```\n\nAnd keep extending
+      your config scripts by creating more files (so not all config scripts are located
+      in one yaml file for better maintenance):\n\nvalues_jenkins_unclassified.yaml\n\n```yaml\njenkins:\n
+      \ controller:\n    JCasC:\n      configScripts:\n        unclassifiedCasc: |\n
+      \         unclassified:\n            ...\n```\n\nWhen installing, you provide
+      all relevant yaml files (e.g `helm install -f values_main.yaml -f values_jenkins_casc.yaml
+      -f values_jenkins_unclassified.yaml ...`).  Instead of updating the `CASC_JENKINS_CONFIG`
+      environment variable to include multiple paths, multiple CasC yaml files will
+      be created in the same path `var/jenkins_home/casc_configs`.\n\n#### Config
+      as Code With or Without Auto-Reload\n\nConfig as Code changes (to `controller.JCasC.configScripts`)
+      can either force a new pod to be created and only be applied at next startup,
+      or can be auto-reloaded on-the-fly.\nIf you set `controller.sidecars.configAutoReload.enabled`
+      to `true`, a second, auxiliary container will be installed into the Jenkins
+      controller pod, known as a \"sidecar\".\nThis watches for changes to configScripts,
+      copies the content onto the Jenkins file-system and issues a POST to `http://<jenkins_url>/reload-configuration-as-code`
+      with a pre-shared key.\nYou can monitor this sidecar's logs using command `kubectl
+      logs <controller_pod> -c config-reload -f`.\nIf you want to enable auto-reload
+      then you also need to configure rbac as the container which triggers the reload
+      needs to watch the config maps:\n\n```yaml\ncontroller:\n  sidecars:\n    configAutoReload:\n
+      \     enabled: true\nrbac:\n  create: true\n```\n\n### Allow Limited HTML Markup
+      in User-Submitted Text\n\nSome third-party systems (e.g. GitHub) use HTML-formatted
+      data in their payload sent to a Jenkins webhook (e.g. URL of a pull-request
+      being built).\nTo display such data as processed HTML instead of raw text set
+      `controller.enableRawHtmlMarkupFormatter` to true.\nThis option requires installation
+      of the [OWASP Markup Formatter Plugin (antisamy-markup-formatter)](https://plugins.jenkins.io/antisamy-markup-formatter/).\nThis
+      plugin is **not** installed by default but may be added to `controller.additionalPlugins`.\n\n###
+      Change max connections to Kubernetes API\nWhen using agents with containers
+      other than JNLP, The kubernetes plugin will communicate with those containers
+      using the Kubernetes API. this changes the maximum concurrent connections\n```yaml\nagent:\n
+      \ maxRequestsPerHostStr: \"32\"\n```\nThis will change the configuration of
+      the kubernetes \"cloud\" (as called by jenkins) that is created automatically
+      as part of this helm chart.\n\n### Mounting Volumes into Agent Pods\n\nYour
+      Jenkins Agents will run as pods, and it's possible to inject volumes where needed:\n\n```yaml\nagent:\n
+      \ volumes:\n  - type: Secret\n    secretName: jenkins-mysecrets\n    mountPath:
+      /var/run/secrets/jenkins-mysecrets\n```\n\nThe supported volume types are: `ConfigMap`,
+      `EmptyDir`, `HostPath`, `Nfs`, `PVC`, `Secret`.\nEach type supports a different
+      set of configurable attributes, defined by [the corresponding Java class](https://github.com/jenkinsci/kubernetes-plugin/tree/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes).\n\n###
+      NetworkPolicy\n\nTo make use of the NetworkPolicy resources created by default,
+      install [a networking plugin that implements the Kubernetes NetworkPolicy spec](https://kubernetes.io/docs/tasks/administer-cluster/declare-network-policy#before-you-begin).\n\n[Install](#install-chart)
+      helm chart with network policy enabled by setting `networkPolicy.enabled` to
+      `true`.\n\nYou can use `controller.networkPolicy.internalAgents` and `controller.networkPolicy.externalAgents`
+      stanzas for fine-grained controls over where internal/external agents can connect
+      from.\nInternal ones are allowed based on pod labels and (optionally) namespaces,
+      and external ones are allowed based on IP ranges.\n\n### Script approval list\n\n`controller.scriptApproval`
+      allows to pass function signatures that will be allowed in pipelines.\nExample:\n\n```yaml\ncontroller:\n
+      \ scriptApproval:\n    - \"method java.util.Base64$Decoder decode java.lang.String\"\n
+      \   - \"new java.lang.String byte[]\"\n    - \"staticMethod java.util.Base64
+      getDecoder\"\n```\n\n### Custom Labels\n\n`controller.serviceLabels` can be
+      used to add custom labels in `jenkins-controller-svc.yaml`.\nFor example:\n\n```yaml\nServiceLabels:\n
+      \ expose: true\n```\n\n### Persistence\n\nThe Jenkins image stores persistence
+      under `/var/jenkins_home` path of the container.\nA dynamically managed Persistent
+      Volume Claim is used to keep the data across deployments, by default.\nThis
+      is known to work in GCE, AWS, and minikube. Alternatively, a previously configured
+      Persistent Volume Claim can be used.\n\nIt is possible to mount several volumes
+      using `persistence.volumes` and `persistence.mounts` parameters.\nSee additional
+      `persistence` values using [configuration commands](#configuration).\n\n####
+      Existing PersistentVolumeClaim\n\n1. Create the PersistentVolume\n2. Create
+      the PersistentVolumeClaim\n3. [Install](#install-chart) the chart, setting `persistence.existingClaim`
+      to `PVC_NAME`\n\n#### Long Volume Attach/Mount Times\n\nCertain volume type
+      and filesystem format combinations may experience long\nattach/mount times,
+      [10 or more minutes][K8S_VOLUME_TIMEOUT], when using\n`fsGroup`.  This issue
+      may result in the following entries in the pod's event\nhistory:\n\n```console\nWarning
+      \ FailedMount  38m                kubelet, aks-default-41587790-2 Unable to
+      attach or mount volumes: unmounted volumes=[jenkins-home], unattached volumes=[plugins
+      plugin-dir jenkins-token-rmq2g sc-config-volume tmp jenkins-home jenkins-config
+      secrets-dir]: timed out waiting for the condition\n```\n\nIn these cases, experiment
+      with replacing `fsGroup` with\n`supplementalGroups` in the pod's `securityContext`.
+      \ This can be achieved by\nsetting the `controller.podSecurityContextOverride`
+      Helm chart value to\nsomething like:\n\n```yaml\ncontroller:\n  podSecurityContextOverride:\n
+      \   runAsNonRoot: true\n    runAsUser: 1000\n    supplementalGroups: [1000]\n```\n\nThis
+      issue has been reported on [azureDisk with ext4][K8S_VOLUME_TIMEOUT] and\non
+      [Alibaba cloud][K8S_VOLUME_TIMEOUT_ALIBABA].\n\n[K8S_VOLUME_TIMEOUT]: https://github.com/kubernetes/kubernetes/issues/67014\n[K8S_VOLUME_TIMEOUT_ALIBABA]:
+      https://github.com/kubernetes/kubernetes/issues/67014#issuecomment-698770511\n\n####
+      Storage Class\n\nIt is possible to define which storage class to use, by setting
+      `persistence.storageClass` to `[customStorageClass]`.\nIf set to a dash (`-`),
+      dynamic provisioning is disabled.\nIf the storage class is set to null or left
+      undefined (`\"\"`), the default provisioner is used (gp2 on AWS, standard on
+      GKE, AWS & OpenStack).\n\n### Additional Secrets\n\nAdditional secrets and Additional
+      Existing Secrets,\ncan be mounted into the Jenkins controller through the chart
+      or created using `controller.additionalSecrets` or `controller.additionalExistingSecrets`.
+      \ \nA common use case might be identity provider credentials if using an external
+      LDAP or OIDC-based identity provider.\nThe secret may then be referenced in
+      JCasC configuration (see [JCasC configuration](#configuration-as-code)).\n\n`values.yaml`
+      controller section, referencing mounted secrets:\n```yaml\ncontroller:\n  #
+      the 'name' and 'keyName' are concatenated with a '-' in between, so for example:\n
+      \ # an existing secret \"secret-credentials\" and a key inside it named \"github-password\"
+      should be used in Jcasc as ${secret-credentials-github-password}\n  # 'name'
+      and 'keyName' must be lowercase RFC 1123 label must consist of lower case alphanumeric
+      characters or '-',\n  # and must start and end with an alphanumeric character
+      (e.g. 'my-name',  or '123-abc')\n  # existingSecret existing secret \"secret-credentials\"
+      and a key inside it named \"github-username\" should be used in Jcasc as ${github-username}\n
+      \ # When using existingSecret no need to specify the keyName under additionalExistingSecrets.\n
+      \ existingSecret: secret-credentials\n  \n  additionalExistingSecrets:\n    -
+      name: secret-credentials\n      keyName: github-username\n    - name: secret-credentials\n
+      \     keyName: github-password\n    - name: secret-credentials\n      keyName:
+      token\n  \n  additionalSecrets:\n    - name: client_id\n      value: abc123\n
+      \   - name: client_secret\n      value: xyz999\n  JCasC:\n    securityRealm:
+      |\n      oic:\n        clientId: ${client_id}\n        clientSecret: ${client_secret}\n
+      \       ...\n    configScripts:\n      jenkins-casc-configs: |\n        credentials:\n
+      \         system:\n            domainCredentials:\n            - credentials:\n
+      \             - string:\n                  description: \"github access token\"\n
+      \                 id: \"github_app_token\"\n                  scope: GLOBAL\n
+      \                 secret: ${secret-credentials-token}\n              - usernamePassword:\n
+      \                 description: \"github access username password\"\n                  id:
+      \"github_username_pass\"\n                  password: ${secret-credentials-github-password}\n
+      \                 scope: GLOBAL\n                  username: ${secret-credentials-github-username}\n```\n\nFor
+      more information, see [JCasC documentation](https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/docs/features/secrets.adoc#kubernetes-secrets).\n\n###
+      Secret Claims from HashiCorp Vault\n\nIt's possible for this chart to generate
+      `SecretClaim` resources in order to automatically create and maintain Kubernetes
+      `Secrets` from HashiCorp [Vault](https://www.vaultproject.io/) via [`kube-vault-controller`](https://github.com/roboll/kube-vault-controller)\n\nThese
+      `Secrets` can then be referenced in the same manner as Additional Secrets above.\n\nThis
+      can be achieved by defining required Secret Claims within `controller.secretClaims`,
+      as follows:\n```yaml\ncontroller:\n  secretClaims:\n    - name: jenkins-secret\n
+      \     path: secret/path\n    - name: jenkins-short-ttl\n      path: secret/short-ttl-path\n
+      \     renew: 60\n```\n\n### RBAC\n\nRBAC is enabled by default. If you want
+      to disable it you will need to set `rbac.create` to `false`.\n\n### Backup\n\nAdds
+      a backup CronJob for jenkins, along with required RBAC resources. See additional
+      `backup` values using [configuration commands](#configuration).\n\n#### Example:
+      Backup to Google Cloud Storage Bucket\n\nLet's look at a quick example. Let's
+      pretend we are backing up Jenkins to a **Google Cloud Storage (GCS) Bucket**.
+      Here is what the process would look like:\n\n##### 1. Create a Google Cloud
+      Platform Account\n\nIf you don't have a GCP account, you can create a Free Account
+      with the link below:\n\n- <https://cloud.google.com/>\n\n##### 2. Create a GCS
+      bucket with a unique name\n\nYou need to create a GCS bucket with a unique name,
+      which you can do by following the guide below:\n\n- <https://cloud.google.com/storage/docs/creating-buckets>\n\n#####
+      3. Create a GCP Service Account\n\nIn order for the backup job to upload Jenkins
+      data to the GCS bucket, you need to provide it with a Google Service Account,
+      which you can create by following the guide below:\n\n- <https://cloud.google.com/iam/docs/creating-managing-service-accounts>\n\n#####
+      4. Bind `roles/storage.admin` role to Service Account\n\nNow you need to provide
+      your GCP Service Account with the `roles/storage.admin` role, which has permissions
+      to read/write content to a GCS bucket. You can do this by following the guide
+      below:\n\n- <https://cloud.google.com/iam/docs/granting-changing-revoking-access#granting-gcloud-manual>\n\n#####
+      5. Create a Service Account Key\n\nNow that you have a Service Account (SA),
+      you need to create a Service Account Key, which is a file that represents the
+      GCP Service Account that will get passed to the Backup Job (and later on to
+      the Recovery Job). You can create it by following the guide below:\n\n- <https://cloud.google.com/iam/docs/creating-managing-service-account-keys#iam-service-account-keys-create-gcloud>\n\n#####
+      6. Create a Kubernetes Secret from the Service Account key\n\nIn order for the
+      Backup Job to access the GCP Service Account Key you need to create Kubernetes
+      Secret, which you can create using the command below:\n\n```bash\n# Replace
+      with the path to the SA Key\nkubectl -n jenkins create secret generic jenkinsgcp
+      --from-file=sa-credentials.json=/path/to/sa_key.json\n```\n\n**NOTE**: This
+      assumes that you will deploy the Jenkins chart in the `jenkins` namespace.\n\n#####
+      7. Deploy the Jenkins Helm Chart using a modified values file\n\nRather than
+      using a long command to pass on all the new Chart values, create a values file
+      called `values.yaml`, then put the following content on it, then save it:\n\n```yaml\nbackup:\n
+      \ enabled: true\n  schedule: \"0 2 * * *\" # Runs every day at 2 am, change
+      it to whatever interval works for you\n  existingSecret:\n    jenkinsgcp: #
+      This is the secret name\n      gcpcredentials: sa-credentials.json # The service
+      account file in the secret\n  destination: \"gcs://BUCKET_NAME/jenkins-k8s-backup\"
+      # Replace with Bucket Name from previous step\ncontroller:\n  initializeOnce:
+      true # Installs latest plugins as soon as Jenkins starts\n  installLatestPlugins:
+      true\npersistence:\n  enabled: true # So that we have a PVC that we can backup\n```\n\n**NOTE**:
+      The [`gcpcredentials`](https://github.com/fabiogomezdiaz/helm-charts-1/blob/main/charts/jenkins/values.yaml#L829)
+      key in the [`jenkinsgcp`](https://github.com/fabiogomezdiaz/helm-charts-1/blob/main/charts/jenkins/values.yaml#L827)
+      field tells the Helm chart that we will be using a GCS bucket as our backup.\n\n#####
+      8. Deploy Jenkins Chart with new values\n\nNow that we have everything in place,
+      let's deploy the Jenkins Chart with the new values file:\n\n```bash\nhelm upgrade
+      --install jenkins --namespace jenkins \\\n    -f values.yaml \\\n    jenkinsci/jenkins;\n```\n\n**NOTE**:
+      Save the password from this installation as it will be needed in the [Restore
+      from Backup in Google Cloud Storage Bucket](#example-restore-from-backup-in-google-cloud-storage-bucket)
+      section.\n\n##### 9. Create resources to backup in Jenkins\n\nOnce Jenkins is
+      available, go to Jenkins and create jobs, download plugins, and create credentials
+      so that we have something to backup other than the default Jenkins installation.\n\n#####
+      10. Trigger the backup job\n\nThe values file we used to deploy Jenkins runs
+      the backup job every day at 2 AM.\n\nIf you don't want to wait that long for
+      the job to start running, then patch the CronJob to run in the next minute with
+      the following commands:\n\n```bash\n# Update CronJob to run every minute\nkubectl
+      -n jenkins patch cronjob.batch/jenkins-backup --patch '{\"spec\": {\"schedule\":
+      \"* * * * *\"}}'\n\n# Run this command until the \"jenkins-backup-*\" container
+      is running\nkubectl get pods | grep backup;\n\n# To prevent multiple jobs from
+      spanning every minute, change the CronJob back to original schedule\nkubectl
+      -n jenkins patch cronjob.batch/jenkins-backup --patch '{\"spec\": {\"schedule\":
+      \"0 2 * * *\"}}'\n```\n\n##### 11. Verify that the backup job completed successfully\n\nOnce
+      the job is running, then query the backup pod logs to monitor progress as follows:\n\n```bash\n#
+      Get backup container name\nBACKUP_CONTAINER=$(kubectl get pods | grep backup
+      | awk '{print $1}');\n\n# Stream logs of backup container until job is finished\nkubectl
+      logs -f ${BACKUP_CONTAINER};\n```\n\n**NOTE**: The backup job will create a
+      time-stamped folder in the GCS bucket each time the backup job runs.\n\nIf you
+      can see a success message from the backup job and can see the contents of the
+      backup on your GCS bucket, then the backup was successful!\n\nA similar process
+      would work for AWS S3. See additional `backup` values using [configuration commands](#configuration).\n\n**NOTE**:
+      If an environmental variable `AWS_REGION` is not provided, the region of the
+      AWS S3 bucket will be assumed to be `eu-central-1`. If you want to use an S3
+      bucket in another region, you need to provide the bucket's region as an environmental
+      variable as below:\n\n```yaml\nbackup:\n  env: # The region of your S3 bucket.\n
+      \   - name: AWS_REGION\n      value: us-east-1\n```\n\n### Restore From Backup\n\nTo
+      restore a backup, you can use the `kube-tasks` underlying tool called [skbn](https://github.com/maorfr/skbn),
+      which copies files from cloud storage to Kubernetes.\nThe best way to do it
+      would be using a `Job` to copy files from the desired backup tag to the Jenkins
+      pod.\n\nSee the following example for more details.\n\n#### Example: Restore
+      from Backup in Google Cloud Storage Bucket\n\n**NOTE**: This section assumes
+      that you ran the steps in [Example: Backup to Google Cloud Storage Bucket](#example-backup-to-google-cloud-storage-bucket)
+      beforehand and that you **saved the password** for that Jenkins installation,
+      which you will need at the end of this section.\n\nLet's pretend you are restoring
+      a backup from a Google Cloud Storage Bucket because you completely lost your
+      Jenkins installation and you are starting from scratch.\n\nIn the following
+      steps, we will explain what this process would look like:\n\n##### 1. Reinstall
+      the Jenkins Helm Chart\n\nFirst, we need to remove the old Jenkins installation
+      that we backed up previously, then we can install a clean Jenkins instance to
+      restore from GCS backup.\n\nTo do so, run the following commands:\n\n```bash\n#
+      Delete old Jenkins installation\nhelm delete jenkins\n\n# Install Jenkins Chart\nhelm
+      upgrade --install jenkins --namespace jenkins \\\n    -f values.yaml \\\n    jenkinsci/jenkins;\n```\n\n**NOTE**:
+      This Command uses the same values file that was created in the [7. Deploy the
+      Jenkins Helm Chart using a modified values file](#7-deploy-the-jenkins-helm-chart-using-a-modified-values-file)
+      section.\n\nNow verify that Jenkins is up and running and it DOES NOT have any
+      of the resources you created earlier.\n\n##### 2. Create a Kubernetes Service
+      Account for the Restore Job\n\nIn order for the Restore job to pull backup data
+      from the GCS bucket and put it in the jenkins `/var/jenkins_home` folder in
+      the Jenkins pod, you need to create the following:\n\n- A [Kubernetes Service
+      Account](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/)
+      (not to be confused with a GCP Service Account) for the Restore job.\n- A [Kubernetes
+      ClusterRole](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole)
+      \ that lists the necessary permissions to update the data in the volumes of
+      other pods.\n- A [Kubernetes ClusterRoleBinding](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding)
+      that binds the above ClusterRole to the Service Account.\n\nTo do so, create
+      a file called `restore-rbac.yaml` and enter the following content, then save
+      it:\n\n```yaml\napiVersion: v1\nkind: ServiceAccount\nmetadata:\n  labels:\n
+      \   app: skbn\n  name: skbn\n  namespace: jenkins\n---\napiVersion: rbac.authorization.k8s.io/v1\nkind:
+      ClusterRole\nmetadata:\n  labels:\n    app: skbn\n  name: skbn\nrules:\n- apiGroups:
+      [\"\"]\n  resources: [\"pods\", \"pods/log\"]\n  verbs: [\"get\", \"list\"]\n-
+      apiGroups: [\"\"]\n  resources: [\"pods/exec\"]\n  verbs: [\"create\"]\n---\napiVersion:
+      rbac.authorization.k8s.io/v1\nkind: ClusterRoleBinding\nmetadata:\n  labels:\n
+      \   app: skbn\n  name: skbn\nroleRef:\n  apiGroup: rbac.authorization.k8s.io\n
+      \ kind: ClusterRole\n  name: skbn\nsubjects:\n- kind: ServiceAccount\n  name:
+      skbn\n  namespace: jenkins\n```\n\nTo apply the above manifest, run the following
+      command:\n\n```bash\nkubectl apply -f restore-rbac.yaml\n```\n\n##### 3. Create
+      a Kubernetes Job to restore Jenkins\n\nThe logic that will execute the Jenkins
+      restoration from a GCS backup will be done through a\n[Kubernetes Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/),
+      which will run only once as needed.\n\nTo create the job, create a manifest
+      file called `restore.yaml` with the following content, then save it:\n\n```yaml\napiVersion:
+      batch/v1\nkind: Job\nmetadata:\n  labels:\n    app: skbn\n  name: skbn\n  namespace:
+      jenkins\nspec:\n  template:\n    metadata:\n      labels:\n        app: skbn\n
+      \   spec:\n      restartPolicy: OnFailure\n      serviceAccountName: skbn\n
+      \     containers:\n      - name: skbn\n        image: maorfr/skbn\n        command:
+      [\"skbn\"]\n        args:\n        - \"cp\"\n        - \"--src\"\n        -
+      \"gcs://BUCKET_NAME/jenkins-k8s-backup/BACKUP_NAME\"\n        - \"--dst\"\n
+      \       - \"k8s://jenkins/jenkins-0/jenkins/var/jenkins_home\"\n        imagePullPolicy:
+      IfNotPresent\n        env:\n        - name: GOOGLE_APPLICATION_CREDENTIALS\n
+      \         value: /var/run/secrets/jenkinsgcp/sa-credentials.json\n        volumeMounts:\n
+      \       - mountPath: /var/run/secrets/jenkinsgcp\n          name: jenkinsgcp\n
+      \     volumes:\n      - name: jenkinsgcp\n        secret:\n          secretName:
+      jenkinsgcp\n```\n\nWhile the above Job manifest is mostly complete, you need
+      to replace a couple of things, as follows:\n\n- Replace `BUCKET_NAME` with the
+      GCS Bucket name created in [Create a GCS bucket with a unique name](#2-create-a-gcs-bucket-with-a-unique-name).\n-
+      Go to your GCS bucket and find the name of the latest timestamped folder (i.e.
+      `20210717154947`), then replace `BACKUP_NAME` with it, then save the file.\n\nNotice
+      that we are using the `jenkinsgcp` Kubernetes Secret that holds the `sa-credentials.json`
+      key file for the GCP Service Account that we created in [Create a Service Account
+      Key](#5-create-a-service-account-key).\n\nHaving the Kubernetes Secret provide
+      the GCP Service Account Key to the Restore Kubernetes Job is what will allow
+      the Job to download the contents of the backup from the GCS bucket and put it
+      into the `/var/jenkins_home` folder in the Persistent Volume Claim of the `jenkins-0`
+      pod.\n\n##### 4. Deploy the Restore Job\n\nDeploy the Restore Job using the
+      following command:\n\n```bash\nkubectl apply -f restore.yaml\n```\n\nWait about
+      a minute for the Job to start, then query the logs using the following commands:\n\n```bash\n#
+      Get restore container name\nRESTORE_CONTAINER=$(kubectl get pods | grep skbn
+      | awk '{print $1}');\n\n# Stream logs of restore container until job is finished\nkubectl
+      logs -f ${RESTORE_CONTAINER};\n```\n\nWatch the logs until the job is done.
+      This usually takes a few minutes.\n\n##### 5. Verify that Jenkins was restored
+      from GCS Backup\n\nLogin to Jenkins, then click on `Manage Jenkins-> Reload
+      Configuration from Disk`, then press `OK`.\n\nJenkins is now going to reload
+      the backup content from disk and restart. Now, if you performed this on a new
+      Jenkins installation, you will **not be able to login** using the password for
+      the new installation of Jenkins.\n\nBecause we are restoring from the backup
+      of a previous installation, we need to login using the password for the old
+      Jenkins installation.\n\nSo, refresh your browser and login to Jenkins using
+      the password from the backup.\n\nNow, verify that all your jobs, plugins, and
+      credentials from that backup are showing up, and if they are, then CONGRATULATIONS
+      on successfully restoring Jenkins from a GCS Backup!\n\nA similar process would
+      work for AWS S3. See additional `backup` values using [configuration commands](#configuration)
+      to figure out how what fields to put in the Restore Job manifest.\n\n### Adding
+      Custom Pod Templates\n\nIt is possible to add custom pod templates for the default
+      configured kubernetes cloud.\nAdd a key under `agent.podTemplates` for each
+      pod template. Each key (prior to `|` character) is just a label, and can be
+      any value.\nKeys are only used to give the pod template a meaningful name.  The
+      only restriction is they may only contain RFC 1123 \\ DNS label characters:
+      lowercase letters, numbers, and hyphens. Each pod template can contain multiple
+      containers.\nThere's no need to add the *jnlp* container since the kubernetes
+      plugin will automatically inject it into the pod.\nFor this pod templates configuration
+      to be loaded the following values must be set:\n\n```yaml\ncontroller.JCasC.defaultConfig:
+      true\n```\n\nThe example below creates a python pod template in the kubernetes
+      cloud:\n\n```yaml\nagent:\n  podTemplates:\n    python: |\n      - name: python\n
+      \       label: jenkins-python\n        serviceAccount: jenkins\n        containers:\n
+      \         - name: python\n            image: python:3\n            command:
+      \"/bin/sh -c\"\n            args: \"cat\"\n            ttyEnabled: true\n            privileged:
+      true\n            resourceRequestCpu: \"400m\"\n            resourceRequestMemory:
+      \"512Mi\"\n            resourceLimitCpu: \"1\"\n            resourceLimitMemory:
+      \"1024Mi\"\n```\n\nBest reference is `https://<jenkins_url>/configuration-as-code/reference#Cloud-kubernetes`.\n\n###
+      Adding Pod Templates Using additionalAgents\n\n`additionalAgents` may be used
+      to configure additional kubernetes pod templates.\nEach additional agent corresponds
+      to `agent` in terms of the configurable values and inherits all values from
+      `agent` so you only need to specify values which differ.\nFor example:\n\n```yaml\nagent:\n
+      \ podName: default\n  customJenkinsLabels: default\n  # set resources for additional
+      agents to inherit\n  resources:\n    limits:\n      cpu: \"1\"\n      memory:
+      \"2048Mi\"\n\nadditionalAgents:\n  maven:\n    podName: maven\n    customJenkinsLabels:
+      maven\n    # An example of overriding the jnlp container\n    # sideContainerName:
+      jnlp\n    image: jenkins/jnlp-agent-maven\n    tag: latest\n  python:\n    podName:
+      python\n    customJenkinsLabels: python\n    sideContainerName: python\n    image:
+      python\n    tag: \"3\"\n    command: \"/bin/sh -c\"\n    args: \"cat\"\n    TTYEnabled:
+      true\n```\n\n### Ingress Configuration\n\nThis chart provides ingress resources
+      configurable via the `controller.ingress` block.\n\nThe simplest configuration
+      looks like the following:\n\n```yaml\ncontroller:\n   ingress:\n       enabled:
+      true\n       paths: []\n       apiVersion: \"extensions/v1beta1\"\n       hostName:
+      jenkins.example.com\n```\n\nThis snippet configures an ingress rule for exposing
+      jenkins at `jenkins.example.com`\n\nYou can define labels and annotations via
+      `controller.ingress.labels` and `controller.ingress.annotations` respectively.\nAdditionally,
+      you can configure the ingress tls via `controller.ingress.tls`.\nBy default,
+      this ingress rule exposes all paths.\nIf needed this can be overwritten by specifying
+      the wanted paths in `controller.ingress.paths`\n\nIf you want to configure a
+      secondary ingress e.g. you don't want the jenkins instance exposed but still
+      want to receive webhooks you can configure `controller.secondaryingress`.\nThe
+      secondaryingress doesn't expose anything by default and has to be configured
+      via `controller.secondaryingress.paths`:\n\n```yaml\ncontroller:\n   ingress:\n
+      \      enabled: true\n       apiVersion: \"extensions/v1beta1\"\n       hostName:
+      \"jenkins.internal.example.com\"\n       annotations:\n           kubernetes.io/ingress.class:
+      \"internal\"\n   secondaryingress:\n       enabled: true\n       apiVersion:
+      \"extensions/v1beta1\"\n       hostName: \"jenkins-scm.example.com\"\n       annotations:\n
+      \          kubernetes.io/ingress.class: \"public\"\n       paths:\n        -
+      /github-webhook\n```\n\n## Prometheus Metrics\n\nIf you want to expose Prometheus
+      metrics you need to install the [Jenkins Prometheus Metrics Plugin](https://github.com/jenkinsci/prometheus-plugin).\nIt
+      will expose an endpoint (default `/prometheus`) with metrics where a Prometheus
+      Server can scrape.\n\nIf you have implemented [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator),
+      you can set `master.prometheus.enabled` to `true` to configure a `ServiceMonitor`
+      and `PrometheusRule`.\nIf you want to further adjust alerting rules you can
+      do so by configuring `master.prometheus.alertingrules`\n\nIf you have implemented
+      Prometheus without using the operator, you can leave `master.prometheus.enabled`
+      set to `false`.\n\n### Running Behind a Forward Proxy\n\nThe controller pod
+      uses an Init Container to install plugins etc. If you are behind a corporate
+      proxy it may be useful to set `controller.initContainerEnv` to add environment
+      variables such as `http_proxy`, so that these can be downloaded.\n\nAdditionally,
+      you may want to add env vars for the init container, the Jenkins container,
+      and the JVM (`controller.javaOpts`):\n\n```yaml\ncontroller:\n  initContainerEnv:\n
+      \   - name: http_proxy\n      value: \"http://192.168.64.1:3128\"\n    - name:
+      https_proxy\n      value: \"http://192.168.64.1:3128\"\n    - name: no_proxy\n
+      \     value: \"\"\n    - name: JAVA_OPTS\n      value: \"-Dhttps.proxyHost=proxy_host_name_without_protocol
+      -Dhttps.proxyPort=3128\"\n  containerEnv:\n    - name: http_proxy\n      value:
+      \"http://192.168.64.1:3128\"\n    - name: https_proxy\n      value: \"http://192.168.64.1:3128\"\n
+      \ javaOpts: >-\n    -Dhttp.proxyHost=192.168.64.1\n    -Dhttp.proxyPort=3128\n
+      \   -Dhttps.proxyHost=192.168.64.1\n    -Dhttps.proxyPort=3128\n```\n\n### HTTPS
+      Keystore Configuration\n\n[This configuration](https://wiki.jenkins.io/pages/viewpage.action?pageId=135468777)
+      enables jenkins to use keystore in order to serve https.\nHere is the [value
+      file section](https://wiki.jenkins.io/pages/viewpage.action?pageId=135468777#RunningJenkinswithnativeSSL/HTTPS-ConfigureJenkinstouseHTTPSandtheJKSkeystore)
+      related to keystore configuration.\nKeystore itself should be placed in front
+      of `jenkinsKeyStoreBase64Encoded` key and in base64 encoded format. To achieve
+      that after having `keystore.jks` file simply do this: `cat keystore.jks | base64`
+      and paste the output in front of `jenkinsKeyStoreBase64Encoded`.\nAfter enabling
+      `httpsKeyStore.enable` make sure that `httpPort` and `targetPort` are not the
+      same, as `targetPort` will serve https.\nDo not set `controller.httpsKeyStore.httpPort`
+      to `-1` because it will cause readiness and liveliness prob to fail.\nIf you
+      already have a kubernetes secret that has keystore and its password you can
+      specify its' name in front of `jenkinsHttpsJksSecretName`, You need to remember
+      that your secret should have proper data key names `jenkins-jks-file` and `https-jks-password`.
+      Example:\n\n```yaml\ncontroller:\n   httpsKeyStore:\n       enable: true\n       jenkinsHttpsJksSecretName:
+      ''\n       httpPort: 8081\n       path: \"/var/jenkins_keystore\"\n       fileName:
+      \"keystore.jks\"\n       password: \"changeit\"\n       jenkinsKeyStoreBase64Encoded:
+      ''\n```\n### AWS Security Group Policies\n\nTo create SecurityGroupPolicies
+      set `awsSecurityGroupPolicies.enabled` to true and add your policies. Each policy
+      requires a `name`, array of `securityGroupIds` and a `podSelector`. Example:\n\n```yaml\nawsSecurityGroupPolicies:\n
+      \ enabled: true\n  policies:\n    - name: \"jenkins-controller\"\n      securityGroupIds:
+      \n        - sg-123456789\n      podSelector:\n        matchExpressions:\n          -
+      key: app.kubernetes.io/component\n            operator: In\n            values:\n
+      \             - jenkins-controller\n```\n\n## Migration Guide\n\n### From stable
+      repo\n\nUpgrade an existing release from `stable/jenkins` to `jenkins/jenkins`
+      seamlessly by ensuring you have the latest [repo info](#get-repo-info) and running
+      the [upgrade commands](#upgrade-chart) specifying the `jenkins/jenkins` chart.\n\n###
+      Major Version Upgrades\n\nChart release versions follow [semver](../../CONTRIBUTING.md#versioning),
+      where a MAJOR version change (example `1.0.0` -> `2.0.0`) indicates an incompatible
+      breaking change needing manual actions.\n\n### To 3.0.0\n\n* Check `securityRealm`
+      and `authorizationStrategy` and adjust it.\n  Otherwise, your configured users
+      and permissions will be overridden.\n* You need to use helm version 3 as the
+      `Chart.yaml` uses `apiVersion: v2`.\n* All XML configuration options have been
+      removed.\n  In case those are still in use you need to migrate to configuration
+      as code.\n  Upgrade guide to 2.0.0 contains pointers how to do that.\n* Jenkins
+      is now using a `StatefulSet` instead of a `Deployment`\n* terminology has been
+      adjusted that's also reflected in values.yaml\n  The following values from `values.yaml`
+      have been renamed:\n\n  * `master` => `controller`\n  * `master.useSecurity`
+      => `controller.adminSecret`\n  * `master.slaveListenerPort` => `controller.agentListenerPort`\n
+      \ * `master.slaveHostPort` => `controller.agentListenerHostPort`\n  * `master.slaveKubernetesNamespace`
+      => `agent.namespace`\n  * `master.slaveDefaultsProviderTemplate` => `agent.defaultsProviderTemplate`\n
+      \ * `master.slaveJenkinsUrl` => `agent.jenkinsUrl`\n  * `master.slaveJenkinsTunnel`
+      => `agent.jenkinsTunnel`\n  * `master.slaveConnectTimeout` => `agent.kubernetesConnectTimeout`\n
+      \ * `master.slaveReadTimeout` => `agent.kubernetesReadTimeout`\n  * `master.slaveListenerServiceAnnotations`
+      => `controller.agentListenerServiceAnnotations`\n  * `master.slaveListenerServiceType`
+      => `controller.agentListenerServiceType`\n  * `master.slaveListenerLoadBalancerIP`
+      => `controller.agentListenerLoadBalancerIP`\n  * `agent.slaveConnectTimeout`
+      => `agent.connectTimeout`\n* Removed values:\n\n  * `master.imageTag`: use `controller.image`
+      and `controller.tag` instead\n  * `slave.imageTag`: use `agent.image` and `agent.tag`
+      instead\n\n### To 2.0.0\n\nConfiguration as Code is now default + container
+      does not run as root anymore.\n\n#### Configuration as Code new default\n\nConfiguration
+      is done via [Jenkins Configuration as Code Plugin](https://github.com/jenkinsci/configuration-as-code-plugin)
+      by default.\nThat means that changes in values which result in a configuration
+      change are always applied.\nIn contrast, the XML configuration was only applied
+      during the first start and never altered.\n\n:exclamation::exclamation::exclamation:\nAttention:\nThis
+      also means if you manually altered configuration then this will most likely
+      be reset to what was configured by default.\nIt also applies to `securityRealm`
+      and `authorizationStrategy` as they are also configured using configuration
+      as code.\n:exclamation::exclamation::exclamation:\n\n#### Image does not run
+      as root anymore\n\nIt's not recommended to run containers in Kubernetes as `root`.\n\n:exclamation:
+      Attention: If you had not configured a different user before then you need to
+      ensure that your image supports the user and group id configured and also manually
+      change permissions of all files so that Jenkins is still able to use them.\n\n####
+      Summary of updated values\n\nAs version 2.0.0 only updates default values and
+      nothing else it's still possible to migrate to this version and opt out of some
+      or all new defaults.\nAll you have to do is ensure the old values are set in
+      your installation.\n\nHere we show which values have changed and the previous
+      default values:\n\n```yaml\ncontroller:\n  runAsUser: 1000         # was unset
+      before\n  fsGroup: 1000           # was unset before\n  JCasC:\n    enabled:
+      true         # was false\n    defaultConfig: true   # was false\n  sidecars:\n
+      \   configAutoReload:\n      enabled: true       # was false\n```\n\n#### Migration
+      steps\n\nMigration instructions heavily depend on your current setup.\nSo think
+      of the list below more as a general guideline of what should be done.\n\n- Ensure
+      that the Jenkins image you are using contains a user with id 1000 and a group
+      with the same id.\n  That's the case for `jenkins/jenkins:lts` image, which
+      the chart uses by default\n- Make a backup of your existing installation especially
+      the persistent volume\n- Ensure that you have the configuration as code plugin
+      installed\n- Export your current settings via the plugin:\n  `Manage Jenkins`
+      -> `Configuration as Code` -> `Download Configuration`\n- prepare your values
+      file for the update e.g. add additional configuration as code setting that you
+      need.\n  The export taken from above might be a good starting point for this.\n
+      \ In addition, the [demos](https://github.com/jenkinsci/configuration-as-code-plugin/tree/master/demos)
+      from the plugin itself are quite useful.\n- Test drive those setting on a separate
+      installation\n- Put Jenkins to Quiet Down mode so that it does not accept new
+      jobs\n  `<JENKINS_URL>/quietDown`\n- Change permissions of all files and folders
+      to the new user and group id:\n\n  ```console\n  kubectl exec -it <jenkins_pod>
+      -c jenkins /bin/bash\n  chown -R 1000:1000 /var/jenkins_home\n  ```\n\n- Update
+      Jenkins\n\n### To 1.0.0\n\nBreaking changes:\n\n- Values have been renamed to
+      follow [helm recommended naming conventions](https://helm.sh/docs/chart_best_practices/#naming-conventions)
+      so that all variables start with a lowercase letter and words are separated
+      with camelcase\n- All resources are now using [helm recommended standard labels](https://helm.sh/docs/chart_best_practices/#standard-labels)\n\nAs
+      a result of the label changes also the selectors of the deployment have been
+      updated.\nThose are immutable so trying an updated will cause an error like:\n\n```console\nError:
+      Deployment.apps \"jenkins\" is invalid: spec.selector: Invalid value: v1.LabelSelector{MatchLabels:map[string]string{\"app.kubernetes.io/component\":\"jenkins-controller\",
+      \"app.kubernetes.io/instance\":\"jenkins\"}, MatchExpressions:[]v1.LabelSelectorRequirement(nil)}:
+      field is immutable\n```\n\nIn order to upgrade, [uninstall](#uninstall-chart)
+      the Jenkins Deployment before upgrading:\n"
+    status: deployed
+  name: jenkins
+  namespace: devops-tools
+  resources:
+  - apiVersion: v1
+    kind: ServiceAccount
+    name: jenkins
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: Secret
+    name: jenkins
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: ConfigMap
+    name: jenkins
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: ConfigMap
+    name: jenkins-jenkins-jcasc-config
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: jenkins
+    namespace: devops-tools
+  - apiVersion: rbac.authorization.k8s.io/v1
+    kind: Role
+    name: jenkins-schedule-agents
+    namespace: devops-tools
+  - apiVersion: rbac.authorization.k8s.io/v1
+    kind: Role
+    name: jenkins-casc-reload
+    namespace: devops-tools
+  - apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    name: jenkins-schedule-agents
+    namespace: devops-tools
+  - apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    name: jenkins-watch-configmaps
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: Service
+    name: jenkins-agent
+    namespace: devops-tools
+  - apiVersion: v1
+    kind: Service
+    name: jenkins
+    namespace: devops-tools
+  - apiVersion: apps/v1
+    kind: StatefulSet
+    name: jenkins
+    namespace: devops-tools
+  values:
+    agent:
+      jenkinsUrl: https://jenkins.danr.dev/
+    global:
+      cattle:
+        clusterId: local
+        clusterName: local
+        rkePathPrefix: ""
+        rkeWindowsPathPrefix: ""
+        systemDefaultRegistry: ""
+        systemProjectId: p-4978h
+        url: https://rancher.k8s.trapnet.xyz
+      systemDefaultRegistry: ""
+    persistence:
+      size: 25Gi
+      storageClass: longhorn
+  version: 2
+status:
+  observedGeneration: 4
+  summary:
+    state: deployed
