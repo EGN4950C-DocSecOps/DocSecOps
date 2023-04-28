@@ -40,8 +40,15 @@ pipeline {
                 echo "Running File Detection program..."
                 script {
                     echo "Checking the uploaded files..."
+                    
+                    //This Jar file runs the program without checking for URLs
+                    //The directory src/FileInput & src/FileOutput must exist in the GitHub repository to work successfully
                     //sh " java -jar FileDetectionValidator.jar"
+                    
+                    //This jar file contains the argument parameter that will check for URLs and validate them
+                    //The directory src/FileInput & src/FileOutput must exist in the GitHub repository to work successfully
                     sh " java -jar FileDetectionValidator.jar -validateURL"
+                    
                     echo "Checking if json files were created successfully"
                     echo "Listing the json files with extracted metadata"
                     sh "ls ./src/FileOutput/"
@@ -54,6 +61,7 @@ pipeline {
             steps {
                 echo "Building.."
                 script {
+                    //finding files, in specified directory, based on their extension 
                     echo "doing build stuff.."
                     textFiles= sh(returnStdout: true, script: 'find ./src/FileInput -iname *.txt')
                     pdfFiles= sh(returnStdout: true, script: 'find ./src/FileInput -iname *.pdf')
@@ -69,7 +77,7 @@ pipeline {
                 echo "Uploading successfully checked files to JFrog.."
                
                 script {
-                    
+                //initializing variables per Jfrog artifactory's upload specifications     
                 def uploadSpecSTART = '{"files": ['
                 def uploadSpecPatStart = '{"pattern": "'   
                 def uploadSpecPatEnd = '",'                          
@@ -90,6 +98,7 @@ pipeline {
                     //echo "${uploadSpecJSON}"
                     
                 echo "Test Step - textFiles"    
+                //defining specified artifact repository for txt
                 uploadSpecTarget = '"target": "DocSecOps-txt/"}'
                 uploadSpecTXT = uploadSpecSTART
                  //sh "echo ${uploadSpecTXT}"
@@ -104,6 +113,7 @@ pipeline {
                     //echo "${uploadSpecTXT}"    
                     
                 echo "Test Step - pdfFiles "  
+                //defining specified artifact repository for pdf
                 uploadSpecTarget = '"target": "DocSecOps-pdf/"}'
                 uploadSpecPDF = uploadSpecSTART
                      def pdftexts = pdfFiles.split('\n')
@@ -117,6 +127,7 @@ pipeline {
                     //echo "${uploadSpecPDF}"  
                     
                 echo "Test Step - pptxFiles "  
+                //defining specified artifact repository for pptx    
                 uploadSpecTarget = '"target": "DocSecOps-pptx/"}'
                 uploadSpecPPTX = uploadSpecSTART
                  //sh "echo ${uploadSpecPPTX}"
@@ -130,7 +141,8 @@ pipeline {
                     uploadSpecPPTX = uploadSpecPPTX + uploadSpecEND
                     //echo "${uploadSpecPPTX}"
                     
-                echo "Test Step - docxFiles "  
+                echo "Test Step - docxFiles " 
+                //defining specified artifact repository for docx
                 uploadSpecTarget = '"target": "DocSecOps-docx/"}'
                 uploadSpecDOCX = uploadSpecSTART
                  //sh "echo ${uploadSpecDOCX}"
@@ -145,6 +157,7 @@ pipeline {
                     //echo "${uploadSpecDOCX}"  
                     
                 echo "Test Step - xlsxFiles "  
+                //defining specified artifact repository for Excel
                 uploadSpecTarget = '"target": "DocSecOps-xlsx/"}'
                 uploadSpecXLSX = uploadSpecSTART
                      def xlsxtexts = xlsxFiles.split('\n')
@@ -161,6 +174,7 @@ pipeline {
         stage('Deploying Files to Artifactory') {
             steps {
                 script {
+                    //Pushing files to JFrog if they are found, otherwise a message is output
                     if(textFiles.length() != 0)
                     {
                         echo 'Deploying *.txt files to JFrog....'
