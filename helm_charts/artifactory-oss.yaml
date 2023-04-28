@@ -1,0 +1,79 @@
+artifactory:
+  artifactory:
+    image:
+      registry: releases-docker.jfrog.io
+      repository: jfrog/artifactory-oss
+    javaOpts: {}
+    resources: {}
+  databaseUpgradeReady: 'yes'
+  ingress:
+    enabled: false
+    tls: null
+  installer:
+    platform: art-oss-helm
+  installerInfo: >-
+    {"productId": "Helm_artifactory-oss/{{ .Chart.Version }}", "features": [ {
+    "featureId": "Platform/{{ default "kubernetes" .Values.installer.platform
+    }}"}]}
+  jfconnect:
+    enabled: false
+  nginx:
+    enabled: false
+    service:
+      type: LoadBalancer
+    tlsSecretName: ''
+  postgresql:
+    enabled: true
+  javaOpts:
+    xms: 1g
+    xmx: 2g
+  persistence:
+    accessMode: ReadWriteOnce
+    cacheProviderDir: cache
+    enabled: true
+    mountPath: /var/opt/jfrog/artifactory
+    size: 200Gi
+    storageClass: longhorn
+  resources:
+    limits:
+      cpu: '2'
+      memory: 2Gi
+    requests:
+      cpu: 500m
+      memory: 1Gi
+postgresql:
+  enabled: true
+  image:
+    registry: releases-docker.jfrog.io
+    repository: bitnami/postgresql
+    tag: 13.4.0-debian-10-r39
+  persistence:
+    enabled: true
+    size: 200Gi
+    storageClass: longhorn
+  postgresqlDatabase: artifactory
+  postgresqlExtendedConf:
+    listenAddresses: '*'
+    maxConnections: '1500'
+  postgresqlPassword: ''
+  postgresqlUsername: artifactory
+  primary:
+    affinity: {}
+    nodeSelector: {}
+    tolerations: null
+  readReplicas:
+    affinity: {}
+    nodeSelector: {}
+    tolerations: null
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 512Mi
+  service:
+    port: 5432
+global:
+  cattle:
+    systemProjectId: p-4978h
