@@ -2,6 +2,7 @@
 
 Our group is configuring a DevSecOps pipeline to handle distinct types of documentation. 
 The pipeline will support plain text files, Word documents, Excel, PDFs, and PowerPoints. 
+
  
 # Configure Jenkins to use Pipeline Script from SCM
 
@@ -31,9 +32,17 @@ Here you will need to provide the URL of the Artifactory instance as well as a u
 
 <img width="555" alt="Screen Shot 2023-04-20 at 9 17 52 PM" src="https://user-images.githubusercontent.com/89712188/233518272-aa96df61-3ce9-4d1a-8be2-612815724e14.png">
 
+# How to use URL checker
+
+In the "Run Java program" stage, if you want to run the URL validator you have to add the argumant parameter "-validateURL"
+If the parameter is not included it will not check for URls.
+
+Lastly, for the Jar file to work appropriately there needs to exist a src/FileInput and src/FileOutput directory in the GitHub Repository. Due to the nature of GitHub this requires to upload a "dummy" file to maintain the,. If a file doesnt exists here, the folder will be deleted and the Jar file will fail.
+
 # How to Build the Pipeline
 
 Once you connected to Github and Artifactory, in Jenkins you can trigger the Build manual by clicking "Build" or you can configure a GitHub webhook everytime a push occurs in the repository. 
+
 
 When the pipeline begeins the first thing it will do is build a Kubernetes agent that will work on all the task in pipeline.
 
