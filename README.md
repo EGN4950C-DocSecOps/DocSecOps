@@ -21,15 +21,15 @@ In the definition, select the "Pipeline script from SCM" and for the SCM pick "G
 
 Then you want to specify the desired branch and the name of the file. In standard practice for Jenkins, it is preferred to use the name "Jenkinsfile" as the name of the document where the pipeline script will resided. To ensure it is working, you can build the pipeline with a simple pipeline script to ensure that it is connecting appropriately.
 
-Quick Tip: If you need help writing pipeline script, you can click on "pipeline syntax" and it will show you various types on common questions and how to write them in the script.
+Quick Tip: If you need help writing pipeline script, you can click on "pipeline syntax" and it will show you various types of common questions and how to write them in the Groovy script.
 
 # Configuring JFrog Artifactory
 
-To add plugins in Jenkins, you need to "Manage Jenkins" then to "Manage Plugins," here you can download a wide range of plugins to fit your needs. Here, we are going to search for the "JFrog" plugin and download it. The back to "Manage Jenkins" you need to go to "Configure System" then scrool untill you reach the JFrog section.
+To add plugins in Jenkins, you need to "Manage Jenkins" then to "Manage Plugins," here you can download a wide range of plugins to fit your needs. Here, we are going to search for the "JFrog" plugin and download it. The back to "Manage Jenkins" you need to go to "Configure System" then scroll untill you reach the JFrog section.
 
 <img width="1356" alt="Screen Shot 2023-04-20 at 8 43 01 PM" src="https://user-images.githubusercontent.com/89712188/233517839-04fb3326-41d7-4a61-b766-bcaaed04e238.png">
 
-Here you will need to provide the URL of the Artifactory instance as well as a username and passsword so it gains access. You can also create an access token and define the environment directly in the Jenkins file.
+Here you will need to provide the URL of the Artifactory instance as well as a username and passsword to gains access. You can also create an access token and define the environment directly in the Jenkins file.
 
 <img width="555" alt="Screen Shot 2023-04-20 at 9 17 52 PM" src="https://user-images.githubusercontent.com/89712188/233518272-aa96df61-3ce9-4d1a-8be2-612815724e14.png">
 
