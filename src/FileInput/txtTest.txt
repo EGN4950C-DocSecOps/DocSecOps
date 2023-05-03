@@ -1,0 +1,1 @@
+This is not one of the file types that can be processed by the pipeline
